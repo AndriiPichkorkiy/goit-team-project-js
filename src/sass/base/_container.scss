@@ -1,0 +1,41 @@
+body {
+  color: $primaryTextColor;
+  background-color: $textColorOnDark;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+}
+
+.container {
+  padding: 0 20px;
+  margin: 0 auto;
+  width: 100%;
+
+  @include min480 {
+    width: 480px;
+  }
+
+  @include min768 {
+    width: 768px;
+    padding: 0 32px;
+  }
+
+  @include min1280 {
+    width: 1280px;
+    padding: 0 32px;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  margin: -1px;
+}
