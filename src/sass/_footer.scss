@@ -39,6 +39,8 @@
   font-size: 1.16rem;
   line-height: 1.33rem;
 
+  cursor: pointer;
+
   & span {
     text-decoration: underline;
   }
@@ -48,3 +50,4 @@
   fill: currentColor;
   animation-iteration-count: infinite;
 }
+
