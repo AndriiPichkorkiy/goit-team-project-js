@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-  padding: 0 1.67rem;
+  padding: 0 20px;
   margin: 0 auto;
   width: 100%;
 
@@ -17,12 +17,12 @@ body {
 
   @include min768 {
     width: 768px;
-    padding: 0 2.67rem;
+    padding: 0 30px;
   }
 
   @include min1280 {
     width: 1280px;
-    padding: 0 2.67rem;
+    padding: 0 30px;
   }
 }
 
@@ -41,14 +41,5 @@ body {
 }
 
 html {
-  font-size: calc(100vw / 26.67);
-
-  @include min768 {
-    font-size: calc(100vw / 64);
-  }
-
-  @include min1280 {
-    width: 1280px;
-    padding: 0 2.67rem;
-  }
+  font-size: 12px;
 }
