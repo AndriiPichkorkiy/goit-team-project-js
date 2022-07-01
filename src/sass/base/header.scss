@@ -2,20 +2,46 @@
   padding-top: 40px;
 }
 
+.endless-bg-color {
+  background-color: #000000;
+}
+
 .header-bg {
   margin-left: auto;
   margin-right: auto;
 
-  max-width: 320px;
+  //   max-width: 100vh;
   min-height: 230px;
 
-  background-color: #000000;
+  //   background-color: #000000;
 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  //   background-position: center;
+  //   background-repeat: no-repeat;
+  //   background-size: cover;
+
+  //   @include min768 {
+  //     max-width: 768px;
+  //   }
+  //   @include min1280 {
+  //     max-width: 1280px;
+  //   }
+}
+// *logo
+
+.logo__name {
+  @include max767 {
+    display: none;
+  }
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.16;
+
+  color: $textColorOnDark;
 }
 
+// *search form
 .search-form {
   position: relative;
 
@@ -41,13 +67,89 @@
   &::placeholder {
     color: $textColorOnDark;
   }
+}
 
-  &:focus {
-    outline: none;
-    border-bottom: 1px solid $accentColor;
+.search-field:focus {
+  outline: none;
+  border-bottom: 1px solid $accentColor;
 
-    &::placeholder {
-      color: $accentColor;
-    }
+  &::placeholder {
+    color: $accentColor;
   }
+}
+
+// *navigation
+.navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.side-nav {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-bottom: 60px;
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  text-transform: uppercase;
+
+  color: $textColorOnDark;
+}
+
+.side-nav__item {
+  &:first-child {
+    margin-right: 40px;
+  }
+}
+
+.side-nav__link {
+  color: inherit;
+}
+
+.side-nav__link--current {
+  position: relative;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+
+    height: 3px;
+    width: 100%;
+
+    background-color: $accentColor;
+  }
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.library__buttons {
+  width: 130px;
+  height: 44px;
+  margin-left: 20px;
+  border: 1px solid $textColorOnDark;
+  border-radius: 5px;
+  color: $textColorOnDark;
+  font-size: 12px;
+  line-height: 1.33;
+  background: transparent;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.library__button--active {
+  border: none;
+  outline: none;
+  background: $accentColor;
 }
