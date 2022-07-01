@@ -42,4 +42,13 @@ body {
 
 html {
   font-size: calc(100vw / 26.67);
+
+  @include min768 {
+    font-size: calc(100vw / 64);
+  }
+
+  @include min1280 {
+    width: 1280px;
+    padding: 0 2.67rem;
+  }
 }
