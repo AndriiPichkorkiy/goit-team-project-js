@@ -1,35 +1,40 @@
-const DEBOUNCE_DELAY = 300;
+// import throttle from 'lodash/throttle';
+// import debounce from 'lodash/throttle';
+// import refs from "./refs";
 
-const searchForm = document.querySelector('#search-form');
+// const DEBOUNCE_DELAY = 300;
 
-searchForm.addEventListener("input", debounce(searchMovies, DEBOUNCE_DELAY));
+// refs.searchForm.addEventListener("input", debounce(searchMovies, DEBOUNCE_DELAY));
+// console.log(refs.searchForm);
+// function searchMovies() {
 
-function searchMovies(e) {
-    const form = e.target.value.trim();
+//     event.preventDefault();
 
-    // clearMarkup();
-    fetchMovies(form)
-        .then(renderAllMovies)
-        .catch(fetchError)
-}
+//     const form = event.target.value.trim();
 
-
-function fetchError() {
-    alert('Oops!!!');
-}
-function moreTwoCharacters(){
-    alert('Please enter more than two characters');
-}
-function correctionRequest(){
-    alert('Please enter a correction request');
-}
-function nothingRequest(){
-    alert('Sorry, there is nothing for your request');
-}
-function selectionMovies(){
-    alert('We have selected ${} movies for you. Enjoy yourself');
-}
-// function clearMarkup() {
-//   refs..innerHTML = '';
-//   refs..innerHTML = '';
+//     // clearMarkup();
+//     fetchMovies(form)
+//         .then(renderAllMovies)
+//         .catch(fetchError)
 // }
+
+
+// function fetchError() {
+//     alert('Oops!!!');
+// }
+// function moreTwoCharacters(){
+//     alert('Please enter more than two characters');
+// }
+// function correctionRequest(){
+//     alert('Please enter a correction request');
+// }
+// function nothingRequest(){
+//     alert('Sorry, there is nothing for your request');
+// }
+// function selectionMovies(){
+//     alert('We have selected ${} movies for you. Enjoy yourself');
+// }
+// // function clearMarkup() {
+// //   refs..innerHTML = '';
+// //   refs..innerHTML = '';
+// // }
