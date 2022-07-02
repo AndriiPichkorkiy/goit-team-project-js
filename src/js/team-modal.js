@@ -1,13 +1,13 @@
+console.log('HELLO');
+const refs = {
+  openModalBtn: document.querySelector('[data-modal-open]'),
+  closeModalBtn: null,
+  modal: document.querySelector('[data-modal]'),
+};
 
-  const refs = {
-    openModalBtn: document.querySelector('[data-modal-open]'),
-    closeModalBtn: null,
-    modal: document.querySelector('[data-modal]'),
-  };
+refs.openModalBtn.addEventListener('click', toggleModal);
 
-  refs.openModalBtn.addEventListener('click', toggleModal);
-
-  const markup = `  <div class="team-modal-wrapper">
+const markup = `  <div class="team-modal-wrapper">
     <button
       tupe="button"
       class="team-modal__btn-close"
@@ -15,7 +15,7 @@
       data-id="teamModalClose"
     >
       <svg class="team-modal__btn-close-icon" width="32" height="32">
-        <use href="./images/icons.svg#icon-close"></use>
+        <use href="images/icons.svg#icon-close"></use>
       </svg>
       
     </button>
@@ -84,15 +84,14 @@
     </ul>
   </div>`;
 
-  function createModalMarkup() {
-    refs.modal.insertAdjacentHTML('beforeend', markup);
-    refs.closeModalBtn = document.querySelector('[data-modal-close]');
-    refs.closeModalBtn.addEventListener('click', toggleModal);
-  }
+function createModalMarkup() {
+  refs.modal.insertAdjacentHTML('beforeend', markup);
+  refs.closeModalBtn = document.querySelector('[data-modal-close]');
+  refs.closeModalBtn.addEventListener('click', toggleModal);
+}
 
-  createModalMarkup();
+createModalMarkup();
 
-
-  function toggleModal() {
-    refs.modal.classList.toggle('visually-hidden');
-  }
+function toggleModal() {
+  refs.modal.classList.toggle('visually-hidden');
+}
