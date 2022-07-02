@@ -37,7 +37,7 @@ import debounce from 'lodash/throttle';
 //=== === === === === === === ===
 //=== ===  FOOTER'S PART  === ===
 //=== === === === === === === ===
-import './js/team-modal.js';
+// import './js/team-modal.js';
 //
 //
 //
@@ -45,7 +45,7 @@ import './js/team-modal.js';
 //=== === === === === === === ===
 //=== = MOVIE SERVICE PART  = ===
 //=== === === === === === === ===
-import './js/movie-service';
+import MovieService from './js/movie-service.js';
 //
 //
 //
