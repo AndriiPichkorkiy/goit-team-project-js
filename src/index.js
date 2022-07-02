@@ -37,7 +37,8 @@ import debounce from 'lodash/throttle';
 //=== === === === === === === ===
 //=== ===  FOOTER'S PART  === ===
 //=== === === === === === === ===
-// import './js/team-modal.js';
+import './js/team-modal.js';
+console.log('abc');
 //
 //
 //

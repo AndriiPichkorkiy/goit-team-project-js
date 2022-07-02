@@ -1,24 +1,33 @@
 .footer {
-  padding-top: 2.5rem;
-  padding-bottom: 2.33rem;
+  padding-top: 28px;
+  padding-bottom: 28px;
   background-color: $footerBgColor;
+  @include min768 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 }
 
 .footer-wrap {
-  padding-left: 3.5rem;
-  padding-right: 3.5rem;
+  padding-left: 40px;
+  padding-right: 40px;
   margin: 0 auto;
   @include flex(flex, center, center);
+  @include min768 {
+    padding: 0;
+  }
 }
 .content {
-  max-width: 235px;
-  font-size: 1.16rem;
-  line-height: 1.33rem;
+  min-width: 235px;
+  font-size: 14px;
+  line-height: 1.14;
   text-align: center;
   color: $footerTextColor;
 
   @include min768 {
     min-width: 480px;
+    font-size: 16px;
+    line-height: 1.18;
 
     & br {
       display: none;
@@ -28,16 +37,22 @@
 
 .footer-wrap__icon {
   color: $accentColor;
-  margin-right: 0.83rem;
-  margin-left: 0.83rem;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .team-modal {
   padding: 0;
   background: transparent;
   color: $footerTextColor;
-  font-size: 1.16rem;
-  line-height: 1.33rem;
+  font-size: 14px;
+  line-height: 1.14;
+
+  cursor: pointer;
+  @include min768 {
+    font-size: 16px;
+    line-height: 1.18;
+  }
 
   & span {
     text-decoration: underline;
