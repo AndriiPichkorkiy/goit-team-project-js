@@ -1,0 +1,96 @@
+.header-bg-lib {
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 100%;
+  min-height: 230px;
+
+  background-color: #000000;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    url(/src/images/bg-libra-320-1x-min.jpg);
+
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(/src/images/bg-libra-320-2x-min.jpg);
+  }
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @include min768 {
+    min-height: 216px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(/src/images/bg-libra-768-1x-min.jpg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(/src/images/bg-libra-768-2x-min.jpg);
+    }
+  }
+
+  @include min1280 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(/src/images/bg-libra-1280-1x-min.jpg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(/src/images/bg-libra-1280-2x-min.jpg);
+    }
+  }
+}
+
+.navigation--lib {
+  margin-bottom: 54px;
+
+  @include min768 {
+    margin-bottom: 40px;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.library__buttons {
+  width: 130px;
+  height: 44px;
+  margin-left: 20px;
+  border: 1px solid $textColorOnDark;
+  border-radius: 5px;
+  color: $textColorOnDark;
+  font-size: 12px;
+  line-height: 1.33;
+  background: transparent;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  @include min768 {
+    width: 150px;
+    height: 44px;
+    margin-left: 30px;
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.library__button--active {
+  border: none;
+  outline: none;
+  background: $accentColor;
+}
