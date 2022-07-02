@@ -1,4 +1,4 @@
-(() => {
+
   const refs = {
     openModalBtn: document.querySelector('[data-modal-open]'),
     closeModalBtn: null,
@@ -92,7 +92,7 @@
 
   createModalMarkup();
 
+
   function toggleModal() {
     refs.modal.classList.toggle('visually-hidden');
   }
-})();
