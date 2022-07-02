@@ -30,8 +30,8 @@ export default class MovieService{
     async getPopularMovies(page){
         this.message = 'OK!';
         // Перевіряє, чи не перевищує пошуковий запит від фактично можливого
-        if((this.totalPagePopular !== 1)&(this.pagePopular === this.totalPagePopular)){ this.message = "Let's page"; return;};
-        if((this.totalPagePopular !== 1)&(page >= this.totalPagePopular)){this.message = 'Great value "page"'; return;};
+        if((this.totalPagePopular !== 1)&&(this.pagePopular === this.totalPagePopular)){ this.message = "Let's page"; return;};
+        if((this.totalPagePopular !== 1)&&(page >= this.totalPagePopular)){this.message = 'Great value "page"'; return;};
         
         const action = 'trending/movie/week';
         const parameters = new URLSearchParams({
