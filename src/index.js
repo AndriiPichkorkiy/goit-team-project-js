@@ -5,7 +5,7 @@ import debounce from 'lodash/throttle';
 //=== === === === === === === ===
 //=== ===  GENERAL PART   === ===
 //=== === === === === === === ===
-//
+import refs from './js/refs.js';
 //
 //
 //
@@ -13,7 +13,7 @@ import debounce from 'lodash/throttle';
 //=== === === === === === === ===
 //=== ===  HEADER'S PART  === ===
 //=== === === === === === === ===
-//
+import './js/search-form.js'
 //
 //
 //
@@ -62,7 +62,7 @@ import MovieService from './js/movie-service.js';
 //=== === === === === === === ===
 //=== ===  OTHER'S PART   === ===
 //=== === === === === === === ===
-//
+// 
 //
 //
 //
