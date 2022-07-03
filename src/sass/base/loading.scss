@@ -1,0 +1,47 @@
+
+// @keyframes fade {
+//     0% { opacity: 0; }
+//     100% { opacity: 1; }
+// }
+
+.icon {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    margin: 25px;
+    // opacity: 0;
+    // transition: all;
+    // &-1 {
+    //     transition: 500ms fade   cubic-bezier(.64, .27, .45, .84);}
+    // &-2 {
+    //     animation: 500ms fade 500ms  cubic-bezier(.64, .27, .45, .84);
+    // }
+    // &-3 {
+    //     animation: 500ms fade 1000ms  cubic-bezier(.64, .27, .45, .84);
+    // }
+    // &-4 {
+    //     animation: 500ms fade 1500ms  cubic-bezier(.64, .27, .45, .84);
+    // }
+    // &-5 {
+    //     animation: 500ms fade 2000ms  cubic-bezier(.64, .27, .45, .84);
+    // }
+    
+}
+
+
+.icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+     
+}
+
+.icon-list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
