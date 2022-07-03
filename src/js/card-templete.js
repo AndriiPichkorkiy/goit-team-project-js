@@ -1,6 +1,6 @@
-import MovieService from '../js/movie-service';
-const movieService = new MovieService();
-const list = document.querySelector('.movies-card');
+// import MovieService from '../js/movie-service';
+// const movieService = new MovieService();
+// const list = document.querySelector('.movies-card');
 
 export default function renderCardTemplate(data) {
   const { id, title, poster_path, release_date, vote_average, genre_ids } =
@@ -29,14 +29,4 @@ export default function renderCardTemplate(data) {
             </div>
           </a>
         </li>`;
-}
-
-movieService
-  .getPopularMovies()
-  .then(data => data.results.map(data => renderCollection(data)));
-
-function renderCollection(data) {
-  const card = renderCardTemplate(data);
-
-  list.insertAdjacentHTML('beforeend', card);
 }
