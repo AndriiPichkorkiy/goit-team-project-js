@@ -5,8 +5,12 @@
 @import './utils/vars';
 @import './utils/mixins';
 @import './base/container';
-@import './base/header.scss';
+@import './base/header';
+
+@import './base/header-lib';
+
 @import './footer';
 @import './team-modal';
-@import './main-flex-grids.scss';
-@import './main-card.scss';
+@import './film-modal';
+@import './main-flex-grids';
+@import './main-card';

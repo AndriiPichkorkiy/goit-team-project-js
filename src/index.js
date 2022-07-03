@@ -5,7 +5,7 @@ import debounce from 'lodash/throttle';
 //=== === === === === === === ===
 //=== ===  GENERAL PART   === ===
 //=== === === === === === === ===
-//
+import refs from './js/refs.js';
 //
 //
 //
@@ -13,7 +13,7 @@ import debounce from 'lodash/throttle';
 //=== === === === === === === ===
 //=== ===  HEADER'S PART  === ===
 //=== === === === === === === ===
-//
+import './js/search-form.js';
 //
 //
 //
@@ -38,7 +38,7 @@ import './js/card-templete';
 //=== === === === === === === ===
 //=== ===  FOOTER'S PART  === ===
 //=== === === === === === === ===
-// import './js/team-modal.js';
+import './js/team-modal.js';
 //
 //
 //
