@@ -23,15 +23,24 @@ function searchMovies(event) {
     // if (!newsApiService.query) {
     //     correctionRequest();
     // }
-    
-
+    fetchData();
+console.log(fetchData());
     // clearMarkup();
 
-    newsApiService.getMoviesByTitle(newsApiService.query)
-        .then(console.log(newsApiService.getMoviesByTitle(newsApiService.query)))
-        // .catch(fetchError)
+    // newsApiService.getMoviesByTitle(newsApiService.query)
+    //     .then(console.log(newsApiService.getMoviesByTitle(newsApiService.query)))
+    //     .catch(fetchError)
 }
 
+async function fetchData() {
+
+  const { page } = await newsApiService.fetchMovies();
+  
+    if (page.length === 0) {
+        nothingRequest()
+    }
+//   renderGalleryItems({page});  
+}
 
 function fetchError() {
     alert('Oops!!!');
