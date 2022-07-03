@@ -1,40 +1,54 @@
-// import throttle from 'lodash/throttle';
-// import debounce from 'lodash/throttle';
-// import refs from "./refs";
+import throttle from 'lodash/throttle';
+import debounce from 'lodash/throttle';
+import refs from "./refs";
+import MovieService from './movie-service';
 
-// const DEBOUNCE_DELAY = 300;
+const newsApiService = new MovieService();
+console.log(newsApiService);
+const DEBOUNCE_DELAY = 300;
 
 // refs.searchForm.addEventListener("input", debounce(searchMovies, DEBOUNCE_DELAY));
-// console.log(refs.searchForm);
-// function searchMovies() {
+refs.searchForm.addEventListener("submit",searchMovies);
+// refs.searchBtn.addEventListener('click', searchMovies);
 
-//     event.preventDefault();
+function searchMovies(event) {
+    event.preventDefault();
 
-//     const form = event.target.value.trim();
+    newsApiService.query = event.currentTarget.elements.query.value.trim();
+    
+    console.log(newsApiService.query);
+    // if (newsApiService.query.length <= 2 || newsApiService.query.length === 0) {
+    //     moreTwoCharacters();
+    // }
+    // if (!newsApiService.query) {
+    //     correctionRequest();
+    // }
+    
 
-//     // clearMarkup();
-//     fetchMovies(form)
-//         .then(renderAllMovies)
-//         .catch(fetchError)
-// }
+    // clearMarkup();
+
+    newsApiService.getMoviesByTitle(newsApiService.query)
+        .then(console.log(newsApiService.getMoviesByTitle(newsApiService.query)))
+        // .catch(fetchError)
+}
 
 
-// function fetchError() {
-//     alert('Oops!!!');
+function fetchError() {
+    alert('Oops!!!');
+}
+function moreTwoCharacters(){
+    alert('Please enter more than 2 characters');
+}
+function correctionRequest(){
+    alert('Please enter a correction request');
+}
+function nothingRequest(){
+    alert('Sorry, there is nothing for your request');
+}
+function selectionMovies(){
+    alert('We have selected ${} movies for you. Enjoy yourself');
+}
+// function clearMarkup() {
+//   refs..innerHTML = '';
+//   refs..innerHTML = '';
 // }
-// function moreTwoCharacters(){
-//     alert('Please enter more than two characters');
-// }
-// function correctionRequest(){
-//     alert('Please enter a correction request');
-// }
-// function nothingRequest(){
-//     alert('Sorry, there is nothing for your request');
-// }
-// function selectionMovies(){
-//     alert('We have selected ${} movies for you. Enjoy yourself');
-// }
-// // function clearMarkup() {
-// //   refs..innerHTML = '';
-// //   refs..innerHTML = '';
-// // }
