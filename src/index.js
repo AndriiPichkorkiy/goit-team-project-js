@@ -13,7 +13,7 @@ import refs from './js/refs.js';
 //=== === === === === === === ===
 //=== ===  HEADER'S PART  === ===
 //=== === === === === === === ===
-import './js/search-form.js'
+import './js/search-form.js';
 //
 //
 //
@@ -38,7 +38,6 @@ import './js/search-form.js'
 //=== ===  FOOTER'S PART  === ===
 //=== === === === === === === ===
 import './js/team-modal.js';
-console.log('abc');
 //
 //
 //
@@ -62,7 +61,7 @@ import MovieService from './js/movie-service.js';
 //=== === === === === === === ===
 //=== ===  OTHER'S PART   === ===
 //=== === === === === === === ===
-// 
+//
 //
 //
 //
