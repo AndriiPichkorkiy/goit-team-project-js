@@ -13,6 +13,8 @@ import refs from './js/refs.js';
 //=== === === === === === === ===
 //=== ===  HEADER'S PART  === ===
 //=== === === === === === === ===
+
+import './js/header.js';
 import './js/search-form.js';
 //
 //
