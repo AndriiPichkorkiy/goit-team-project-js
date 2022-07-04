@@ -5,7 +5,7 @@
   width: 100%;
   min-height: 230px;
 
-  background-color: #000000;
+  background-color: $textColorDark;
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
     url(/src/images/bg-libra-320-1x-min.jpg);
 
@@ -52,17 +52,14 @@
   }
 }
 
-.navigation--lib {
-  margin-bottom: 54px;
-
-  @include min768 {
-    margin-bottom: 40px;
-  }
-}
-
-.buttons {
+.buttons-wrapper {
   display: flex;
   justify-content: center;
+  margin-top: 54px;
+
+  @include min768 {
+    margin-top: 40px;
+  }
 }
 
 .library__buttons {

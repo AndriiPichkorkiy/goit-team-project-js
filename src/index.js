@@ -13,6 +13,8 @@ import refs from './js/refs.js';
 //=== === === === === === === ===
 //=== ===  HEADER'S PART  === ===
 //=== === === === === === === ===
+
+import './js/header.js';
 import './js/search-form.js';
 //
 //
@@ -21,7 +23,8 @@ import './js/search-form.js';
 //=== === === === === === === ===
 //=== === = MAIN'S PART = === ===
 //=== === === === === === === ===
-//
+import './js/card-templete';
+import './js/render-movies';
 //
 //
 //
