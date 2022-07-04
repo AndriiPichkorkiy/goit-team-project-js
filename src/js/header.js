@@ -2,14 +2,15 @@ import refs from '/src/js/refs';
 
 const activeHeader = document.querySelector('.js-active-header');
 
-let mainPage = 1;
+let mainPage = 'homePage';
+
 markupForm();
 refs.home.classList.add('side-nav__link--current');
 refs.logoLink.setAttribute('style', 'cursor:default');
 
 refs.home.addEventListener('click', e => {
   e.preventDefault();
-  if (mainPage === 1) return;
+  if (mainPage === 'homePage') return;
 
   markupPageHome();
   markupForm();
@@ -17,20 +18,20 @@ refs.home.addEventListener('click', e => {
 
 refs.library.addEventListener('click', e => {
   e.preventDefault();
-  if (mainPage === 2) return;
+  if (mainPage === 'libraryPage') return;
   markupPageLibrary();
   markupButtons();
 });
 
 refs.logoLink.addEventListener('click', e => {
   e.preventDefault();
-  if (mainPage !== 2) return;
+  if (mainPage !== 'libraryPage') return;
   markupPageHome();
   markupForm();
 });
 
 function markupPageHome() {
-  mainPage = 1;
+  mainPage = 'homePage';
   refs.home.classList.add('side-nav__link--current');
   refs.library.classList.remove('side-nav__link--current');
   refs.header.classList.remove('header-bg-lib');
@@ -38,7 +39,7 @@ function markupPageHome() {
 }
 
 function markupPageLibrary() {
-  mainPage = 2;
+  mainPage = 'libraryPage';
   refs.library.classList.add('side-nav__link--current');
   refs.home.classList.remove('side-nav__link--current');
   refs.header.classList.add('header-bg-lib');
