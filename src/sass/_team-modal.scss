@@ -17,7 +17,7 @@
   top: 50%;
   left: 50%;
 
-  max-width: 800px;
+  max-width: 1000px;
   width: calc(100% - 30px);
   max-height: 609px;
 
@@ -46,7 +46,7 @@
   // rotate(180deg)
   &__title {
     margin-top: 0;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 
     color: $footerTextColor;
 
@@ -57,6 +57,12 @@
     @media screen and (min-width: 1200px) {
       line-height: 1.15;
     }
+  }
+
+  &__after-title {
+    margin-bottom: 15px;
+    @include font(15px, null, 1.15, null);
+    text-align: center;
   }
 }
 
@@ -102,7 +108,62 @@
 }
 
 .team-modal__item {
-  flex-basis: calc((100% / 3) - 20px);
-  margin-left: 20px;
-  margin-bottom: 20px;
+  text-align: center;
+  background-color: $textColorOnDark;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.14),
+    0 2px 1px rgba(0, 0, 0, 0.2);
+  @include min768 {
+    flex-basis: calc((100% / 2) - 20px);
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  @include min1280 {
+    flex-basis: calc((100% / 4) - 20px);
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.item-container {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.item-container__title {
+  color: $accentColor;
+  margin-bottom: 10px;
+  @include font(24px, 600, 1.12, null);
+}
+
+.item-container__text {
+  margin-bottom: 10px;
+  @include font(14px, 600, 1.14, null);
+}
+
+.item-container__git {
+  color: $accentColor;
+  @include font(14px, null, 1.14, null);
+}
+
+.item-container__mail {
+  display: block;
+  margin-bottom: 10px;
+  color: inherit;
+  text-decoration: none;
+  @include font(14px, 600, 1.14, null);
+}
+
+.team-modal-wrapper__img {
+  display: block;
+  width: 100%;
+  height: 65%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.team-modal__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
