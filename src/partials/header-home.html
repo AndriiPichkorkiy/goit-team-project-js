@@ -1,9 +1,9 @@
-<header class="header-bg">
+<header class="header-bg" data-id="header">
   <div class="endless-bg-color">
     <div class="container">
       <div class="header-section">
         <nav class="navigation">
-          <a class="navigation__logo">
+          <a class="navigation__logo" data-id="logoLink">
             <svg class="logo__icon" width="24" height="24">
               <use href="/src/images/icons.svg#icon-film"></use>
             </svg>
@@ -12,29 +12,16 @@
 
           <ul class="side-nav">
             <li class="side-nav__item">
-              <a href="" class="side-nav__link side-nav__link--current">Home</a>
+              <a href="" class="side-nav__link" data-id="home">Home</a>
             </li>
             <li class="side-nav__item">
-              <a href="/src/librery.html" class="side-nav__link">My library</a>
+              <a href="" class="side-nav__link" data-id="library">My library</a>
             </li>
           </ul>
         </nav>
-
-        <form class="search-form" data-id="searchForm">
-          <input
-            type="text"
-            name="query"
-            autocomplete="off"
-            data-id="searchQuery"
-            placeholder="Movie search"
-            class="search-field"
-          />
-          <button type="submit" class="search-btn" data-id="searchBtn">
-            <svg class="search-icon" width="12" height="12">
-              <use href="/src/images/icons.svg#icon-search"></use>
-            </svg>
-          </button>
-        </form>
+        <div class="js-active-header">
+          
+        </div>
       </div>
     </div>
   </div>
