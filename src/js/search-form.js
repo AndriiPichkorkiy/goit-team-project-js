@@ -1,13 +1,12 @@
 import throttle from 'lodash/throttle';
 import debounce from 'lodash/throttle';
 import refs from "./refs";
-import MovieService from './movie-service';
+import {movieService} from './movie-service';
 import renderCardTemplate from './card-templete';
 import './header'
 
-refs.searchForm = document.querySelector(['.search-form']);
+refs.searchForm = document.querySelector('.search-form');
 
-const movieService = new MovieService();
 // const DEBOUNCE_DELAY = 300;
 
 // refs.searchForm.addEventListener("input", debounce(searchMovies, DEBOUNCE_DELAY));
@@ -37,7 +36,6 @@ async function fetchData(value) {
         })
     refs.moviesCard.innerHTML = data;
 }
-
 
 function moreTwoCharacters(){
     alert('Please enter more than 2 characters');
