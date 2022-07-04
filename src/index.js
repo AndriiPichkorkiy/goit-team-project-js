@@ -74,3 +74,4 @@ import MovieService from './js/movie-service.js';
 //
 //
 //
+import './js/loading.js';
