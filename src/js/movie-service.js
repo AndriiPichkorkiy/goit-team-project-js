@@ -11,6 +11,8 @@ export default class MovieService{
         this.query = "";
         //Тут інформація про успіх запитів
         this.message = "";
+        // Тут інформація про жанри, масив об'єктів:
+        this.genres =[];
     }
    
     //Пошук 1 фільма за айдішніком (для отримання детальної інформації по фільму);
@@ -123,6 +125,13 @@ export default class MovieService{
         return this.fetchMovies(url);
     }
 
+    //Запит для отримання масива з жанрами фільмів
+    async getGenres(){
+        const url = this.createUrl('genre/movie/list');
+        const {genres} = await this.fetchMovies(url);
+        return genres;
+    };
+
     resetPage(){
         this.page = 1;
     }
@@ -134,4 +143,12 @@ export default class MovieService{
     resetPagePopular(){
         this.pagePopular = 1;
     }
-}
+};
+
+//Створює екземпляр класу і робить іменований експорт
+const movieService = new MovieService();
+async function firstRunServise(){
+    movieService.genres = await movieService.getGenres();
+};
+firstRunServise();
+export {movieService};
