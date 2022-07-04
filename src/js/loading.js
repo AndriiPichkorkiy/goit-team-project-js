@@ -9,19 +9,8 @@ function search(e) {
     let svgAr = icon.children;
     let svg = svgAr[0];
     console.log(svg);
-    // svg.classList.add(`animate__flash`);
-    // svg.classList.add(`animate__delay-5s`);
-    setTimeout(() => {
-      console.log('sdffdfg');
-      icon.classList.remove(`animate__zoomIn`);
-      for (let i = 0; i < array.length; i++) {
-        array[i].classList.remove(`animate__delay-${i}s`);
-      }
-      icon.classList.add(`animate__zoomIn`);
-      for (let i = 0; i < array.length; i++) {
-        array[i].classList.add(`animate__delay-${i}s`);
-      }
-    }, 5000);
+    svg.classList.add(`animate__flash`);
+    svg.classList.add(`animate__delay-5s`);
   });
   for (let i = 0; i < array.length; i++) {
     array[i].classList.add(`animate__delay-${i}s`);
