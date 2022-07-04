@@ -50,6 +50,19 @@
 
     color: $footerTextColor;
 
+    background: linear-gradient(
+      60deg,
+      #0501d6 0%,
+      #0501d6 50%,
+      #fcff4a 50%,
+      #fcff4a 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: bp 5s infinite cubic-bezier(0.81, 0.35, 0.87, 0.86);
+    background-size: 300px 300px;
+    background-position: 0 0;
+
     @include font(30px, 700, 1.5, null);
 
     text-align: center;
@@ -61,8 +74,26 @@
 
   &__after-title {
     margin-bottom: 15px;
-    @include font(15px, null, 1.15, null);
+    @include font(16px, 500, 1.15, null);
     text-align: center;
+  }
+}
+
+@keyframes bp {
+  0% {
+    background-position-x: 300px;
+  }
+  25% {
+    background-position-x: 150px;
+  }
+  50% {
+    background-position-x: 0px;
+  }
+  75% {
+    background-position-x: 150px;
+  }
+  100% {
+    background-position-x: 300px;
   }
 }
 
@@ -95,6 +126,8 @@
   }
 
   &-icon {
+    width: 15px;
+    height: 15px;
     fill: currentColor;
   }
 }
@@ -119,7 +152,9 @@
     margin-bottom: 20px;
   }
   @include min1280 {
-    flex-basis: calc((100% / 4) - 20px);
+    flex-basis: calc((100% / 3) - 20px);
+    width: 300px;
+    height: 330px;
     margin-left: 20px;
     margin-bottom: 20px;
   }
@@ -133,7 +168,7 @@
 .item-container__title {
   color: $accentColor;
   margin-bottom: 10px;
-  @include font(24px, 600, 1.12, null);
+  @include font(16px, 600, 1.12, null);
 }
 
 .item-container__text {
