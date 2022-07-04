@@ -1,4 +1,11 @@
-import MovieService from './movie-service'
+import movieService from './movie-service'
+
+import onClickFilm from './film-modal'
+console.log(onClickFilm);
+
+//  <button type="button" class="add-to-watched">ADD TO WATCHED</button>
+// <button type="button" class="add-to-queue">ADD TO QUEUE</button> 
+// console.log(filmModal);
 // const movi = new MovieService
 // // ..........мінімальна розмітка потрібна щоб працювало........
 //   ........................................................
@@ -13,11 +20,13 @@ import MovieService from './movie-service'
 let idRandomNumber = Math.ceil(Math.random() * 30)
 
 
-const watchedBtn = document.querySelector("#watched");
-const queueBtn = document.querySelector('#queue');
+const watchedBtn = document.querySelector(".add-to-watched");
+const queueBtn = document.querySelector('.add-to-queue');
+if (watchedBtn) {
+  watchedBtn.addEventListener('click', addToWatched)
+  queueBtn.addEventListener('click',addedToQueue)
+}
 
-watchedBtn.addEventListener('click', addToWatched)
-queueBtn.addEventListener('click',addedToQueue)
 
 
 const localStorageKeys = {
