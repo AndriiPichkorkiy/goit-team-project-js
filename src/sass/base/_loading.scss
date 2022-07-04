@@ -16,7 +16,8 @@
     height: 100vh;
     position: fixed;
     top: 0;
-    z-index: -1;
+    // z-index: -1;
+    pointer-events: none;
 }
 
 .icon-list {
@@ -31,4 +32,8 @@
     opacity: 0;
     pointer-events: 0;
     visibility: hidden;
+}
+
+.blockedSreen {
+    pointer-events: all;
 }

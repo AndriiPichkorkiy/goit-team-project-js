@@ -16,4 +16,12 @@ function search(e) {
     array[i].classList.add(`animate__delay-${i}s`);
   }
 }
+function blockSreen() {
+  iconList.classList.add(`blockSreen`);
+}
+
+function unblockSreen() {
+  iconList.classList.remove(`blockSreen`);
+}
+
 form.addEventListener('submit', search);
