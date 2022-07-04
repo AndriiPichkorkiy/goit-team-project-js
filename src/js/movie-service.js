@@ -5,12 +5,14 @@ export default class MovieService{
         this.totalPage = 1;
         //Це для пошуку популярних фільмів
         this.pagePopular = 1;
-        this.totalPagePopular = 2;
+        this.totalPagePopular = 1;
         
         //Зберігає останній позитивний пошуковий запит (для внутрішньої логіки)
         this.query = "";
         //Тут інформація про успіх запитів
         this.message = "";
+        // Тут інформація про жанри, масив об'єктів:
+        this.genres = this.galleryData();
     }
    
     //Пошук 1 фільма за айдішніком (для отримання детальної інформації по фільму);
@@ -123,6 +125,17 @@ export default class MovieService{
         return this.fetchMovies(url);
     }
 
+    async galleryData(){
+        this.genres = await this.getGenres();
+    }
+
+    //Запит для отримання масива з жанрами фільмів
+    async getGenres(){
+        const url = this.createUrl('genre/movie/list');
+        const {genres} = await this.fetchMovies(url);
+        return genres;
+    };
+
     resetPage(){
         this.page = 1;
     }
@@ -134,4 +147,7 @@ export default class MovieService{
     resetPagePopular(){
         this.pagePopular = 1;
     }
-}
+};
+
+//Створює екземпляр класу і робить іменований експорт
+export const movieService = new MovieService();
