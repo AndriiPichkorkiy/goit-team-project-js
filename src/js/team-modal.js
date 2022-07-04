@@ -90,6 +90,8 @@ refs.openModalBtn.addEventListener('click', toggleModal);
 // }
 
 // createModalMarkup();
+refs.closeModalBtn = document.querySelector('[data-modal-close]');
+refs.closeModalBtn.addEventListener('click', toggleModal);
 
 function toggleModal() {
   refs.modal.classList.toggle('visually-hidden');
