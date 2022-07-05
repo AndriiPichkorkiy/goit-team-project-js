@@ -1,19 +1,31 @@
 html {
     scroll-behavior: smooth;
 }
-
+.scrolltop__container {
+    @media screen and (max-width: 650px) {
+        display: flex;
+        width: 100vw;
+        justify-content: center;
+        align-items: center;
+    }
+}
 .scrolltop__btn {
-    position: fixed;
     width: 100px;
     height: 100px;
-    z-index: 10000;
     background-color: black;
     border-radius: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 5%;
-    right: 5%;
+    @media screen and (min-width: 650px) {
+        position: fixed;
+        bottom: 5%;
+        right: 0;
+        z-index: 10000;
+    }
+    @media screen and (min-width: 880px) {
+        right: 5%;
+    }
     border: 10px double orange;
     transition: 1000ms;
 }
