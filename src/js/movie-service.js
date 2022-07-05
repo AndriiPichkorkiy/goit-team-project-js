@@ -128,13 +128,6 @@ export default class MovieService{
         this.page = 1;
     }
 
-    resetTotalPage(){
-        this.totalPage = 1;
-    }
-
-    resetPagePopular(){
-        this.pagePopular = 1;
-    }
 };
 
 // Створює екземпляр класу і робить іменований експорт
