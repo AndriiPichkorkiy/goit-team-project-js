@@ -16,11 +16,11 @@ function search(e) {
     array[i].classList.add(`animate__delay-${i}s`);
   }
 }
-function blockSreen() {
+export function blockSreen() {
   iconList.classList.add(`blockSreen`);
 }
 
-function unblockSreen() {
+export function unblockSreen() {
   iconList.classList.remove(`blockSreen`);
 }
 
