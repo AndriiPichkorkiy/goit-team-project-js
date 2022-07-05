@@ -5,6 +5,7 @@
 export default function renderCardTemplate(data) {
   const { id, title, poster_path, release_date, vote_average, genre_ids } =
     data;
+  const avarage = vote_average.toFixed(1);
 
   return `<li class="movies-card__item">
           <a
@@ -24,7 +25,7 @@ export default function renderCardTemplate(data) {
               <h2 class="movies-card__heading">${title}</h2>
               <p class="movies-card__text">
                 ${genre_ids} | ${release_date}
-                <span class="movies-card__rating">${vote_average}</span>
+                <span class="movies-card__rating">${avarage}</span>
               </p>
             </div>
           </a>
