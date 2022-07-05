@@ -33,7 +33,7 @@ export default class MovieService{
         this.message = 'OK!';
         // Перевіряє, чи не перевищує пошуковий запит від фактично можливого
         if((this.totalPagePopular !== 1)&&(this.pagePopular === this.totalPagePopular)){ this.message = "Let's page"; return;};
-        if((this.totalPagePopular !== 1)&&(page >= this.totalPagePopular)){this.message = 'Great value "page"'; return;};
+        if((this.totalPagePopular !== 1)&&(page > this.totalPagePopular)){this.message = 'Great value "page"'; return;};
         
         const action = 'trending/movie/week';
         const parameters = new URLSearchParams({
@@ -68,9 +68,8 @@ export default class MovieService{
             this.message = "No information found";
             return;
         };
-        
+
         this.page = movies.page;
-        console.log('this.page: ', this.page);
         this.query = searchQuery;
         if(page){this.page = movies.page;};
         this.totalPage = movies.total_pages;
@@ -139,4 +138,4 @@ export default class MovieService{
 };
 
 // Створює екземпляр класу і робить іменований експорт
-export const moviesService = new MovieService();
+export const movieService = new MovieService();
