@@ -1,0 +1,28 @@
+.wrapper-button {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.watched-btn {
+    width: 110px;
+    height: 44px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+
+    // padding: 6px 0px;
+    // display: flex;
+    // align-items: center;
+    border-radius: 5px;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+    background-color: #FF6B01;
+}
+
+.queue-btn {
+    background-color: #fff;
+    // background-color:  #FF6B01;
+    color: black;
+    outline: 1px black solid;
+}
