@@ -35,6 +35,11 @@ async function fetchData(value) {
             return results.map(result => renderCardTemplate(result))
         })
     refs.moviesCard.innerHTML = data;
+
+    const total_pages = movieService.totalPage;
+    if (total_pages >= 2) {
+        // call pagination
+    }
 }
 
 function moreTwoCharacters(){
