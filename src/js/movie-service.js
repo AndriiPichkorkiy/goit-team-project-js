@@ -15,7 +15,7 @@ export default class MovieService{
         this.genres = this.galleryData();
     }
    
-    //Пошук 1 фільма за айдішніком (для отримання детальної інформації по фільму);
+    // Пошук 1 фільма за айдішніком (для отримання детальної інформації по фільму);
     async getOneMovie(id){
         this.message = 'OK!';
         if (!id){return};
@@ -28,7 +28,7 @@ export default class MovieService{
         return;
     }
 
-    //пошук фільмів за популярністю. Можна передавати необов'язковий параметр page(ціле число), повертає 20 фільмів
+    // пошук фільмів за популярністю. Можна передавати необов'язковий параметр page(ціле число), повертає 20 фільмів
     async getPopularMovies(page){
         this.message = 'OK!';
         // Перевіряє, чи не перевищує пошуковий запит від фактично можливого
@@ -50,38 +50,27 @@ export default class MovieService{
         return movies;
     }
 
-    //Пошук фільмів за назвою(ключовим словом). searchQuery - обов'язковий елемент, строка без пропусків на початку та кінці. Page - необов'язковий аргумент, ціле число. 
+    // Пошук фільмів за назвою(ключовим словом). searchQuery - обов'язковий елемент, строка без пропусків на початку та кінці. Page - необов'язковий аргумент, ціле число. 
     async getMoviesByTitle(searchQuery, page){
         this.message = 'OK!';
         if(!searchQuery){this.message = 'empty request'; return};
-        // Перевіряє, чи співпадає новий запит з попереднім. Якщо так, то збільшити пагінацію на 1 і зробити запит.
-        // а після запиту перевірити. Якщо запит був успішний, то пагінацію залишити, в this.query записати назву запиту
-        // якщо запит не був успішний, то пагінації повернути попереднє значення.
-        let backupPage = 1;
-        if((searchQuery !== this.query)){
-            backupPage = this.page;
-            this.page = 1;
-        }else{
-            if(this.page === this.totalPage){this.message = "Let's page"; return};
-            if(page >= this.totalPage){this.message = 'Great value "page"'; return;};
-            backupPage = this.page;
-            this.page += 1;
-        };
-        
+        if(page < 1){this.message = 'Small value page'; return};
+        if((this.query)&&(page > this.totalPage)){this.message = 'Great value page'; return};
         const action = 'search/movie';
         const parameters = new URLSearchParams({
-            'page': page || this.page,
+            'page': page || 1,
             'query': searchQuery,
         });
         
         const url = this.createUrl(action, parameters);
         const movies = await this.fetchMovies(url);
         if((!movies)||(movies.total_pages === 0)||(movies.results.length === 0)){
-            this.page = backupPage;
             this.message = "No information found";
             return;
         };
         
+        this.page = movies.page;
+        console.log('this.page: ', this.page);
         this.query = searchQuery;
         if(page){this.page = movies.page;};
         this.totalPage = movies.total_pages;
@@ -149,5 +138,5 @@ export default class MovieService{
     }
 };
 
-//Створює екземпляр класу і робить іменований експорт
-export const movieService = new MovieService();
+// Створює екземпляр класу і робить іменований експорт
+export const moviesService = new MovieService();
