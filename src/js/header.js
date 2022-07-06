@@ -1,15 +1,19 @@
 import refs from '/src/js/refs';
+import * as iconSearch from '/src/images/icons.svg';
 
 const activeHeader = document.querySelector('.js-active-header');
+const logoPageHome = document.querySelector('.logo__name');
+let mainPage = 'homePage';
 
-let mainPage = 1;
 markupForm();
+
 refs.home.classList.add('side-nav__link--current');
 refs.logoLink.setAttribute('style', 'cursor:default');
+logoPageHome.classList.add('reveal-text');
 
 refs.home.addEventListener('click', e => {
   e.preventDefault();
-  if (mainPage === 1) return;
+  if (mainPage === 'homePage') return;
 
   markupPageHome();
   markupForm();
@@ -17,32 +21,36 @@ refs.home.addEventListener('click', e => {
 
 refs.library.addEventListener('click', e => {
   e.preventDefault();
-  if (mainPage === 2) return;
+  if (mainPage === 'libraryPage') return;
   markupPageLibrary();
   markupButtons();
 });
 
 refs.logoLink.addEventListener('click', e => {
   e.preventDefault();
-  if (mainPage !== 2) return;
+  if (mainPage !== 'libraryPage') return;
   markupPageHome();
   markupForm();
 });
 
 function markupPageHome() {
-  mainPage = 1;
+  mainPage = 'homePage';
   refs.home.classList.add('side-nav__link--current');
   refs.library.classList.remove('side-nav__link--current');
   refs.header.classList.remove('header-bg-lib');
   refs.logoLink.setAttribute('style', 'cursor:default');
+  logoPageHome.classList.add('reveal-text');
+  logoPageHome.classList.remove('rise-text');
 }
 
 function markupPageLibrary() {
-  mainPage = 2;
+  mainPage = 'libraryPage';
   refs.library.classList.add('side-nav__link--current');
   refs.home.classList.remove('side-nav__link--current');
   refs.header.classList.add('header-bg-lib');
   refs.logoLink.setAttribute('style', 'cursor:pointer;');
+  logoPageHome.classList.remove('reveal-text');
+  logoPageHome.classList.add('rise-text');
 }
 
 function markupForm() {
@@ -57,7 +65,7 @@ function markupForm() {
           />
           <button type="submit" class="search-btn" data-id="searchBtn">
             <svg class="search-icon" width="12" height="12">
-              <use href="/src/images/icons.svg/#icon-search"></use>
+              <use href="${iconSearch}#icon-search"></use>
             </svg>
           </button>
         </form>`;

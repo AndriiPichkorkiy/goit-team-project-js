@@ -1,30 +1,45 @@
-// import throttle from 'lodash/throttle';
-// import debounce from 'lodash/throttle';
-// import refs from "./refs";
+import throttle from 'lodash/throttle';
+import debounce from 'lodash/throttle';
+import refs from "./refs";
+import {movieService} from './movie-service';
+import renderCardTemplate from './card-templete';
+import './header'
+
+refs.searchForm = document.querySelector('.search-form');
 
 // const DEBOUNCE_DELAY = 300;
 
 // refs.searchForm.addEventListener("input", debounce(searchMovies, DEBOUNCE_DELAY));
-// console.log(refs.searchForm);
-// function searchMovies() {
+refs.searchForm.addEventListener("submit",searchMovies);
 
-//     event.preventDefault();
+function searchMovies(event) {
+    event.preventDefault();
 
-//     const form = event.target.value.trim();
+   const value = event.currentTarget.elements.query.value.trim();
+    
+    if (value.length <= 2 || value.length === 0) {
+        moreTwoCharacters();
+        return;
+    }
 
-//     // clearMarkup();
-//     fetchMovies(form)
-//         .then(renderAllMovies)
-//         .catch(fetchError)
-// }
+    movieService.resetPage();
 
+    fetchData(value);
 
-// function fetchError() {
-//     alert('Oops!!!');
-// }
-// function moreTwoCharacters(){
-//     alert('Please enter more than two characters');
-// }
+    clearMarkup();
+}
+
+async function fetchData(value) {
+    const data = await movieService.getMoviesByTitle(value)
+        .then(({ results }) => {
+            return results.map(result => renderCardTemplate(result))
+        })
+    refs.moviesCard.innerHTML = data;
+}
+
+function moreTwoCharacters(){
+    alert('Please enter more than 2 characters');
+}
 // function correctionRequest(){
 //     alert('Please enter a correction request');
 // }
@@ -34,7 +49,9 @@
 // function selectionMovies(){
 //     alert('We have selected ${} movies for you. Enjoy yourself');
 // }
-// // function clearMarkup() {
-// //   refs..innerHTML = '';
-// //   refs..innerHTML = '';
-// // }
+// function fetchError() {
+//     alert('Oops!!!');
+// }
+function clearMarkup() {
+  refs.moviesCard.innerHTML = '';
+}
