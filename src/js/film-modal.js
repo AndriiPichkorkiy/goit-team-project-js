@@ -1,5 +1,6 @@
 import { result } from "lodash";
 import MovieService from "./movie-service";
+import renderCardTemplate from "./card-templete";
 
 const movieService = new MovieService;
 
@@ -8,13 +9,26 @@ const refs = {
     filmModal: document.querySelector('.modal-film'),
     closeModalFilm: document.querySelector('.modal-film-close__btn'),
     backdropFilmModal: document.querySelector('.js-backdrop-film-modal'),
+    filmCardTemplate: document.querySelector('.movies-card'),
+    addToWatchBtn: document.querySelector('.add-to-watched'),
+    addToQueue: document.querySelector('.add-to-queue'),
 };
 
 
 refs.closeModalFilm.addEventListener('click', onCloseModal)
 refs.backdropFilmModal.addEventListener('click', onBackDropClick);
+refs.filmCardTemplate.addEventListener('click', onOpenFilmModal);
 
 
+function onOpenFilmModal() {
+    event.preventDefault();
+    const id = event.target.parentNode.parentNode.dataset.cardId;
+   
+    if (!id) return;
+    document.body.classList.add('show-modal')
+    onClickFilm(+id);
+    
+}
 
 function onCloseModal() {
     document.body.classList.remove('show-modal');
@@ -29,24 +43,37 @@ function onBackDropClick(event) {
 
 export default async function onClickFilm(id) {
     const answer = await movieService.getOneMovie(id).then(movie => {
-        console.log(movie);
-        const markup = `<div class="film-card">
-        <div class="film-poster">
-       <a href="${movie.poster_path}">
-<img class="film-poster-img" src="${movie.poster_path}" alt="${movie.tags}" loading="lazy" width=375/>
-</div>
-
+        const genre = Object.values(movie.genres);
+       
+        let genreValue = []
+        for (const value of genre) {
+            genreValue.push(value.name)
+        }
+        const markup = `<div class="film-card"
+            data-film-id = '${movie.id}'
+            data-film-title = '${movie.title}'
+            data-film-poster = '${movie.poster_path}'
+            data-card-release="${movie.release_date}"
+            data-film-vote = '${movie.vote_average}'
+            data-film-genre = '${genreValue}'
+        >
+        <div class="film-info-container">
+<img class="film-poster-img" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.tags}" loading="lazy"/>
+<div class="value-films">
 <h2 class="name-film">${movie.original_title}</h2>
-<p class="info-film">Vote / Votes<span class="info-value">${movie.vote_average}</span></p>
-<p class="info-film">Popularity<span class="info-value">${movie.vote_count}</span></p>
-<p class="info-film">Popularity<span class="info-value">${movie.popularity}</span></p>
-<p class="info-film">Original Title<span class="info-value">${movie.original_title}</span></p>
-<p class="info-film">ABOUT<span class="info-value">${movie.overview}</span></p>
-
-<button type="button" class="add-to-watched">ADD TO WATCHED</button>
-<button type="button" class="add-to-queue">ADD TO QUEUE</button>
+<table>
+<tbody><tr><td class="info-film"">Vote / Votes</td><td class="info-value"><span class="vote">${movie.vote_average}</span> / <span class="vote-count">${movie.vote_count}</span> </td></tr>
+<tbody><tr><td class="info-film"">Popularity</td><td class="info-value">${movie.popularity}</td></tr>
+<tbody><tr><td class="info-film"">Original Title</td><td class="info-value original-title">${movie.original_title}</td></tr>
+<tbody><tr><td class="info-film"">Genre</td><td class="info-value genres-film">${genreValue.join(", ")}</td></tr>
+    </table>
+<h3 class="about-film-title">about</h3>
+<p><span class="about-film-text">${movie.overview}</span></p>
+<button type="button" class="film-modal-btn add-to-watched">add to watched</button>
+<button type="button" class="film-modal-btn add-to-queue">add to queue</button>
+</div>
+</div>
 </div>`
-        refs.filmModal.insertAdjacentHTML('beforeend', markup);
+        refs.filmModal.innerHTML = markup;
     })
 }
-onClickFilm(453395);
