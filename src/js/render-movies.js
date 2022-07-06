@@ -1,8 +1,8 @@
 import refs from '../js/refs';
 import templeteCard from './card-templete';
-import MovieService from '../js/movie-service';
+import { movieService } from './movie-service';
 
-const movieService = new MovieService();
+// const movieService = new MovieService();
 
 //-------- Рендер популярних фільмів -----------------------------
 movieService
@@ -12,6 +12,6 @@ movieService
 function renderCollection(data) {
   const card = templeteCard(data);
 
-  refs.moviesCard.insertAdjacentHTML('beforeend', card);
+  refs.moviesCard.innerHTML = card;
 }
 //----------------------------------------------------------------
