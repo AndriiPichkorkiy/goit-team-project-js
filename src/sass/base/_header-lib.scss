@@ -74,10 +74,10 @@
   background: transparent;
   text-transform: uppercase;
   cursor: pointer;
+  transition: 1s;
 
   @include min768 {
-    width: 150px;
-    height: 44px;
+    width: 145px;
     margin-left: 30px;
   }
 
@@ -90,18 +90,16 @@
   border: none;
   outline: none;
   background: $accentColor;
+  //   box-shadow: 0 0 10px $accentColor, 0 0 20px $accentColor,
+  //     0 0 40px $accentColor, 0 0 80px $accentColor;
 }
 
-.button__light {
-  width: 130px;
-  height: 44px;
-  margin-left: 20px;
-  color: $textColorOnDark;
-  font-size: 12px;
-  line-height: 1.33;
-  background: transparent;
-  text-transform: uppercase;
-}
-.button__light:hover {
-  background: var(--clr);
+.library__buttons:hover {
+  font-size: 14px;
+  font-weight: 500;
+  color: $primaryTextColor;
+  background: $btnHoverColor;
+  border: 1px solid $btnHoverColor;
+  box-shadow: 0 0 10px $btnHoverColor, 0 0 20px $btnHoverColor,
+    0 0 40px $btnHoverColor;
 }
