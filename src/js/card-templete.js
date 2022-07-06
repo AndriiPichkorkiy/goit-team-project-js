@@ -21,8 +21,8 @@ export default function renderCardTemplate(data) {
               />
             </div>
             <div class="movies-card__content">
-              <h2 class="movies-card__heading">${title}</h2>
-              <p class="movies-card__text">
+              <h2 class="movies-card__heading text">${title}</h2>
+              <p class="movies-card__text ">
                 ${genre_ids} | ${release_date}
                 <span class="movies-card__rating">${vote_average}</span>
               </p>
