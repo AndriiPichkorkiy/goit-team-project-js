@@ -74,3 +74,4 @@ import movieService from './js/movie-service.js';
 //
 //
 //
+import './js/darktheme.js';
