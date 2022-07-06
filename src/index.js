@@ -73,9 +73,9 @@ import movieService from './js/movie-service.js';
 //
 //
 //
-
+import './js/scrolltop';
 import './js/film-modal'
 import './js/localStorage';
-
 import './js/loading.js';
+
 

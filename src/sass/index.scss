@@ -6,7 +6,11 @@
 @import './utils/mixins';
 @import './base/container';
 @import './base/header';
+
+@import './scrolltop';
+
 @import './base/loading';
+
 @import './base/header-lib';
 @import './pagination';
 @import './footer';
