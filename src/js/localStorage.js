@@ -3,7 +3,7 @@ import {movieService} from './movie-service'
 // import onClickFilm from './film-modal'
 let idRandomNumber = Math.ceil(Math.random() * 30)
 
-onClickFilm(idRandomNumber);
+// onClickFilm(idRandomNumber);
 async function onClickFilm(id) {
     const answer = await movieService.getOneMovie(id).then(movie => {
         // console.log(movie);
