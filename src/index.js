@@ -28,7 +28,7 @@ import './js/render-movies';
 //
 //
 //
-//
+import './js/film-modal';
 //=== === === === === === === ===
 //=== =  PAGINATION'S PART  = ===
 //=== === === === === === === ===
@@ -48,7 +48,7 @@ import './js/team-modal.js';
 //=== === === === === === === ===
 //=== = MOVIE SERVICE PART  = ===
 //=== === === === === === === ===
-import MovieService from './js/movie-service.js';
+import movieService from './js/movie-service.js';
 //
 //
 //
@@ -73,6 +73,9 @@ import MovieService from './js/movie-service.js';
 //
 //
 //
-//
+
 import './js/film-modal'
 import './js/localStorage';
+
+import './js/loading.js';
+
