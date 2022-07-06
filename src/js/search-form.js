@@ -1,44 +1,45 @@
 import throttle from 'lodash/throttle';
 import debounce from 'lodash/throttle';
-import refs from "./refs";
-import {movieService} from './movie-service';
+import refs from './refs';
+import { movieService } from './movie-service';
 import renderCardTemplate from './card-templete';
-import './header'
+import './header';
 
 refs.searchForm = document.querySelector('.search-form');
 
 // const DEBOUNCE_DELAY = 300;
 
 // refs.searchForm.addEventListener("input", debounce(searchMovies, DEBOUNCE_DELAY));
-refs.searchForm.addEventListener("submit",searchMovies);
+refs.searchForm.addEventListener('submit', searchMovies);
 
 function searchMovies(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-   const value = event.currentTarget.elements.query.value.trim();
-    
-    if (value.length <= 2 || value.length === 0) {
-        moreTwoCharacters();
-        return;
-    }
+  const value = event.currentTarget.elements.query.value.trim();
 
-    movieService.resetPage();
+  if (value.length <= 2 || value.length === 0) {
+    moreTwoCharacters();
+    return;
+  }
 
-    fetchData(value);
+  movieService.resetPage();
 
-    clearMarkup();
+  fetchData(value);
+
+  clearMarkup();
 }
 
 async function fetchData(value) {
-    const data = await movieService.getMoviesByTitle(value)
-        .then(({ results }) => {
-            return results.map(result => renderCardTemplate(result))
-        })
-    refs.moviesCard.innerHTML = data;
+  const data = await movieService
+    .getMoviesByTitle(value)
+    .then(({ results }) => {
+      return results.map(result => renderCardTemplate(result));
+    });
+  refs.moviesCard.innerHTML = data;
 }
 
-function moreTwoCharacters(){
-    alert('Please enter more than 2 characters');
+function moreTwoCharacters() {
+  alert('Please enter more than 2 characters');
 }
 // function correctionRequest(){
 //     alert('Please enter a correction request');

@@ -24,7 +24,7 @@ import './js/search-form.js';
 //=== === = MAIN'S PART = === ===
 //=== === === === === === === ===
 import './js/card-templete';
-import './js/render-movies';
+// import './js/render-movies';
 //
 //
 //
@@ -32,7 +32,7 @@ import './js/film-modal';
 //=== === === === === === === ===
 //=== =  PAGINATION'S PART  = ===
 //=== === === === === === === ===
-//
+import './js/pagination.js';
 //
 //
 //
@@ -73,4 +73,9 @@ import movieService from './js/movie-service.js';
 //
 //
 //
-//
+
+import './js/film-modal'
+import './js/localStorage';
+
+import './js/loading.js';
+
