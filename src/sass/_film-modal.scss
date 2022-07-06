@@ -50,13 +50,19 @@ padding: 40px 72px 40px 36px;
 }
 
 .modal-film-close__btn{
-background-color: $textColorOnDark;
+background-color: black;
 position: fixed;
 text-align: center;
 align-items: center;
 top: 16px;
 right: 16px;
 padding: 0;
+}
+
+.modal-film__vector {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 

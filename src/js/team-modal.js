@@ -2,9 +2,12 @@ const refs = {
   openModalBtn: document.querySelector('[data-modal-open]'),
   closeModalBtn: null,
   modal: document.querySelector('[data-modal]'),
+  list: document.querySelector('.team-modal__list'),
+  front: document.querySelector('.wrap-front'),
+  back: document.querySelector('.wrap-back'),
 };
 
-refs.openModalBtn.addEventListener('click', toggleModal);
+refs.openModalBtn.addEventListener('click', onModalOpen);
 
 // const markup = `  <div class="team-modal-wrapper">
 //     <button
@@ -91,8 +94,38 @@ refs.openModalBtn.addEventListener('click', toggleModal);
 
 // createModalMarkup();
 refs.closeModalBtn = document.querySelector('[data-modal-close]');
-refs.closeModalBtn.addEventListener('click', toggleModal);
+refs.closeModalBtn.addEventListener('click', onModalClose);
+
+const cardArr = [...refs.list.children];
 
 function toggleModal() {
   refs.modal.classList.toggle('visually-hidden');
 }
+
+function onModalOpen() {
+  toggleModal();
+  let delay = 500;
+  cardArr.forEach(element => {
+    delay += 500;
+    setTimeout(() => {
+      element.firstElementChild.style.transform = 'rotateY(360deg)';
+
+      element.lastElementChild.style.transform = 'rotateY(180deg)';
+    }, delay);
+  });
+}
+
+function onModalClose() {
+  console.log('first');
+  setTimeout(toggleModal, 4000);
+  let delay = 250;
+  cardArr.forEach(element => {
+    delay += 250;
+    setTimeout(() => {
+      element.firstElementChild.style.transform = 'rotateY(180deg)';
+
+      element.lastElementChild.style.transform = 'rotateY(360deg)';
+    }, delay);
+  });
+}
+

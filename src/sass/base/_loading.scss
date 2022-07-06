@@ -1,0 +1,61 @@
+
+.icon {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    margin: 25px;
+    @media screen and (max-width: 450px) {
+        margin: 8px;
+        width: 50px;
+    }
+    @media screen and (min-width: 450px) and (max-width: 700px) {
+        margin: 10px;
+        width: 75px;
+    }
+}
+
+
+// .container-icons {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     height: 100vh;
+//     pointer-events: 0;
+//     width: 100vh;
+// }
+
+.icons {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    // z-index: -1;
+    pointer-events: none;
+    
+}
+
+.icon-list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 100;
+    @media screen and (max-width: 450px) {
+        max-width: 350px;
+        overflow: hidden;
+    }
+}
+
+.is-hidden {
+    opacity: 0;
+    pointer-events: 0;
+    visibility: hidden;
+}
+
+.blockedSreen {
+    pointer-events: all;
+}

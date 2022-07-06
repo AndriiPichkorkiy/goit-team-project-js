@@ -1,24 +1,19 @@
 import { result } from "lodash";
-import MovieService from "./movie-service";
+import vectorSvg from '../images/icons.svg';
+import {movieService} from "./movie-service";
 import renderCardTemplate from "./card-templete";
-
-const movieService = new MovieService;
-
+import { addEventsOnModalBtn } from "./localStorage";
 
 const refs = {
     filmModal: document.querySelector('.modal-film'),
     closeModalFilm: document.querySelector('.modal-film-close__btn'),
     backdropFilmModal: document.querySelector('.js-backdrop-film-modal'),
     filmCardTemplate: document.querySelector('.movies-card'),
-    addToWatchBtn: document.querySelector('.add-to-watched'),
-    addToQueue: document.querySelector('.add-to-queue'),
 };
 
-
-refs.closeModalFilm.addEventListener('click', onCloseModal)
+refs.closeModalFilm.addEventListener('click', onCloseModal);
 refs.backdropFilmModal.addEventListener('click', onBackDropClick);
 refs.filmCardTemplate.addEventListener('click', onOpenFilmModal);
-
 
 function onOpenFilmModal() {
     event.preventDefault();
@@ -27,27 +22,27 @@ function onOpenFilmModal() {
     if (!id) return;
     document.body.classList.add('show-modal')
     onClickFilm(+id);
-    
 }
 
 function onCloseModal() {
-    document.body.classList.remove('show-modal');
+  document.body.classList.remove('show-modal');
 }
 
 function onBackDropClick(event) {
-    if (event.currentTarget === event.target) {
-     onCloseModal()
-    }
+  if (event.currentTarget === event.target) {
+    onCloseModal();
+  }
 }
-
 
 export default async function onClickFilm(id) {
     const answer = await movieService.getOneMovie(id).then(movie => {
         const genre = Object.values(movie.genres);
        
         let genreValue = []
+        let genreId = []
         for (const value of genre) {
             genreValue.push(value.name)
+            genreId.push(value.id)
         }
         const markup = `<div class="film-card"
             data-film-id = '${movie.id}'
@@ -55,8 +50,8 @@ export default async function onClickFilm(id) {
             data-film-poster = '${movie.poster_path}'
             data-card-release="${movie.release_date}"
             data-film-vote = '${movie.vote_average}'
-            data-film-genre = '${genreValue}'
-        >
+            data-film-genre = '${genreId}'
+            >
         <div class="film-info-container">
 <img class="film-poster-img" src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.tags}" loading="lazy"/>
 <div class="value-films">
@@ -75,5 +70,7 @@ export default async function onClickFilm(id) {
 </div>
 </div>`
         refs.filmModal.innerHTML = markup;
+        addEventsOnModalBtn();
     })
+        
 }
