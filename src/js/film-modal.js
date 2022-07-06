@@ -1,7 +1,7 @@
 import { result } from 'lodash';
-import MovieService from './movie-service';
 
-const movieService = new MovieService();
+import { movieService } from './movie-service';
+// const movieService = new MovieService;
 
 const refs = {
   filmModal: document.querySelector('.modal-film'),
@@ -41,7 +41,8 @@ export default async function onClickFilm(id) {
             <button type="button" class="add-to-watched">ADD TO WATCHED</button>
             <button type="button" class="add-to-queue">ADD TO QUEUE</button>
         </div>`;
+
     refs.filmModal.insertAdjacentHTML('beforeend', markup);
   });
 }
-onClickFilm(453395);
+// onClickFilm(453395);
