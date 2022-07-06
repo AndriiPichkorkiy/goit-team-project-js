@@ -13,5 +13,5 @@
 //   const card = templeteCard(data);
 
 //   refs.moviesCard.innerHTML = card;
-}
+// }
 //----------------------------------------------------------------
