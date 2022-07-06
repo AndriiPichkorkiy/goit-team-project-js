@@ -1,7 +1,7 @@
 const iconList = document.querySelector('.icon-list');
 const form = document.querySelector('.search-form');
 const array = [...iconList.children];
-function animationWhenSearch(e) {
+export function animationWhenSearch(e) {
   e.preventDefault();
   array.forEach(icon => {
     icon.classList.remove(`is-hidden`);
@@ -19,7 +19,7 @@ export function blockSreen() {
   iconList.classList.add(`blockSreen`);
 }
 
-export function unblockSreen() {
+export function removeAnimation() {
   if (iconList.classList.contains(`blockSreen`)) {
     iconList.classList.remove(`blockSreen`);
   }
@@ -35,5 +35,3 @@ export function unblockSreen() {
     array[i].classList.remove(`animate__delay-${i}s`);
   }
 }
-
-form.addEventListener('submit', animationWhenSearch);
