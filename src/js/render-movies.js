@@ -1,8 +1,8 @@
 import refs from '../js/refs';
 import templeteCard from './card-templete';
-import MovieService from '../js/movie-service';
+import { movieService } from '../js/movie-service';
 
-const movieService = new MovieService();
+// const movieService = new MovieService();
 
 //-------- Рендер популярних фільмів -----------------------------
 movieService
