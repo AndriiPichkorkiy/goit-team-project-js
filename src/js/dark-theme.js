@@ -34,7 +34,10 @@ function light() {
   footer.style.backgroundColor = '#f7f7f7';
   moon.style.opacity = 0;
   sun.style.opacity = 1;
-  globalStyle.innerHTML = '.text { color: black;}';
+  globalStyle.innerHTML =
+    '.movies-card__heading { color: black;}' +
+    '.content { color: #545454;}' +
+    '.team-modal { color: #545454;}';
 }
 
 function changeTheme() {
