@@ -1,5 +1,5 @@
-import MovieService from './movie-service'
-const movieService = new MovieService;
+import {movieService} from './movie-service'
+
 // import onClickFilm from './film-modal'
 let idRandomNumber = Math.ceil(Math.random() * 30)
 
@@ -36,15 +36,21 @@ async function onClickFilm(id) {
 // // ..........мінімальна розмітка потрібна щоб працювало........
      
 
-
-
-
+function addEventsOnModalBtn(){
 const watchedBtn = document.querySelector(".add-to-watched");
 const queueBtn = document.querySelector('.add-to-queue');
 if (watchedBtn) {
   watchedBtn.addEventListener('click', addToWatched)
   queueBtn.addEventListener('click',addedToQueue)
+  }
+else {
+  alert("buttons are not here!!")
+  }
 }
+export { addEventsOnModalBtn }
+
+
+
 let idInStorage;
 let objectInStorage;
 
