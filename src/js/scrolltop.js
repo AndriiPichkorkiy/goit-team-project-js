@@ -1,17 +1,19 @@
-const btn = document.querySelector('.scrolltop__btn');
+import { throttle } from 'lodash';
 
-window.onscroll = () => {
-  if (window.scrollY > 200) {
+const btn = document.querySelector('.scrolltop__btn');
+window.addEventListener('scroll', throttle(onScroll, 200));
+
+function onScroll() {
+  const minimumPxToScroll = 200;
+  if (window.scrollY > minimumPxToScroll) {
     btn.classList.remove(`is-hidden-button`);
-    // btn.classList.add('animate__delay-1s');
     btn.classList.add('animate__bounce');
   }
-  if (window.scrollY < 200) {
+  if (window.scrollY < minimumPxToScroll) {
     btn.classList.add(`is-hidden-button`);
     btn.classList.remove('animate__bounce');
-    // btn.classList.remove('animate__delay-1s');
   }
-};
+}
 
 function toTop(e) {
   e.preventDefault();
