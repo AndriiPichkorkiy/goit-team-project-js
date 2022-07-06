@@ -11,13 +11,13 @@
 
   background-color: $textColorDark;
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-    url(/src/images/bg-home-320-1x-min.jpg);
+    url(/src/images/header/bg-home-320-1x-min.jpg);
 
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/bg-home-320-2x-min.jpg);
+      url(/src/images/header/bg-home-320-2x-min.jpg);
   }
 
   background-position: center;
@@ -27,7 +27,7 @@
   @include min768 {
     min-height: 216px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/bg-home-768-1x-min.jpg);
+      url(/src/images/header/bg-home-768-1x-min.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
@@ -36,13 +36,13 @@
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url(/src/images/bg-home-768-2x-min.jpg);
+        url(/src/images/header/bg-home-768-2x-min.jpg);
     }
   }
 
   @include min1280 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/bg-home-1280-1x-min.jpg);
+      url(/src/images/header/bg-home-1280-1x-min.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
@@ -51,7 +51,7 @@
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url(/src/images/bg-home-1280-2x-min.jpg);
+        url(/src/images/header/bg-home-1280-2x-min.jpg);
     }
   }
 }
@@ -67,12 +67,21 @@
 
   text-decoration: none;
 }
+// :root {
+//   --color1: white;
+//   --color2: red;
+// }
 
 .logo__icon {
+  //   fill: currentColor;
+  //   color: var(--color1);
   @include min768 {
     margin-right: 10px;
   }
 }
+// .logo__icon:hover {
+//   transform: scale(1.2);
+// }
 
 .logo__name {
   font-family: 'Roboto', sans-serif;
@@ -352,7 +361,6 @@ $iterations: 1;
   border-bottom: 1px solid $accentColor;
 
   &::placeholder {
-    color: $accentColor;
     opacity: 0.5;
   }
 }
@@ -375,4 +383,9 @@ $iterations: 1;
   background-color: transparent;
   border: transparent;
   color: $textColorOnDark;
+}
+
+.search-btn:hover {
+  transform: scale(1.5);
+  transition: 0.7s;
 }

@@ -7,13 +7,13 @@
 
   background-color: $textColorDark;
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-    url(/src/images/bg-libra-320-1x-min.jpg);
+    url(/src/images/header/bg-libra-320-1x-min.jpg);
 
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/bg-libra-320-2x-min.jpg);
+      url(/src/images/header/bg-libra-320-2x-min.jpg);
   }
 
   background-position: center;
@@ -23,7 +23,7 @@
   @include min768 {
     min-height: 216px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/bg-libra-768-1x-min.jpg);
+      url(/src/images/header/bg-libra-768-1x-min.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
@@ -32,13 +32,13 @@
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url(/src/images/bg-libra-768-2x-min.jpg);
+        url(/src/images/header/bg-libra-768-2x-min.jpg);
     }
   }
 
   @include min1280 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/bg-libra-1280-1x-min.jpg);
+      url(/src/images/header/bg-libra-1280-1x-min.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
@@ -47,7 +47,7 @@
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url(/src/images/bg-libra-1280-2x-min.jpg);
+        url(/src/images/header/bg-libra-1280-2x-min.jpg);
     }
   }
 }
@@ -90,4 +90,18 @@
   border: none;
   outline: none;
   background: $accentColor;
+}
+
+.button__light {
+  width: 130px;
+  height: 44px;
+  margin-left: 20px;
+  color: $textColorOnDark;
+  font-size: 12px;
+  line-height: 1.33;
+  background: transparent;
+  text-transform: uppercase;
+}
+.button__light:hover {
+  background: var(--clr);
 }
