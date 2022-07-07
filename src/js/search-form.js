@@ -15,14 +15,12 @@ refs.searchForm.addEventListener("submit",searchMovies);
 function searchMovies(event) {
     event.preventDefault();
 
-   const value = event.currentTarget.elements.query.value.trim();
+    const value = event.currentTarget.elements.query.value.trim();
     
     if (value.length <= 2 || value.length === 0) {
         moreTwoCharacters();
         return;
     }
-
-    movieService.resetPage();
 
     fetchData(value);
 
@@ -31,10 +29,15 @@ function searchMovies(event) {
 
 async function fetchData(value) {
     const data = await movieService.getMoviesByTitle(value)
-        .then(({ results }) => {
-            return results.map(result => renderCardTemplate(result))
-        })
-    refs.moviesCard.innerHTML = data;
+    const card = data.results
+        .map(result => renderCardTemplate(result))
+        .join('');
+    refs.moviesCard.innerHTML = card;
+
+    const total_pages = movieService.totalPage;
+    if (total_pages >= 2) {
+        // call pagination
+    }
 }
 
 function moreTwoCharacters(){
