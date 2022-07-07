@@ -1,0 +1,40 @@
+// body {
+//     background-color: rgba(0, 0, 0, 0.904);
+// }
+
+.darktheme-btn {
+    background-color: transparent;
+    position: absolute;
+    left: 65px;
+    top: 40px;
+    @media screen and (min-width:400px){
+        left: 25%;
+        height: 35px;
+    }
+    @media screen and (min-width:610px) {
+        left: 35%;
+        height: 35px;
+    }
+    @media screen and (min-width:768px) {
+        left: 50%;
+    }
+}
+
+.darktheme-icon {
+    width: 35px;
+    height: 35px;
+    @media screen and (min-width:400px) {
+        height: 50px;
+        width: 50px;
+    }
+    transition: 500ms;
+}
+
+.darktheme-icon__moon {
+    fill: rgb(17, 101, 228);
+    opacity: 0;
+}
+
+.darktheme-icon__sun {
+    fill: rgb(233, 164, 14);
+}

@@ -5,11 +5,19 @@ export default function renderCardTemplate(data) {
     data;
   const avarage = vote_average.toFixed(1);
   const releaseYear = parseInt(release_date);
+  // if (window.matchMedia('(min-width: 768px)').matches) {
+  //   console.log(title.slice(0, 5));
+  // }
+  // if (window.matchMedia('(min-width: 1280px)').matches) {
+  //   console.log(title.slice(0, 10));
+  // }
 
   return `<li class="movies-card__item" data-card-id="${id}">
             <div class="movies-card__thumb">
               <img
+              
                 src="https://image.tmdb.org/t/p/w500/${poster_path}"
+                onError="this.onerror=null;this.src='https://subscribenow.com.au/time/asia/Solo/Content/Images/noCover.gif';"
                 alt="${title}"
                 loading="lazy"
               />
