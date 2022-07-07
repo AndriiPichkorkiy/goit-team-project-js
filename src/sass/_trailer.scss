@@ -1,0 +1,60 @@
+.btn-trailer {
+  position: absolute;
+  z-index: 1;
+  width: 260px;
+  height: 40px;
+  margin-left: 2px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  background-image: url(/src/images/youtube.svg);
+  background-color: initial;
+}
+
+.btn-trailer-text {
+  position: absolute;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: $textColorDark;
+  cursor: pointer;
+  margin: 0;
+  z-index: 5;
+  @include min768 {
+    font-size: 16px;
+  }
+}
+
+.btn-trailer-overlay-text {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 25px;
+  width: 190px;
+  pointer-events: none;
+  font-family: Roboto, sans-serif;
+  background-color: $btnHoverColor;
+  border-radius: 5px;
+  top: 3px;
+  left: 95px;
+  z-index: 2;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: all 0.4s ease-in;
+  @include min768 {
+    width: 220px;
+    left: 100px;
+  }
+  @include min1280 {
+    width: 150px;
+    left: 80px;
+  }
+}
+
+.btn-wrapper-trailer:hover .btn-trailer-overlay-text {
+  display: flex;
+  opacity: 1;
+  transform: translateX(-30%);
+}

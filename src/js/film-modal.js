@@ -53,9 +53,18 @@ export default async function onClickFilm(id) {
             data-film-genre = '${genreId}'
             >
             <div class="film-info-container">
+
+				<div class="btn-wrapper-trailer">
+				 <button type="button" class="btn-trailer" data-id="trailerBtn">
+   <div class="btn-trailer-overlay-text">
+  <h3 class="btn-trailer-text">Watch Trailer</h3>
+  </button>
                 <img class="film-poster-img" src="https://image.tmdb.org/t/p/w500/${
                   movie.poster_path
                 }" alt="${movie.tags}" loading="lazy"/>
+  </div>
+
+
             <div class="value-films">
             <h2 class="name-film">${movie.original_title}</h2>
             <table>
