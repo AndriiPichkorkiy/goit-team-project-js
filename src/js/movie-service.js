@@ -24,6 +24,12 @@ class MovieService {
     return this.getMovies(action, parameters);
   }
 
+  //Пошук фільмів за популярністю АБО ключовим словом
+  async getSearchQuery(searchQuery, page){
+    if(!searchQuery){return await this.getPopularMovies(page)}
+    return await this.getMoviesByTitle(searchQuery, page);
+  };
+
   // пошук фільмів за популярністю. Можна передавати необов'язковий параметр page(ціле число), повертає 20 фільмів
   async getPopularMovies(page) {
     this.message = 'OK!';
@@ -38,7 +44,7 @@ class MovieService {
 
     const action = 'trending/movie/week';
     const parameters = new URLSearchParams({
-      page: page || this.pagePopular,
+      page: page || 1,
     });
 
     return await this.getMovies(action, parameters);
@@ -128,7 +134,6 @@ class MovieService {
     const movies = await this.fetchMovies(url);
 
     //Якщо запрос карточки по Id
-    console.log('action.slice(0, 6): ',action.slice(0, 6));
     if(action.slice(0, 6) === "movie/"){
       if(!movies ){this.message = 'No information found'; return;}
       else {return movies;}
@@ -140,17 +145,11 @@ class MovieService {
     };
     
     this.data = movies;
-    if ((action = 'search/movie')) {
-      this.page = movies.page;
-      this.totalPage = movies.total_pages;
-    };
-    if ((action = 'trending/movie/week')) {
-      this.pagePopular = movies.page;
-      this.totalPagePopular = movies.total_pages;
-    };
+    this.page = movies.page;
+    this.totalPage = movies.total_pages;
+
     return movies;
   }
-
 };
 
 // Створює екземпляр класу і робить іменований експорт
