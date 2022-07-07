@@ -3,9 +3,7 @@ class MovieService {
     //Це для пошуку за ключовими словами
     this.page = 1;
     this.totalPage = 1;
-    //Це для пошуку популярних фільмів
-    this.pagePopular = 1;
-    this.totalPagePopular = 1;
+    
     this.data = {};
     //Зберігає останній позитивний пошуковий запит (для внутрішньої логіки)
     this.query = '';
@@ -18,18 +16,19 @@ class MovieService {
   // Пошук 1 фільма за айдішніком (для отримання детальної інформації по фільму);
   async getOneMovie(id) {
     this.message = 'OK!';
-    if (!id) {
-      return;
-    }
-
-    const url = this.createUrl(`movie/${+id}`);
-    const movie = await this.fetchMovies(url);
-    if (!movie) {
-      this.message = 'No information found';
-      return;
-    }
-    return movie;
+    if (!id){this.message = 'There is no search query'; return;}
+    const action = `movie/${+id}`;
+    const parameters = new URLSearchParams({
+      'append_to_response': 'videos',
+    });
+    return this.getMovies(action, parameters);
   }
+
+  //Пошук фільмів за популярністю АБО ключовим словом
+  async getSearchQuery(searchQuery, page){
+    if(!searchQuery){return await this.getPopularMovies(page)}
+    return await this.getMoviesByTitle(searchQuery, page);
+  };
 
   // пошук фільмів за популярністю. Можна передавати необов'язковий параметр page(ціле число), повертає 20 фільмів
   async getPopularMovies(page) {
@@ -45,7 +44,7 @@ class MovieService {
 
     const action = 'trending/movie/week';
     const parameters = new URLSearchParams({
-      page: page || this.pagePopular,
+      page: page || 1,
     });
 
     return await this.getMovies(action, parameters);
@@ -106,7 +105,7 @@ class MovieService {
         return response.json();
       });
     } catch (error) {
-      alert(error.message);
+      this.message = error.message;
       return;
     }
   }
@@ -117,6 +116,7 @@ class MovieService {
     return this.fetchMovies(url);
   }
 
+  //Додає масив об'єктів з жанрами
   async galleryData() {
     this.genres = await this.getGenres();
   }
@@ -128,30 +128,29 @@ class MovieService {
     return genres;
   }
 
+  //----Повертає об'єкт відповіді----
   async getMovies(action, parameters) {
     const url = this.createUrl(action, parameters);
     const movies = await this.fetchMovies(url);
 
+    //Якщо запрос карточки по Id
+    if(action.slice(0, 6) === "movie/"){
+      if(!movies ){this.message = 'No information found'; return;}
+      else {return movies;}
+    };
+
     if (!movies || movies.results.length === 0) {
       this.message = 'No information found';
       return;
-    }
+    };
+    
     this.data = movies;
-    if ((action = 'search/movie')) {
-      this.page = movies.page;
-      this.totalPage = movies.total_pages;
-    }
-    if ((action = 'trending/movie/week')) {
-      this.pagePopular = movies.page;
-      this.totalPagePopular = movies.total_pages;
-    }
+    this.page = movies.page;
+    this.totalPage = movies.total_pages;
+
     return movies;
   }
-
-  resetPage() {
-    this.page = 1;
-  }
-}
+};
 
 // Створює екземпляр класу і робить іменований експорт
 export const movieService = new MovieService();
