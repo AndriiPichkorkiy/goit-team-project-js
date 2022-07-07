@@ -1,4 +1,5 @@
 .footer {
+  background-color: teal;
   padding-top: 28px;
   padding-bottom: 28px;
   background-color: $footerBgColor;
@@ -9,6 +10,8 @@
 }
 
 .footer-wrap {
+  // position: absolute;
+  // bottom: 0;
   padding-left: 40px;
   padding-right: 40px;
   margin: 0 auto;
