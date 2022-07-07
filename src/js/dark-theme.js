@@ -4,6 +4,7 @@ const footer = document.querySelector('footer');
 const moon = document.querySelector('.darktheme-icon__moon');
 const sun = document.querySelector('.darktheme-icon__sun');
 const globalStyle = document.querySelector('[data-id ="global-page-style"]');
+const themeFromStorage = localStorage.getItem('THEME');
 
 const objTheme = {
   dark: 0,
@@ -18,15 +19,33 @@ const objTheme = {
   },
 };
 
+if (localStorage.getItem('THEME') === 'DARK') {
+  dark();
+  objTheme.changeToDark();
+}
+
 function dark() {
-  body.style.backgroundColor = 'rgba(0, 0, 0, 0.904)';
+  body.style.backgroundColor = 'rgb(17, 17, 17)';
   footer.style.backgroundColor = 'black';
   sun.style.opacity = 0;
   moon.style.opacity = 1;
+  if (
+    localStorage.getItem('THEME') === '' ||
+    localStorage.getItem('THEME') === 'LIGHT'
+  ) {
+    localStorage.setItem('THEME', 'DARK');
+  }
   globalStyle.innerHTML =
     '.movies-card__heading { color: white;}' +
-    '.content { color: white;}' +
-    '.team-modal { color: white;}';
+    '.content { color: orange;}' +
+    '.team-modal { color: orange;}' +
+    '.pagination { background-color: rgb(17, 17, 17);}' +
+    '.modal-film {background-color: black;}' +
+    '.name-film {color: white;}' +
+    '.info-value {color: orange;}' +
+    '.about-film-title {color: orange;}' +
+    '.about-film-text {color: orange;}' +
+    '.film-modal-btn {background-color: orange; }';
 }
 
 function light() {
@@ -34,10 +53,18 @@ function light() {
   footer.style.backgroundColor = '#f7f7f7';
   moon.style.opacity = 0;
   sun.style.opacity = 1;
+  localStorage.setItem('THEME', 'LIGHT');
   globalStyle.innerHTML =
     '.movies-card__heading { color: black;}' +
     '.content { color: #545454;}' +
-    '.team-modal { color: #545454;}';
+    '.team-modal { color: #545454;}' +
+    '.pagination { background-color: white;}' +
+    '.modal-film {background-color: white;}' +
+    '.name-film {color: black;}' +
+    '.info-value {color: black;}' +
+    '.about-film-title {color: black;}' +
+    '.about-film-text {color: black;}' +
+    '.film-modal-btn {background-color: white; }';
 }
 
 function changeTheme() {
