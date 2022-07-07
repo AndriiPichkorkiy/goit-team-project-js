@@ -52,36 +52,37 @@ export default async function onClickFilm(id) {
             data-film-vote = '${movie.vote_average}'
             data-film-genre = '${genreId}'
             >
-        <div class="film-info-container">
-<img class="film-poster-img" src="https://image.tmdb.org/t/p/w500/${
-      movie.poster_path
-    }" alt="${movie.tags}" loading="lazy"/>
-<div class="value-films">
-<h2 class="name-film">${movie.original_title}</h2>
-<table>
-<tbody><tr><td class="info-film"">Vote / Votes</td><td class="info-value"><span class="vote">${
-      movie.vote_average
-    }</span> / <span class="vote-count">${movie.vote_count}</span> </td></tr>
-<tbody><tr><td class="info-film"">Popularity</td><td class="info-value">${
-      movie.popularity
-    }</td></tr>
-<tbody><tr><td class="info-film"">Original Title</td><td class="info-value original-title">${
-      movie.original_title
-    }</td></tr>
-<tbody><tr><td class="info-film"">Genre</td><td class="info-value genres-film">${genreValue.join(
-      ', '
-    )}</td></tr>
-    </table>
-<h3 class="about-film-title">about</h3>
-<p><span class="about-film-text">${movie.overview}</span></p>
-<button type="button" class="film-modal-btn add-to-watched">add to watched</button>
-<button type="button" class="film-modal-btn add-to-queue">add to queue</button>
-</div>
-</div>
-</div>`;
+            <div class="film-info-container">
+                <img class="film-poster-img" src="https://image.tmdb.org/t/p/w500/${
+                  movie.poster_path
+                }" alt="${movie.tags}" loading="lazy"/>
+            <div class="value-films">
+            <h2 class="name-film">${movie.original_title}</h2>
+            <table>
+            <tbody><tr><td class="info-film"">Vote / Votes</td><td class="info-value"><span class="vote">${
+              movie.vote_average
+            }</span> / <span class="vote-count">${
+      movie.vote_count
+    }</span> </td></tr>
+            <tbody><tr><td class="info-film"">Popularity</td><td class="info-value">${
+              movie.popularity
+            }</td></tr>
+            <tbody><tr><td class="info-film"">Original Title</td><td class="info-value original-title">${
+              movie.original_title
+            }</td></tr>
+            <tbody><tr><td class="info-film"">Genre</td><td class="info-value genres-film">${genreValue.join(
+              ', '
+            )}</td></tr>
+                </table>
+            <h3 class="about-film-title">about</h3>
+            <p><span class="about-film-text">${movie.overview}</span></p>
+            <button type="button" class="film-modal-btn add-to-watched">add to watched</button>
+            <button type="button" class="film-modal-btn add-to-queue">add to queue</button>
+            </div>
+            </div>
+            </div>`;
     refs.filmModal.innerHTML = markup;
     addEventsOnModalBtn();
   });
 }
-
 // onClickFilm(453395);
