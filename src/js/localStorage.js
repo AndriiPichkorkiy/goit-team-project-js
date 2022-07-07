@@ -27,11 +27,6 @@ let filmCard;
 export { addEventsOnModalBtn }
 
 
-
-// let idInStorage;
-// let objectInStorage;
-
-
 const localStorageKeys = {
   watchedFilm:'watchedFilm',
   filmInQueue:'filmInQueue'
