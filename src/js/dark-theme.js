@@ -1,3 +1,9 @@
+import * as anyNameThatYouWant from '../images/icons.svg';
+
+// div.innerHTML = `<svg class="search-icon" width="48" height="48">
+//    <use href="${anyNameThatYouWant}#icon-film"></use>
+//  </svg>`;
+
 const darkthemeBtn = document.querySelector('.darktheme-btn');
 const body = document.querySelector('body');
 const footer = document.querySelector('footer');
@@ -86,10 +92,10 @@ function changeTheme() {
 export function doChangeThemeBtnMarkup() {
   const themeBtnMarkup = `<button class="darktheme-btn">
         <svg class="darktheme-icon darktheme-icon__sun">
-            <use href = "./images/icons.svg#icon-sun">
+            <use href = "${anyNameThatYouWant}#icon-sun">
         </svg>
         <svg class="darktheme-icon darktheme-icon__moon">
-            <use href="./images/icons.svg#icon-moon">
+            <use href="${anyNameThatYouWant}#icon-moon">
         </svg>
 </button>`;
   return themeBtnMarkup;
