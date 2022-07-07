@@ -16,6 +16,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  overflow: auto;
 
   @include max1279 {
     overflow: auto;
@@ -29,7 +30,7 @@
   @include min1280 {
     max-width: 1200px;
     width: calc(100% - 50px);
-    max-height: 900px;
+    max-height: 800px;
   }
 
   @media screen and (max-width: 610px) {
@@ -44,7 +45,6 @@
   padding: 30px;
   transform: translate(-50%, -50%) scale(1);
   transition: transform 250ms;
-  // rotate(0)
 
   background: #fff;
   border-radius: 4px;
@@ -54,7 +54,7 @@
   .backdrop.visually-hidden & {
     transform: translate(-50%, -50%) scale(0.5);
   }
-  // rotate(180deg)
+
   &__title {
     margin-top: 0;
     margin-bottom: 15px;
@@ -163,9 +163,6 @@
   position: relative;
   perspective: 1000px;
 
-  // background-size: 300px 300px;
-  //   background-position: 0 0;
-
   @include max767 {
     margin-bottom: 15px;
     height: 350px;
@@ -173,14 +170,14 @@
 
   @include min768 {
     flex-basis: calc((100% / 2) - 20px);
-    height: 370px;
+    height: 300px;
     margin-left: 20px;
     margin-bottom: 20px;
   }
   @include min1280 {
     flex-basis: calc((100% / 5) - 20px);
     width: 300px;
-    height: 370px;
+    height: 300px;
     margin-left: 20px;
     margin-bottom: 20px;
   }
@@ -218,7 +215,7 @@
 .team-modal-wrapper__img {
   display: block;
   width: 100%;
-  height: 70%;
+  height: 60%;
   overflow: hidden;
   z-index: -1;
 }
@@ -253,25 +250,8 @@
     0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-// .team-modal__item:hover .wrap-front {
-//   transform: rotateY(360deg);
-// }
-// .team-modal__item:hover .wrap-back {
-//   transform: rotateY(180deg);
-// }
-
 .back-image {
   width: 100%;
   height: 73%;
   object-fit: cover;
 }
-
-// @keyframes card-reverse {
-//   0% {
-//     transform: rotateY(0deg);
-//   }
-
-//   100% {
-//     transform: rotateY(180deg);
-//   }
-// }
