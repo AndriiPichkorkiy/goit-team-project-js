@@ -3,8 +3,11 @@ import debounce from 'lodash/throttle';
 import refs from "./refs";
 import {movieService} from './movie-service';
 import renderCardTemplate from './card-templete';
-import './header'
+import './header';
+import { loading } from './loading';
+import { blockSreen } from './loading';
 
+console.log(loading);
 refs.searchForm = document.querySelector('.search-form');
 
 // const DEBOUNCE_DELAY = 300;
@@ -13,6 +16,7 @@ refs.searchForm = document.querySelector('.search-form');
 refs.searchForm.addEventListener("submit",searchMovies);
 
 function searchMovies(event) {
+    
     event.preventDefault();
 
     const value = event.currentTarget.elements.query.value.trim();
@@ -21,9 +25,12 @@ function searchMovies(event) {
         moreTwoCharacters();
         return;
     }
+    loading.on();
+
+    blockSreen();
 
     fetchData(value);
-
+    
     clearMarkup();
 }
 
@@ -33,7 +40,7 @@ async function fetchData(value) {
         .map(result => renderCardTemplate(result))
         .join('');
     refs.moviesCard.innerHTML = card;
-
+    loading.off();
     const total_pages = movieService.totalPage;
     if (total_pages >= 2) {
         // call pagination
