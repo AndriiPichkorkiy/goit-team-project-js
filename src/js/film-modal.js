@@ -93,5 +93,5 @@ export default async function onClickFilm(id) {
     refs.filmModal.innerHTML = markup;
     addEventsOnModalBtn();
   });
-// }
+}
 // onClickFilm(453395);
