@@ -73,9 +73,10 @@ import movieService from './js/movie-service.js';
 //
 //
 //
-
+//
+import './js/dark-theme.js';
+import './js/scrolltop';
 import './js/film-modal'
 import './js/localStorage';
-
 import './js/loading.js';
-
+import './js/myLibraryBtns'
