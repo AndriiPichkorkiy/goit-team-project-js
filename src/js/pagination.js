@@ -5,7 +5,7 @@ import templeteCard from './card-templete';
 const pagination = refs.paginationList;
 const root = refs.paginationWrapper;
 
-async function renderPagination(totalPages, currentPage) {
+function renderPagination(totalPages, currentPage) {
   let liItem = '';
   let beforePages = currentPage - 2;
   let nextPages = currentPage + 2;
@@ -81,26 +81,41 @@ async function renderPagination(totalPages, currentPage) {
   }
 }
 
+function removePagination() {
+  pagination.innerHTML = '';
+  root.classList.add('visually-hidden');
+  pagination.classList.add('visually-hidden');
+}
+
 async function onPrevBtnClick() {
-  movieService.pagePopular -= 1;
-  const data = await movieService.getPopularMovies(movieService.pagePopular);
-  renderPagination(movieService.totalPagePopular, movieService.pagePopular);
+  movieService.page -= 1;
+  const data = await movieService.getSearchQuery(
+    movieService.query,
+    movieService.page
+  );
+  renderPagination(movieService.totalPage, movieService.page);
   refs.moviesCard.innerHTML = '';
   return data.results.map(data => renderCollection(data));
 }
 
 async function onNextBtnClick() {
-  movieService.pagePopular += 1;
-  const data = await movieService.getPopularMovies(movieService.pagePopular);
-  renderPagination(movieService.totalPagePopular, movieService.pagePopular);
+  movieService.page += 1;
+  const data = await movieService.getSearchQuery(
+    movieService.query,
+    movieService.page
+  );
+  renderPagination(movieService.totalPage, movieService.page);
   refs.moviesCard.innerHTML = '';
   return data.results.map(data => renderCollection(data));
 }
 
 async function onPaginationBtnClick(event) {
-  movieService.pagePopular = +event.target.innerText;
-  renderPagination(movieService.totalPagePopular, movieService.pagePopular);
-  const data = await movieService.getPopularMovies(movieService.pagePopular);
+  movieService.page = +event.target.innerText;
+  renderPagination(movieService.totalPage, movieService.page);
+  const data = await movieService.getSearchQuery(
+    movieService.query,
+    movieService.page
+  );
   refs.moviesCard.innerHTML = '';
   return data.results.map(data => renderCollection(data));
 }
@@ -115,17 +130,18 @@ function renderCollection(data) {
 }
 
 async function fetchPopularMovies() {
-  const data = await movieService.getPopularMovies();
+  const data = await movieService.getSearchQuery(
+    movieService.query,
+    movieService.page
+  );
   if (data.total_pages === 1) {
-    root.innerHTML = '';
-    root.classList.add('visually-hidden');
-    pagination.classList.add('visually-hidden');
+    removePagination();
     data.results.map(data => renderCollection(data));
     return;
   }
   if (data.total_pages > 1) {
     data.results.map(data => renderCollection(data));
-    renderPagination(movieService.totalPagePopular, movieService.pagePopular);
+    renderPagination(movieService.totalPage, movieService.page);
   }
 }
 
