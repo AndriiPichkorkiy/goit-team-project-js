@@ -1,6 +1,6 @@
 import {movieService} from './movie-service'
 
-<<<<<<< HEAD
+
 // import onClickFilm from './film-modal'
 let idRandomNumber = Math.ceil(Math.random() * 30)
 
@@ -51,10 +51,7 @@ else {
 }
 export { addEventsOnModalBtn }
 
-=======
-import onClickFilm from './film-modal'
-// let idRandomNumber = Math.ceil(Math.random() * 30)
->>>>>>> main
+
 
 let watchedBtn;
 let queueBtn;
