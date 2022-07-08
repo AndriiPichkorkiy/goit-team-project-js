@@ -73,7 +73,7 @@ function markupForm() {
 export function markupButtons() {
   activeHeader.innerHTML = `<div class="buttons-wrapper"><button
             type="button"
-            class="library__buttons library__button--active"
+            class="library__buttons library__button--active library__button--trailer"
             data-id="watchedBtn"
           >
             Watched

@@ -3,6 +3,7 @@ import vectorSvg from '../images/icons.svg';
 import { movieService } from './movie-service';
 import renderCardTemplate from './card-templete';
 import { addEventsOnModalBtn } from './localStorage';
+import addEventsOnModalBtnTrailer from './trailer';
 
 const refs = {
   filmModal: document.querySelector('.modal-film'),
@@ -103,5 +104,6 @@ export default async function onClickFilm(id) {
     refs.closeModalFilm = document.querySelector('.modal-film-close__btn')
       refs.closeModalFilm.addEventListener('click', onCloseModal);
     addEventsOnModalBtn();
+    addEventsOnModalBtnTrailer(movie.videos);
   });
 }
