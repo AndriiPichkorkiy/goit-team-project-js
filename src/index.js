@@ -80,3 +80,4 @@ import './js/film-modal'
 import './js/trailer'
 import './js/localStorage';
 import './js/loading.js';
+import './js/myLibraryBtns'

@@ -3,8 +3,7 @@ const form = document.querySelector('.search-form');
 const array = [...iconList.children];
 
 export const loading = {
-  on: function (e) {
-    e.preventDefault();
+  on: function () {
     array.forEach(icon => {
       icon.classList.remove(`is-hidden`);
       icon.classList.add(`animate__zoomIn`);
