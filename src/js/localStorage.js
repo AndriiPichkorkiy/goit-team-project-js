@@ -37,7 +37,8 @@ async function onClickFilm(id) {
      
 
 function addEventsOnModalBtn(){
-const watchedBtn = document.querySelector(".add-to-watched");
+  const watchedBtn = document.querySelector(".add-to-watched");
+  console.log(watchedBtn)
 const queueBtn = document.querySelector('.add-to-queue');
 if (watchedBtn) {
   watchedBtn.addEventListener('click', addToWatched)
