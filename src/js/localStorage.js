@@ -1,106 +1,24 @@
-import {movieService} from './movie-service'
-
-
-// import onClickFilm from './film-modal'
-let idRandomNumber = Math.ceil(Math.random() * 30)
-
-// onClickFilm(idRandomNumber);
-async function onClickFilm(id) {
-    const answer = await movieService.getOneMovie(id).then(movie => {
-        // console.log(movie);
-        const markup = `<div class="film-card">
-        <div class="film-poster">
-       <a href="${movie.poster_path}">
-<img class="film-poster-img" src="${movie.poster_path}" alt="${movie.tags}" loading="lazy" width=375/>
-</div>
-
-<h2 class="name-film">${movie.original_title}</h2>
-<p class="info-film">Vote / Votes<span class="info-value">${movie.vote_average}</span></p>
-<p class="info-film">Popularity<span class="info-value">${movie.vote_count}</span></p>
-<p class="info-film">Popularity<span class="info-value">${movie.popularity}</span></p>
-<p class="info-film">Original Title<span class="info-value">${movie.original_title}</span></p>
-<p class="info-film">ABOUT<span class="info-value">${movie.overview}</span></p>
-
-<button type="button" class="add-to-watched">ADD TO WATCHED</button>
-<button type="button" class="add-to-queue">ADD TO QUEUE</button>
-</div>`
-      document.querySelector('.modal-film').insertAdjacentHTML('beforeend', markup);
-      return movie
-    }).then(data=>objInStorage(data))
-}
-//  <button type="button" class="add-to-watched">ADD TO WATCHED</button>
-// <button type="button" class="add-to-queue">ADD TO QUEUE</button> 
-//  <div class="wrapper-button">
-//       <button id="watched" class="watched-btn add-to-watched">add to watched</button>
-//   <button id="queue" class=" watched-btn queue-btn add-to-queue">add to queue</button></div>
-
-// // ..........мінімальна розмітка потрібна щоб працювало........
-     
-
-function addEventsOnModalBtn(){
-  const watchedBtn = document.querySelector(".add-to-watched");
-  console.log(watchedBtn)
-const queueBtn = document.querySelector('.add-to-queue');
-if (watchedBtn) {
-  watchedBtn.addEventListener('click', addToWatched)
-  queueBtn.addEventListener('click',addedToQueue)
-  }
-else {
-  alert("buttons are not here!!")
-  }
-}
-export { addEventsOnModalBtn }
-
-
-
 let watchedBtn;
 let queueBtn;
 let filmCard;
 
  function addEventsOnModalBtn(){
   watchedBtn = document.querySelector(".add-to-watched");
-   queueBtn = document.querySelector('.add-to-queue');
-   filmCard = document.querySelector('.film-card')
-  
-  // if (watchedBtn!==null) {
+  queueBtn = document.querySelector('.add-to-queue');
+  filmCard = document.querySelector('.film-card')
 
   watchedBtn.addEventListener('click', addToWatched,{once:true})
-   queueBtn.addEventListener('click', addedToQueue);
-   searchByIdWatched(localStorageKeys.watchedFilm)
-   searchByIdQueue(localStorageKeys.filmInQueue)
-  // }
-// else {
-//   alert("buttons are not here!!")
-//   }
-   return filmCard.dataset.filmId
+  queueBtn.addEventListener('click', addedToQueue);
+  searchByIdWatched(localStorageKeys.watchedFilm)
+  searchByIdQueue(localStorageKeys.filmInQueue)
 }
 export { addEventsOnModalBtn }
 
 
-const localStorageKeys = {
+export const localStorageKeys = {
   watchedFilm:'watchedFilm',
   filmInQueue:'filmInQueue'
 }
-
-// function objInStorage(data) {
-//   let obj;
-//   const { id, title, poster_path, release_date, vote_average, genre_ids } =
-//     data;
-
-//   obj = {
-//     id,
-//     title,
-//     poster_path,
-//     release_date,
-//     vote_average,
-//     genre_ids
-//   }
-//  idInStorage = id
-//   objectInStorage=obj
-//   return obj
-// }
-
-////дістати значення з локалсторедж JSON.parse(localStorage.getItem(localStorageKeys.filmInQueue або localStorageKeys.watchedFilm
 
 function addToWatched() {
     jsonLocalStorage(localStorageKeys.watchedFilm)
@@ -183,24 +101,27 @@ function filterArrObj(arr) {
 }
 function searchByIdWatched(value) {
   const arr = JSON.parse(localStorage.getItem(value))
-
-  for (let iterator of arr) {
+  if (arr === null) { return }
+  else {
+    for (let iterator of arr) {
  
-    if (filmCard.dataset.filmId === iterator.filmId) {
-  addedStyleToWatched()
- }
+      if (filmCard.dataset.filmId === iterator.filmId) {
+        addedStyleToWatched()
+      }
+    }
   }
  
 }
 function searchByIdQueue(value) {
 
     const arr = JSON.parse(localStorage.getItem(value))
-
+  if (arr === null) { return }
+  else {
     for (let iterator of arr) {
   
-    if (filmCard.dataset.filmId === iterator.filmId) {
-    addedStyleToQueue()
+      if (filmCard.dataset.filmId === iterator.filmId) {
+        addedStyleToQueue()
+      }
     }
-    }
-
+  }
 }

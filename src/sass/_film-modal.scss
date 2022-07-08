@@ -60,9 +60,11 @@ padding: 0;
 }
 
 .modal-film__vector {
-  position: absolute;
-  top: 0;
-  left: 0;
+position: absolute;
+left: -16px;
+
+
+transform: rotate(-90deg);
 }
 
 
@@ -209,6 +211,10 @@ line-height: 20px;
 color: $primaryTextColor;
 }
 
+
+.modal-btn-wrapper{
+  display: flex;
+}
 
 .film-modal-btn {
 font-family: 'Roboto';

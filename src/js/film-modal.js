@@ -59,9 +59,18 @@ export default async function onClickFilm(id) {
             </svg>
         </button>
             <div class="film-info-container">
-                <img class="film-poster-img" src="https://image.tmdb.org/t/p/w500/${
-                  movie.poster_path
-                }" alt="${movie.tags}" loading="lazy"/>
+                <div class="btn-wrapper-trailer">
+  <button type="button" class="btn-trailer" data-id="trailerBtn">
+    <div class="btn-trailer-overlay-text">
+      <h3 class="btn-trailer-text">Watch Trailer</h3>
+    </div>
+  </button>
+  <img
+    class="film-poster-img"
+    src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"
+    alt="${movie.tags}"
+    loading="lazy"
+  /></div>
             <div class="value-films">
             <h2 class="name-film">${movie.original_title}</h2>
             <table>
@@ -82,8 +91,10 @@ export default async function onClickFilm(id) {
                 </table>
             <h3 class="about-film-title">about</h3>
             <p><span class="about-film-text">${movie.overview}</span></p>
+            <div class="modal-btn-wrapper">
             <button type="button" class="film-modal-btn add-to-watched">add to watched</button>
             <button type="button" class="film-modal-btn add-to-queue">add to queue</button>
+            </div>
             </div>
             </div>
             </div>`;
