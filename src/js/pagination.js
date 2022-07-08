@@ -5,7 +5,7 @@ import templeteCard from './card-templete';
 const pagination = refs.paginationList;
 const root = refs.paginationWrapper;
 
-function renderPagination(totalPages, currentPage) {
+export function renderPagination(totalPages, currentPage) {
   let liItem = '';
   let beforePages = currentPage - 2;
   let nextPages = currentPage + 2;
@@ -81,10 +81,15 @@ function renderPagination(totalPages, currentPage) {
   }
 }
 
-function removePagination() {
+export function removePagination() {
   pagination.innerHTML = '';
   root.classList.add('visually-hidden');
   pagination.classList.add('visually-hidden');
+}
+
+export function showPagination() {
+  root.classList.remove('visually-hidden');
+  pagination.classList.remove('visually-hidden');
 }
 
 async function onPrevBtnClick() {
@@ -111,11 +116,11 @@ async function onNextBtnClick() {
 
 async function onPaginationBtnClick(event) {
   movieService.page = +event.target.innerText;
-  renderPagination(movieService.totalPage, movieService.page);
   const data = await movieService.getSearchQuery(
     movieService.query,
     movieService.page
   );
+  renderPagination(movieService.totalPage, movieService.page);
   refs.moviesCard.innerHTML = '';
   return data.results.map(data => renderCollection(data));
 }
