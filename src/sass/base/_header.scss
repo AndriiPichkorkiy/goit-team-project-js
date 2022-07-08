@@ -120,7 +120,7 @@
   text-shadow: 2px 2px 5px $textColorOnDark;
   animation-name: rise;
   animation-duration: 1s;
-  animation-delay: 1s;
+  animation-delay: 250ms;
   animation-iteration-count: 1;
   animation-timing-function: cubic-bezier(0, 0.25, 0.55, 1);
   animation-fill-mode: forwards;
@@ -138,7 +138,7 @@
 // }
 
 //* вариант 2
-$animation-delay: 1s;
+$animation-delay: 250ms;
 $duration: 1000ms;
 $iterations: 1;
 
@@ -324,17 +324,17 @@ $iterations: 1;
 .search-form {
   position: relative;
   text-align: center;
-  margin-top: 54px;
+  margin-top: 34px;
 
   @include min768 {
-    margin-top: 40px;
+    margin-top: 20px;
   }
 }
 
 .search-field {
   width: 100%;
 
-  font-size: 14px;
+  font-size: 17px;
   line-height: 1.17;
 
   background-color: transparent;
@@ -353,6 +353,7 @@ $iterations: 1;
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.56);
+    font-size: 14px;
   }
 }
 
@@ -389,3 +390,5 @@ $iterations: 1;
   transform: scale(1.5);
   transition: 0.7s;
 }
+
+
