@@ -1,17 +1,14 @@
 import { movieService } from '../js/movie-service';
+import sayGenres from './genresById';
 
 export default function renderCardTemplate(data) {
   const { id, title, poster_path, release_date, vote_average, genre_ids } =
     data;
   const avarage = vote_average.toFixed(1);
   const releaseYear = parseInt(release_date);
-  // if (window.matchMedia('(min-width: 768px)').matches) {
-  //   console.log(title.slice(0, 5));
-  // }
-  // if (window.matchMedia('(min-width: 1280px)').matches) {
-  //   console.log(title.slice(0, 10));
-  // }
+  const genre = sayGenres(genre_ids);
 
+  console.log(data);
   return `<li class="movies-card__item" data-card-id="${id}">
             <div class="movies-card__thumb">
               <img
@@ -25,7 +22,7 @@ export default function renderCardTemplate(data) {
             <div class="movies-card__content">
               <h2 class="movies-card__heading">${title}</h2>
               <p class="movies-card__text">
-                ${'genre'} | ${releaseYear}
+                ${genre} | ${releaseYear}
                 <span class="movies-card__rating">${avarage}</span>
               </p>
             </div>

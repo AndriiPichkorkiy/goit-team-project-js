@@ -22,7 +22,7 @@ function searchMovies(event) {
     return;
   }
 
-  movieService.resetPage();
+  fetchData(value);
 
   fetchData(value);
 
@@ -30,12 +30,14 @@ function searchMovies(event) {
 }
 
 async function fetchData(value) {
-  const data = await movieService
-    .getMoviesByTitle(value)
-    .then(({ results }) => {
-      return results.map(result => renderCardTemplate(result));
-    });
-  refs.moviesCard.innerHTML = data;
+  const data = await movieService.getMoviesByTitle(value);
+  const card = data.results.map(result => renderCardTemplate(result)).join('');
+  refs.moviesCard.innerHTML = card;
+
+  const total_pages = movieService.totalPage;
+  if (total_pages >= 2) {
+    // call pagination
+  }
 }
 
 function moreTwoCharacters() {
