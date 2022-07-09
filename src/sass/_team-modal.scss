@@ -30,7 +30,7 @@
   @include min1280 {
     max-width: 1200px;
     width: calc(100% - 50px);
-    max-height: 800px;
+    max-height: 720px;
   }
 
   @media screen and (max-width: 610px) {
