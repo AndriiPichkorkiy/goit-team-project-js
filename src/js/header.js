@@ -1,9 +1,16 @@
 import refs from '/src/js/refs';
 import * as iconSearch from '/src/images/icons.svg';
+import {
+  doChangeThemeBtnMarkup,
+  addEvLisToThemeBtn,
+  changeTo,
+  currentTheme,
+} from './dark-theme.js';
 
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
 let mainPage = 'homePage';
+const changeBtnMarkup = doChangeThemeBtnMarkup();
 
 markupForm();
 
@@ -54,22 +61,32 @@ function markupPageLibrary() {
 }
 
 function markupForm() {
-  activeHeader.innerHTML = ` <form class="search-form" data-id="searchForm">
-          <input
-            type="text"
-            name="query"
-            autocomplete="off"
-            data-id="searchQuery"
-            placeholder="Movie search"
-            class="search-field"
-          />
-          <button type="submit" class="search-btn" data-id="searchBtn">
-            <svg class="search-icon" width="12" height="12">
-              <use href="${iconSearch}#icon-search"></use>
-            </svg>
-          </button>
-        </form>`;
+  activeHeader.innerHTML =
+    // <div class="form-and-changebtn">
+    `<form class="search-form" data-id="searchForm">
+            <input
+              type="text"
+              name="query"
+              autocomplete="off"
+              data-id="searchQuery"
+              placeholder="Movie search"
+              class="search-field"
+            />
+            <button type="submit" class="search-btn" data-id="searchBtn">
+              <svg class="search-icon" width="12" height="12">
+                <use href="${iconSearch}#icon-search"></use>
+              </svg>
+            </button>
+          </form>`;
+  // ${changeBtnMarkup}
+  // </div>;
+  // addEvLisToThemeBtn();
+  // if (localStorage.getItem('THEME') === 'DARK') {
+  //   changeTo.dark();
+  //   currentTheme.changeToDark();
+  // }
 }
+
 function markupButtons() {
   activeHeader.innerHTML = `<div class="buttons-wrapper"><button
             type="button"
