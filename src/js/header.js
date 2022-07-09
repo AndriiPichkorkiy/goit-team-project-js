@@ -84,4 +84,3 @@ export function markupButtons() {
           </button></div>`;
   activateHeadersBtn();
 }
-

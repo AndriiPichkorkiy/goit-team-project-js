@@ -13,13 +13,15 @@ export function renderPagination(totalPages, currentPage) {
 
   if (currentPage > 1) {
     liItem += `<li>
-    <button class="pagination__button pagination__button--prev">Prev</button>
+    <button class="pagination__button pagination__button--prev" data-page="${
+      currentPage - 1
+    }">Prev</button>
   </li>`;
   }
 
   if (currentPage > 3) {
     liItem += `<li>
-    <button class="pagination__button pagination__button--js">1</button>
+    <button class="pagination__button pagination__button--js" data-page="1">1</button>
   </li>`;
   }
 
@@ -46,7 +48,7 @@ export function renderPagination(totalPages, currentPage) {
       currentLiItem = '';
     }
     liItem += `<li>
-    <button class="pagination__button ${currentLiItem} pagination__button--js">${buttonsQuantity}</button>
+    <button class="pagination__button ${currentLiItem} pagination__button--js" data-page="${buttonsQuantity}">${buttonsQuantity}</button>
   </li>`;
   }
 
@@ -56,28 +58,30 @@ export function renderPagination(totalPages, currentPage) {
 
   if (currentPage < totalPages - 2) {
     liItem += `<li>
-    <button class="pagination__button pagination__button--js">${totalPages}</button>
+    <button class="pagination__button pagination__button--js" data-page="${totalPages}">${totalPages}</button>
   </li>`;
   }
 
   if (currentPage < totalPages) {
     liItem += `<li>
-    <button class="pagination__button pagination__button--next">Next</button>
+    <button class="pagination__button pagination__button--next" data-page="${
+      currentPage + 1
+    }">Next</button>
   </li>`;
   }
 
   pagination.innerHTML = liItem;
 
-  const prevBtnEl = document.querySelector('.pagination__button--prev');
-  const nextBtnEl = document.querySelector('.pagination__button--next');
+  // const prevBtnEl = document.querySelector('.pagination__button--prev');
+  // const nextBtnEl = document.querySelector('.pagination__button--next');
   pagination.addEventListener('click', onPaginationBtnClick);
 
-  if (prevBtnEl) {
-    prevBtnEl.addEventListener('click', onPrevBtnClick);
-  }
-  if (nextBtnEl) {
-    nextBtnEl.addEventListener('click', onNextBtnClick);
-  }
+  // if (prevBtnEl) {
+  //   prevBtnEl.addEventListener('click', onPrevBtnClick);
+  // }
+  // if (nextBtnEl) {
+  //   nextBtnEl.addEventListener('click', onNextBtnClick);
+  // }
 }
 
 export function removePagination() {
@@ -91,36 +95,39 @@ export function showPagination() {
   pagination.classList.remove('visually-hidden');
 }
 
-export async function onPrevBtnClick() {
-  movieService.page -= 1;
-  const data = await movieService.getSearchQuery(
-    movieService.query,
-    movieService.page
-  );
-  renderPagination(movieService.totalPage, movieService.page);
-  refs.moviesCard.innerHTML = '';
-  return data.results.map(data => renderCollection(data));
-}
+// export async function onPrevBtnClick() {
+//   // movieService.page -= 1;
+//   const data = await movieService.getSearchQuery(
+//     movieService.query,
+//     movieService.page - 1
+//   );
+//   renderPagination(movieService.totalPage, movieService.page);
+//   refs.moviesCard.innerHTML = '';
+//   return data.results.map(data => renderCollection(data));
+// }
 
-export async function onNextBtnClick() {
-  movieService.page += 1;
-  const data = await movieService.getSearchQuery(
-    movieService.query,
-    movieService.page
-  );
-  renderPagination(movieService.totalPage, movieService.page);
-  refs.moviesCard.innerHTML = '';
-  return data.results.map(data => renderCollection(data));
-}
+// export async function onNextBtnClick() {
+//   // movieService.page += 1;
+//   const data = await movieService.getSearchQuery(
+//     movieService.query,
+//     movieService.page + 1
+//   );
+//   renderPagination(movieService.totalPage, movieService.page);
+//   refs.moviesCard.innerHTML = '';
+//   return data.results.map(data => renderCollection(data));
+// }
 
 export async function onPaginationBtnClick(event) {
-  if (event.target.classList.contains('pagination__button--js')) {
-    movieService.page = +event.target.innerText;
-    const data = await movieService.getSearchQuery(
-      movieService.query,
-      movieService.page
-    );
-    renderPagination(movieService.totalPage, movieService.page);
+  const itemToFind = document.querySelector('.side-nav__link--current').dataset
+    .id;
+  console.log(itemToFind);
+  if (itemToFind === 'library') {
+    const itemToFind2 = document.querySelector();
+  }
+  if (event.target.dataset.page) {
+    const page = +event.target.dataset.page;
+    const data = await movieService.getSearchQuery(movieService.query, page);
+    renderPagination(movieService.totalPage, page);
     refs.moviesCard.innerHTML = '';
     return data.results.map(data => renderCollection(data));
   }
@@ -138,13 +145,14 @@ export async function fetchPopularMovies() {
     movieService.query,
     movieService.page
   );
+  data.results.map(data => renderCollection(data));
+
   if (data.total_pages === 1) {
     removePagination();
-    data.results.map(data => renderCollection(data));
     return;
   }
   if (data.total_pages > 1) {
-    data.results.map(data => renderCollection(data));
+    // data.results.map(data => renderCollection(data));
     renderPagination(movieService.totalPage, movieService.page);
   }
 }

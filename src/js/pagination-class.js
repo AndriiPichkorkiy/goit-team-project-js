@@ -4,6 +4,8 @@ class Pagination {
     this.currentPage = 1;
     // Загальна кількість сторінок
     this.totalPages = 1;
+    // UL для пагінації
+    this.list = {};
   }
 
   render(totalPages, currentPage) {
@@ -66,19 +68,20 @@ class Pagination {
         <button class="pagination__button pagination__button--next">Next</button>
       </li>`;
     }
-    const pagination = document.querySelector('.pagination__list');
-    pagination.innerHTML = liItem;
-
-    const prevBtnEl = document.querySelector('.pagination__button--prev');
-    const nextBtnEl = document.querySelector('.pagination__button--next');
-
-    pagination.addEventListener('click', onPaginationBtnClick);
-
-    if (prevBtnEl) {
-      prevBtnEl.addEventListener('click', onPrevBtnClick);
-    }
-    if (nextBtnEl) {
-      nextBtnEl.addEventListener('click', onNextBtnClick);
-    }
+    this.list.innerHTML = liItem;
   }
+
+  // const pagination = document.querySelector('.pagination__list');
+
+  // const prevBtnEl = document.querySelector('.pagination__button--prev');
+  // const nextBtnEl = document.querySelector('.pagination__button--next');
+
+  // pagination.addEventListener('click', onPaginationBtnClick);
+
+  // if (prevBtnEl) {
+  //   prevBtnEl.addEventListener('click', onPrevBtnClick);
+  // }
+  // if (nextBtnEl) {
+  //   nextBtnEl.addEventListener('click', onNextBtnClick);
+  // }
 }
