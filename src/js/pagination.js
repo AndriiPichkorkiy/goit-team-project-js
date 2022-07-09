@@ -5,10 +5,6 @@ import templeteCard from './card-templete';
 const pagination = refs.paginationList;
 const root = refs.paginationWrapper;
 
-let currentLocalPage = 1;
-let totalLocalPages = 40;
-let localStorageOpened = true;
-
 export function renderPagination(totalPages, currentPage) {
   let liItem = '';
   let beforePages = currentPage - 2;
@@ -76,7 +72,8 @@ export function renderPagination(totalPages, currentPage) {
   const nextBtnEl = document.querySelector('.pagination__button--next');
   const btnEl = document.querySelectorAll('.pagination__button--js');
 
-  btnEl.forEach(addListeners);
+  pagination.addEventListener('click', onPaginationBtnClick);
+
   if (prevBtnEl) {
     prevBtnEl.addEventListener('click', onPrevBtnClick);
   }
@@ -96,42 +93,30 @@ export function showPagination() {
   pagination.classList.remove('visually-hidden');
 }
 
-async function onPrevBtnClick() {
-  if (!localStorageOpened) {
-    movieService.page -= 1;
-    const data = await movieService.getSearchQuery(
-      movieService.query,
-      movieService.page
-    );
-    renderPagination(movieService.totalPage, movieService.page);
-    refs.moviesCard.innerHTML = '';
-    return data.results.map(data => renderCollection(data));
-  } else {
-    currentLocalPage -= 1;
-    renderPagination(totalLocalPages, currentLocalPage);
-    console.log('local storage current page', currentLocalPage);
-  }
+export async function onPrevBtnClick() {
+  movieService.page -= 1;
+  const data = await movieService.getSearchQuery(
+    movieService.query,
+    movieService.page
+  );
+  renderPagination(movieService.totalPage, movieService.page);
+  refs.moviesCard.innerHTML = '';
+  return data.results.map(data => renderCollection(data));
 }
 
-async function onNextBtnClick() {
-  if (!localStorageOpened) {
-    movieService.page += 1;
-    const data = await movieService.getSearchQuery(
-      movieService.query,
-      movieService.page
-    );
-    renderPagination(movieService.totalPage, movieService.page);
-    refs.moviesCard.innerHTML = '';
-    return data.results.map(data => renderCollection(data));
-  } else {
-    currentLocalPage += 1;
-    renderPagination(totalLocalPages, currentLocalPage);
-    console.log('local storage current page', currentLocalPage);
-  }
+export async function onNextBtnClick() {
+  movieService.page += 1;
+  const data = await movieService.getSearchQuery(
+    movieService.query,
+    movieService.page
+  );
+  renderPagination(movieService.totalPage, movieService.page);
+  refs.moviesCard.innerHTML = '';
+  return data.results.map(data => renderCollection(data));
 }
 
-async function onPaginationBtnClick(event) {
-  if (!localStorageOpened) {
+export async function onPaginationBtnClick(event) {
+  if (event.target.classList.contains('pagination__button--js')) {
     movieService.page = +event.target.innerText;
     const data = await movieService.getSearchQuery(
       movieService.query,
@@ -140,15 +125,8 @@ async function onPaginationBtnClick(event) {
     renderPagination(movieService.totalPage, movieService.page);
     refs.moviesCard.innerHTML = '';
     return data.results.map(data => renderCollection(data));
-  } else {
-    currentLocalPage = +event.target.innerText;
-    renderPagination(totalLocalPages, currentLocalPage);
-    console.log('local storage current page', currentLocalPage);
   }
-}
-
-function addListeners(element) {
-  element.addEventListener('click', onPaginationBtnClick);
+  return;
 }
 
 function renderCollection(data) {
@@ -156,25 +134,19 @@ function renderCollection(data) {
   refs.moviesCard.innerHTML += card;
 }
 
-async function fetchPopularMovies() {
-  if (!localStorageOpened) {
-    renderPagination(totalLocalPages, currentLocalPage);
-
+export async function fetchPopularMovies() {
+  const data = await movieService.getSearchQuery(
+    movieService.query,
+    movieService.page
+  );
+  if (data.total_pages === 1) {
+    removePagination();
+    data.results.map(data => renderCollection(data));
     return;
-  } else {
-    const data = await movieService.getSearchQuery(
-      movieService.query,
-      movieService.page
-    );
-    if (data.total_pages === 1) {
-      removePagination();
-      data.results.map(data => renderCollection(data));
-      return;
-    }
-    if (data.total_pages > 1) {
-      data.results.map(data => renderCollection(data));
-      renderPagination(movieService.totalPage, movieService.page);
-    }
+  }
+  if (data.total_pages > 1) {
+    data.results.map(data => renderCollection(data));
+    renderPagination(movieService.totalPage, movieService.page);
   }
 }
 
