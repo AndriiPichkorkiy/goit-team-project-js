@@ -28,7 +28,7 @@ export function renderPagination(totalPages, currentPage) {
   }
 
   for (
-    buttonsQuantity = beforePages;
+    let buttonsQuantity = beforePages;
     buttonsQuantity <= nextPages;
     buttonsQuantity++
   ) {
