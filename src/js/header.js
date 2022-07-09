@@ -1,6 +1,6 @@
 import refs from '/src/js/refs';
 import * as iconSearch from '/src/images/icons.svg';
-import {activateHeadersBtn} from './myLibraryBtns'
+import { activateHeadersBtn } from './myLibraryBtns';
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
 let mainPage = 'homePage';
@@ -81,5 +81,7 @@ export function markupButtons() {
           </button>
           <button type="button" class="library__buttons" data-id="queueBtn">
             Queue
-          </button></div>`;activateHeadersBtn()
+          </button></div>`;
+  activateHeadersBtn();
 }
+

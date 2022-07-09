@@ -30,8 +30,10 @@ export function doChangeThemeBtnMarkup() {
   return themeBtnMarkup;
 }
 
+
 const darkthemeBtn = document.querySelector('.darktheme-btn');
 darkthemeBtn.addEventListener('click', changeTheme);
+
 
 export const changeTo = {
   dark: function () {
@@ -80,11 +82,6 @@ export const changeTo = {
       '.film-modal-btn {background-color: white; }';
   },
 };
-
-if (localStorage.getItem('THEME') === 'DARK') {
-  changeTo.dark();
-  currentTheme.changeToDark();
-}
 
 function changeTheme() {
   if (currentTheme.dark === 0) {
