@@ -2,7 +2,7 @@ import renderCardTemplate from './card-templete';
 import { markupButtons } from './header'
 import {jsonLocalStorage,localStorageKeys,removeFromStorage} from './localStorage'
 import refs from "./refs";
-import {showPagination, renderPagination,removePagination } from './pagination';
+import {showPagination, renderPagination,removePagination,onNextBtnClick ,onPrevBtnClick} from './pagination';
 
 
 export function activateHeadersBtn() {
@@ -16,7 +16,7 @@ export function activateHeadersBtn() {
 
 function pressWatchedBtn() {
     takeFromStorage(localStorageKeys.watchedFilm)
-   switchPagination()
+    switchPagination()
 }
 
 function pressQueuedBtn() {
@@ -46,7 +46,7 @@ function takeFromStorage(value) {
     quantityPages = Math.ceil(oldItems.length / 20)
  console.log(quantityPages);
   const arrayOfArrays=chunkArrayInGroups(oldItems, 20)
-  console.log(arrayOfArrays[index]);
+  // console.log(arrayOfArrays[index]);
 
     renderPagination(quantityPages,currentPage)
     const card = arrayOfArrays[index]
@@ -54,7 +54,7 @@ function takeFromStorage(value) {
     .join('');
     // console.log("1 card :",card);
     refs.moviesCard.innerHTML = card;
-//    renderPagination(totalPages, currentPage)
+
     
 }
 
@@ -108,17 +108,21 @@ function switchPagination() {
     const prevBtnEl = document.querySelector('.pagination__button--prev');
     const nextBtnEl = document.querySelector('.pagination__button--next');
     const btnEl = document.querySelectorAll('.pagination__button--js');
-    console.log(nextBtnEl);
-    //   btnEl.forEach(addListeners);
-    if (prevBtnEl) {
-    prevBtnEl.addEventListener('click', onPrevBtnClick);
+    console.log(prevBtnEl);
+
+  if (prevBtnEl) {
+      console.log(onPrevBtnClick);
+      prevBtnEl.removeEventListener('click', onPrevBtnClick);
+      prevBtnEl.addEventListener('click',prevBtnClick)
     }
-    if (nextBtnEl) {
-    nextBtnEl.addEventListener('click', onNextBtnClick);
+  if (nextBtnEl) {
+  
+    nextBtnEl.removeEventListener('click',onNextBtnClick)
+    nextBtnEl.addEventListener('click', NextBtnClick);
     }
     }
 
-function onNextBtnClick() {
+function NextBtnClick() {
   const oldItems = JSON.parse(localStorage.getItem(localStorageKeys.watchedFilm)) || arr;
   const arrayOfArrays=chunkArrayInGroups(oldItems, 20)
   console.log(arrayOfArrays[index+1]);
@@ -127,6 +131,20 @@ function onNextBtnClick() {
     const card = arrayOfArrays[index+1]
     .map(result => renderWatchedOrQueue(result))
     .join('');
+    console.log("1 card :",card);
+
+    refs.moviesCard.innerHTML = card;
+}
+function prevBtnClick() {
+  const oldItems = JSON.parse(localStorage.getItem(localStorageKeys.watchedFilm)) || arr;
+  const arrayOfArrays=chunkArrayInGroups(oldItems, 20)
+  console.log(arrayOfArrays[index]);
+
+    renderPagination(quantityPages,currentPage)
+    const card = arrayOfArrays[index]
+    .map(result => renderWatchedOrQueue(result))
+    .join('');
     // console.log("1 card :",card);
+ 
     refs.moviesCard.innerHTML = card;
 }

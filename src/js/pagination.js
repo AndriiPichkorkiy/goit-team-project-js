@@ -92,7 +92,7 @@ export function showPagination() {
   pagination.classList.remove('visually-hidden');
 }
 
-async function onPrevBtnClick() {
+export async function onPrevBtnClick() {
   movieService.page -= 1;
   const data = await movieService.getSearchQuery(
     movieService.query,
@@ -103,7 +103,7 @@ async function onPrevBtnClick() {
   return data.results.map(data => renderCollection(data));
 }
 
-async function onNextBtnClick() {
+export async function onNextBtnClick() {
   movieService.page += 1;
   const data = await movieService.getSearchQuery(
     movieService.query,
