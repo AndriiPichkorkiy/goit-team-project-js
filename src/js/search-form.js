@@ -15,7 +15,7 @@ import {
 
 refs.searchForm = document.querySelector('.search-form');
 
-refs.searchForm.addEventListener('submit', searchMovies);
+// refs.searchForm.addEventListener('submit', searchMovies);
 
 function searchMovies(event) {
     event.preventDefault();
