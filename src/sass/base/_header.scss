@@ -67,24 +67,14 @@
 
   text-decoration: none;
 }
-// :root {
-//   --color1: white;
-//   --color2: red;
-// }
 
 .logo__icon {
-  //   fill: currentColor;
-  //   color: var(--color1);
   @include min768 {
     margin-right: 10px;
   }
 }
-// .logo__icon:hover {
-//   transform: scale(1.2);
-// }
 
 .logo__name {
-  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 30px;
   line-height: 2;
@@ -216,9 +206,8 @@ $iterations: 1;
   display: flex;
   justify-content: flex-end;
 
-  font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  font-size: 12px;
+  font-size: $font-size;
   line-height: 1.17;
   text-transform: uppercase;
 
@@ -226,9 +215,7 @@ $iterations: 1;
 }
 
 .side-nav__item {
-  &:first-child {
-    margin-right: 30px;
-  }
+  margin-left: 30px;
 }
 
 .side-nav__link {
@@ -332,17 +319,13 @@ $iterations: 1;
 }
 
 .search-field {
-  width: 100%;
-
   font-size: 17px;
   line-height: 1.17;
-
+  width: 100%;
   background-color: transparent;
   border: transparent;
   border-bottom: 1px solid $textColorOnDark;
   color: $textColorOnDark;
-
-  font-family: 'Roboto', sans-serif;
 
   @include min768 {
     max-width: 336px;
@@ -390,5 +373,3 @@ $iterations: 1;
   transform: scale(1.5);
   transition: 0.7s;
 }
-
-

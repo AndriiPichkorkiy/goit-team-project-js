@@ -4,7 +4,7 @@ export default function renderCardTemplate(data) {
   const { id, title, poster_path, release_date, vote_average, genre_ids } =
     data;
   const avarage = vote_average.toFixed(1);
-  const releaseYear = release_date.slice(0, 4);
+  const releaseYear = release_date?.slice(0, 4) || '';
   const genre = sayGenres(genre_ids);
 
   console.log(data);

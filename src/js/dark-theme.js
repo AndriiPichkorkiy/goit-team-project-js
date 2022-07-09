@@ -57,7 +57,8 @@ export const changeTo = {
       '.info-value {color: orange;}' +
       '.about-film-title {color: orange;}' +
       '.about-film-text {color: orange;}' +
-      '.film-modal-btn {background-color: orange; }';
+      '.film-modal-btn {background-color: orange; }' +
+      '.modal-film-close__btn {fill: white;}';
   },
   light: function () {
     const moon = document.querySelector('.darktheme-icon__moon');
@@ -77,7 +78,8 @@ export const changeTo = {
       '.info-value {color: black;}' +
       '.about-film-title {color: black;}' +
       '.about-film-text {color: black;}' +
-      '.film-modal-btn {background-color: white; }';
+      '.film-modal-btn {background-color: white; }' +
+      '.modal-film-close__btn {fill: black;}';
   },
 };
 
