@@ -4,62 +4,65 @@ import {jsonLocalStorage,localStorageKeys,removeFromStorage} from './localStorag
 import refs from "./refs";
 import {showPagination, renderPagination,removePagination,onNextBtnClick ,onPrevBtnClick} from './pagination';
 
-
+let watchedBtn;
+let queueBtn;
 export function activateHeadersBtn() {
-    const activeHeader = document.querySelector('.js-active-header');
-    const watchedBtn = document.querySelector('[data-id="watchedBtn"]')
-    const queueBtn = document.querySelector('[data-id="queueBtn"]')
-    
-    watchedBtn.addEventListener('click', pressWatchedBtn)
-    queueBtn.addEventListener('click', pressQueuedBtn)
+  const activeHeader = document.querySelector('.js-active-header');
+  watchedBtn = document.querySelector('[data-id="watchedBtn"]');
+  queueBtn = document.querySelector('[data-id="queueBtn"]');
+
+  watchedBtn.addEventListener('click', pressWatchedBtn);
+  queueBtn.addEventListener('click', pressQueuedBtn);
 }
 
 function pressWatchedBtn() {
+  watchedBtn.classList.add('library__button--active')
+  queueBtn.classList.remove('library__button--active')
     takeFromStorage(localStorageKeys.watchedFilm)
     switchPagination()
 }
 
 function pressQueuedBtn() {
-    takeFromStorage(localStorageKeys.filmInQueue)
-    switchPagination()
+  queueBtn.classList.add('library__button--active')
+  watchedBtn.classList.remove('library__button--active')
+  takeFromStorage(localStorageKeys.filmInQueue);
+  switchPagination();
 }
 
-let currentPage = 1
+let currentPage = 1;
 let quantityPages;
- let index=0
+let index = 0;
 
 function takeFromStorage(value) {
   let arr = []
- 
+ showPagination()
     const oldItems = JSON.parse(localStorage.getItem(value)) || arr;
-    if (oldItems === arr||oldItems.length===0) {
-    alert('no films here.please add film in main page')
+  if (oldItems === arr || oldItems.length === 0) {
+      removePagination()
+      // alert('no films here.please add film in main page')
+      document.querySelector('.movies-card').innerHTML="<li class='movies-card__item' data-card-id='453395'><div class='movies-card__thumb'><img src='https://image.tmdb.org/t/p/w500//9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg' onerror='this.onerror=null;this.src='https://subscribenow.com.au/time/asia/Solo/Content/Images/noCover.gif' alt='Doctor Strange in the Multiverse of Madness' loading='lazy'></div><div class='movies-card__content'><h2 class='movies-card__heading'>no films here.please add film in main page</h2><p class='movies-card__text'>Fantasy, Action, Other | 2022<span class='movies-card__rating'>7.5</span></p></div></li>"
     return
     }
-    console.log(oldItems.length);
+   
     if (oldItems.length < 20) {
       removePagination()
     }
-    else {
-        // showPagination()
-    }  
+    
     quantityPages = Math.ceil(oldItems.length / 20)
- console.log(quantityPages);
+ 
   const arrayOfArrays=chunkArrayInGroups(oldItems, 20)
   // console.log(arrayOfArrays[index]);
 
-    renderPagination(quantityPages,currentPage)
-    const card = arrayOfArrays[index]
+  renderPagination(quantityPages, currentPage);
+  const card = arrayOfArrays[index]
     .map(result => renderWatchedOrQueue(result))
     .join('');
     // console.log("1 card :",card);
     refs.moviesCard.innerHTML = card;
-
     
 }
 
 function chunkArrayInGroups(arr, size) {
-
   let newArr = [];
   for (let i = 0; i < arr.length; i += size) {
     newArr.push(arr.slice(i, i + size));
@@ -67,15 +70,8 @@ function chunkArrayInGroups(arr, size) {
   return newArr;
 }
 
-
 function renderWatchedOrQueue(data) {
-    
-    const { cardRelease,
-            filmGenre,
-            filmId,
-            filmPoster,
-            filmTitle,
-            filmVote } =
+  const { cardRelease, filmGenre, filmId, filmPoster, filmTitle, filmVote } =
     data;
 
   return `<li class="movies-card__item">
@@ -101,7 +97,6 @@ function renderWatchedOrQueue(data) {
             </div>
           </a>
         </li>`;
-
 }
 
 function switchPagination() {
@@ -127,8 +122,8 @@ function NextBtnClick() {
   const arrayOfArrays=chunkArrayInGroups(oldItems, 20)
   console.log(arrayOfArrays[index+1]);
 
-    renderPagination(quantityPages,currentPage+1)
-    const card = arrayOfArrays[index+1]
+  renderPagination(quantityPages, currentPage + 1);
+  const card = arrayOfArrays[index + 1]
     .map(result => renderWatchedOrQueue(result))
     .join('');
     console.log("1 card :",card);

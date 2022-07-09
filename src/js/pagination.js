@@ -72,7 +72,8 @@ export function renderPagination(totalPages, currentPage) {
   const nextBtnEl = document.querySelector('.pagination__button--next');
   const btnEl = document.querySelectorAll('.pagination__button--js');
 
-  btnEl.forEach(addListeners);
+  pagination.addEventListener('click', onPaginationBtnClick);
+
   if (prevBtnEl) {
     prevBtnEl.addEventListener('click', onPrevBtnClick);
   }
@@ -114,19 +115,18 @@ export async function onNextBtnClick() {
   return data.results.map(data => renderCollection(data));
 }
 
-async function onPaginationBtnClick(event) {
-  movieService.page = +event.target.innerText;
-  const data = await movieService.getSearchQuery(
-    movieService.query,
-    movieService.page
-  );
-  renderPagination(movieService.totalPage, movieService.page);
-  refs.moviesCard.innerHTML = '';
-  return data.results.map(data => renderCollection(data));
-}
-
-function addListeners(element) {
-  element.addEventListener('click', onPaginationBtnClick);
+export async function onPaginationBtnClick(event) {
+  if (event.target.classList.contains('pagination__button--js')) {
+    movieService.page = +event.target.innerText;
+    const data = await movieService.getSearchQuery(
+      movieService.query,
+      movieService.page
+    );
+    renderPagination(movieService.totalPage, movieService.page);
+    refs.moviesCard.innerHTML = '';
+    return data.results.map(data => renderCollection(data));
+  }
+  return;
 }
 
 function renderCollection(data) {
@@ -134,7 +134,7 @@ function renderCollection(data) {
   refs.moviesCard.innerHTML += card;
 }
 
-async function fetchPopularMovies() {
+export async function fetchPopularMovies() {
   const data = await movieService.getSearchQuery(
     movieService.query,
     movieService.page
