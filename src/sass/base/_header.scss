@@ -215,9 +215,7 @@ $iterations: 1;
 }
 
 .side-nav__item {
-  &:first-child {
-    margin-right: 30px;
-  }
+  margin-left: 30px;
 }
 
 .side-nav__link {
@@ -316,7 +314,7 @@ $iterations: 1;
   margin-top: 34px;
 
   @include min768 {
-    margin-top: 10px;
+    margin-top: 20px;
   }
 }
 
