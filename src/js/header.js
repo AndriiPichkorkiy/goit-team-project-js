@@ -1,6 +1,6 @@
 import refs from '/src/js/refs';
 import * as iconSearch from '/src/images/icons.svg';
-import {activateHeadersBtn} from './myLibraryBtns'
+import { activateHeadersBtn } from './myLibraryBtns';
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
 let mainPage = 'homePage';
@@ -54,22 +54,23 @@ function markupPageLibrary() {
 }
 
 function markupForm() {
-  activeHeader.innerHTML = ` <form class="search-form" data-id="searchForm">
-          <input
-            type="text"
-            name="query"
-            autocomplete="off"
-            data-id="searchQuery"
-            placeholder="Movie search"
-            class="search-field"
-          />
-          <button type="submit" class="search-btn" data-id="searchBtn">
-            <svg class="search-icon" width="12" height="12">
-              <use href="${iconSearch}#icon-search"></use>
-            </svg>
-          </button>
-        </form>`;
+  activeHeader.innerHTML = `<form class="search-form" data-id="searchForm">
+            <input
+              type="text"
+              name="query"
+              autocomplete="off"
+              data-id="searchQuery"
+              placeholder="Movie search"
+              class="search-field"
+            />
+            <button type="submit" class="search-btn" data-id="searchBtn">
+              <svg class="search-icon" width="12" height="12">
+                <use href="${iconSearch}#icon-search"></use>
+              </svg>
+            </button>
+          </form>`;
 }
+
 export function markupButtons() {
   activeHeader.innerHTML = `<div class="buttons-wrapper"><button
             type="button"
@@ -80,5 +81,7 @@ export function markupButtons() {
           </button>
           <button type="button" class="library__buttons" data-id="queueBtn">
             Queue
-          </button></div>`;activateHeadersBtn()
+          </button></div>`;
+  activateHeadersBtn();
 }
+
