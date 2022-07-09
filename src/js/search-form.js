@@ -11,7 +11,7 @@ import {
   removePagination,
   showPagination,
 } from './pagination';
-import { fromPairs } from 'lodash';
+// import { fromPairs } from 'lodash';
 
 console.log(loading);
 refs.searchForm = document.querySelector('.search-form');
