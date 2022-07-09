@@ -52,6 +52,11 @@ export default async function onClickFilm(id) {
             data-film-vote = '${movie.vote_average}'
             data-film-genre = '${genreId}'
             >
+               <button type="button" class="modal-film-close__btn" data-action="close-modal" data-id="modalFilmCloseBtn">
+            <svg class="modal-film__vector" width="18" height="18">
+                <use href="${vectorSvg}#icon-close"></use>
+            </svg>
+        </button>
             <div class="film-info-container">
                 <img class="film-poster-img" src="https://image.tmdb.org/t/p/w500/${
                   movie.poster_path

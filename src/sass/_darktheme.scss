@@ -12,16 +12,11 @@
 .darktheme-btn {
     padding: 0;
     background-color: transparent;
-    // position: absolute;
-    // left: 65px;
-    // top: 170px;
     color: white;
     cursor: pointer;
     width: 30px;
     height: 30px;
     display: flex;
-    // left: 48%;
-    // margin-top: 10px;
 }
 
 .darktheme-icon {
@@ -32,10 +27,10 @@
 }
     
 .darktheme-icon__moon {
-    fill: rgb(17, 101, 228);
+    fill: white;
     opacity: 0;
 }
 
 .darktheme-icon__sun {
-    fill: rgb(233, 164, 14);
+    fill: $accentColor;
 }
