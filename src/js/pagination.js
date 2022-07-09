@@ -5,7 +5,7 @@ import templeteCard from './card-templete';
 const pagination = refs.paginationList;
 const root = refs.paginationWrapper;
 
-async function renderPagination(totalPages, currentPage) {
+export function renderPagination(totalPages, currentPage) {
   let liItem = '';
   let beforePages = currentPage - 2;
   let nextPages = currentPage + 2;
@@ -28,7 +28,7 @@ async function renderPagination(totalPages, currentPage) {
   }
 
   for (
-    buttonsQuantity = beforePages;
+    let buttonsQuantity = beforePages;
     buttonsQuantity <= nextPages;
     buttonsQuantity++
   ) {
@@ -72,7 +72,8 @@ async function renderPagination(totalPages, currentPage) {
   const nextBtnEl = document.querySelector('.pagination__button--next');
   const btnEl = document.querySelectorAll('.pagination__button--js');
 
-  btnEl.forEach(addListeners);
+  pagination.addEventListener('click', onPaginationBtnClick);
+
   if (prevBtnEl) {
     prevBtnEl.addEventListener('click', onPrevBtnClick);
   }
@@ -81,32 +82,51 @@ async function renderPagination(totalPages, currentPage) {
   }
 }
 
-async function onPrevBtnClick() {
-  movieService.pagePopular -= 1;
-  const data = await movieService.getPopularMovies(movieService.pagePopular);
-  renderPagination(movieService.totalPagePopular, movieService.pagePopular);
+export function removePagination() {
+  pagination.innerHTML = '';
+  root.classList.add('visually-hidden');
+  pagination.classList.add('visually-hidden');
+}
+
+export function showPagination() {
+  root.classList.remove('visually-hidden');
+  pagination.classList.remove('visually-hidden');
+}
+
+export async function onPrevBtnClick() {
+  movieService.page -= 1;
+  const data = await movieService.getSearchQuery(
+    movieService.query,
+    movieService.page
+  );
+  renderPagination(movieService.totalPage, movieService.page);
   refs.moviesCard.innerHTML = '';
   return data.results.map(data => renderCollection(data));
 }
 
-async function onNextBtnClick() {
-  movieService.pagePopular += 1;
-  const data = await movieService.getPopularMovies(movieService.pagePopular);
-  renderPagination(movieService.totalPagePopular, movieService.pagePopular);
+export async function onNextBtnClick() {
+  movieService.page += 1;
+  const data = await movieService.getSearchQuery(
+    movieService.query,
+    movieService.page
+  );
+  renderPagination(movieService.totalPage, movieService.page);
   refs.moviesCard.innerHTML = '';
   return data.results.map(data => renderCollection(data));
 }
 
-async function onPaginationBtnClick(event) {
-  movieService.pagePopular = +event.target.innerText;
-  renderPagination(movieService.totalPagePopular, movieService.pagePopular);
-  const data = await movieService.getPopularMovies(movieService.pagePopular);
-  refs.moviesCard.innerHTML = '';
-  return data.results.map(data => renderCollection(data));
-}
-
-function addListeners(element) {
-  element.addEventListener('click', onPaginationBtnClick);
+export async function onPaginationBtnClick(event) {
+  if (event.target.classList.contains('pagination__button--js')) {
+    movieService.page = +event.target.innerText;
+    const data = await movieService.getSearchQuery(
+      movieService.query,
+      movieService.page
+    );
+    renderPagination(movieService.totalPage, movieService.page);
+    refs.moviesCard.innerHTML = '';
+    return data.results.map(data => renderCollection(data));
+  }
+  return;
 }
 
 function renderCollection(data) {
@@ -114,18 +134,19 @@ function renderCollection(data) {
   refs.moviesCard.innerHTML += card;
 }
 
-async function fetchPopularMovies() {
-  const data = await movieService.getPopularMovies();
+export async function fetchPopularMovies() {
+  const data = await movieService.getSearchQuery(
+    movieService.query,
+    movieService.page
+  );
   if (data.total_pages === 1) {
-    root.innerHTML = '';
-    root.classList.add('visually-hidden');
-    pagination.classList.add('visually-hidden');
+    removePagination();
     data.results.map(data => renderCollection(data));
     return;
   }
   if (data.total_pages > 1) {
     data.results.map(data => renderCollection(data));
-    renderPagination(movieService.totalPagePopular, movieService.pagePopular);
+    renderPagination(movieService.totalPage, movieService.page);
   }
 }
 
