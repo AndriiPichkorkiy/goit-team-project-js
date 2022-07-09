@@ -1,6 +1,6 @@
 import refs from '/src/js/refs';
 import * as iconSearch from '/src/images/icons.svg';
-
+import {activateHeadersBtn} from './myLibraryBtns'
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
 let mainPage = 'homePage';
@@ -70,15 +70,15 @@ function markupForm() {
           </button>
         </form>`;
 }
-function markupButtons() {
+export function markupButtons() {
   activeHeader.innerHTML = `<div class="buttons-wrapper"><button
             type="button"
-            class="library__buttons library__button--active"
+            class="library__buttons library__button--active library__button--trailer"
             data-id="watchedBtn"
           >
             Watched
           </button>
           <button type="button" class="library__buttons" data-id="queueBtn">
             Queue
-          </button></div>`;
+          </button></div>`;activateHeadersBtn()
 }

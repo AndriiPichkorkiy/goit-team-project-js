@@ -1,3 +1,10 @@
+.movies {
+  margin-bottom: 40px;
+  @include min768 {
+    margin-bottom: 60px;
+  }
+}
+
 .movies-card__item {
   cursor: pointer;
   transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -11,6 +18,8 @@
   border-radius: 5px;
   overflow: hidden;
   margin-bottom: 8px;
+  min-height: 398px;
+  object-fit: cover;
   @include min768 {
     height: 455px;
   }

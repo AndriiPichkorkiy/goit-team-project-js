@@ -4,7 +4,16 @@ import refs from './refs';
 import { movieService } from './movie-service';
 import renderCardTemplate from './card-templete';
 import './header';
+import { loading } from './loading';
+import { blockSreen } from './loading';
+import {
+  renderPagination,
+  removePagination,
+  showPagination,
+} from './pagination';
+// import { fromPairs } from 'lodash';
 
+console.log(loading);
 refs.searchForm = document.querySelector('.search-form');
 
 // const DEBOUNCE_DELAY = 300;
@@ -21,8 +30,9 @@ function searchMovies(event) {
     moreTwoCharacters();
     return;
   }
+  // loading.on();
 
-  fetchData(value);
+  blockSreen();
 
   fetchData(value);
 
@@ -30,13 +40,15 @@ function searchMovies(event) {
 }
 
 async function fetchData(value) {
-  const data = await movieService.getMoviesByTitle(value);
+  const total_pages = movieService.totalPage;
+  const data = await movieService.getSearchQuery(value, movieService.page);
   const card = data.results.map(result => renderCardTemplate(result)).join('');
   refs.moviesCard.innerHTML = card;
+  // loading.off();
 
-  const total_pages = movieService.totalPage;
   if (total_pages >= 2) {
     // call pagination
+    renderPagination(movieService.totalPage, movieService.page);
   }
 }
 
