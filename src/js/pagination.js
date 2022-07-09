@@ -70,8 +70,6 @@ export function renderPagination(totalPages, currentPage) {
 
   const prevBtnEl = document.querySelector('.pagination__button--prev');
   const nextBtnEl = document.querySelector('.pagination__button--next');
-  const btnEl = document.querySelectorAll('.pagination__button--js');
-
   pagination.addEventListener('click', onPaginationBtnClick);
 
   if (prevBtnEl) {
@@ -133,6 +131,7 @@ function renderCollection(data) {
   const card = templeteCard(data);
   refs.moviesCard.innerHTML += card;
 }
+//                                Show home page
 
 export async function fetchPopularMovies() {
   const data = await movieService.getSearchQuery(
