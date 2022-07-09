@@ -1,8 +1,11 @@
 import refs from '/src/js/refs';
 import * as iconSearch from '/src/images/icons.svg';
 import { activateHeadersBtn } from './myLibraryBtns';
+import searchMovies from './search-form';
+
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
+
 let mainPage = 'homePage';
 
 markupForm();
@@ -10,6 +13,8 @@ markupForm();
 refs.home.classList.add('side-nav__link--current');
 refs.logoLink.setAttribute('style', 'cursor:default');
 logoPageHome.classList.add('reveal-text');
+refs.searchForm = document.querySelector('.search-form');
+refs.searchForm.addEventListener('submit', searchMovies);
 
 refs.home.addEventListener('click', e => {
   e.preventDefault();
@@ -17,6 +22,9 @@ refs.home.addEventListener('click', e => {
 
   markupPageHome();
   markupForm();
+
+  refs.searchForm = document.querySelector('.search-form');
+  refs.searchForm.addEventListener('submit', searchMovies);
 });
 
 refs.library.addEventListener('click', e => {
@@ -84,4 +92,3 @@ export function markupButtons() {
           </button></div>`;
   activateHeadersBtn();
 }
-
