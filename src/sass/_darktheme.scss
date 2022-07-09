@@ -1,17 +1,27 @@
 // .body {
 //     background-color: rgb(184, 184, 184) rgb(44, 24, 24);
 // }
+.form-and-changebtn {
+    display: flex;
+    flex-direction: row;
+    // width: 100%;
+    max-width: 100%;
+    justify-content: center;
+}
 
 .darktheme-btn {
     padding: 0;
     background-color: transparent;
     // position: absolute;
-    left: 65px;
-    top: 170px;
+    // left: 65px;
+    // top: 170px;
     color: white;
-    font-size: 12px;
     cursor: pointer;
-    left: 48%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    // left: 48%;
+    // margin-top: 10px;
 }
 
 .darktheme-icon {
