@@ -1,15 +1,9 @@
 import * as anyNameThatYouWant from '../images/icons.svg';
 
-// div.innerHTML = `<svg class="search-icon" width="48" height="48">
-//    <use href="${anyNameThatYouWant}#icon-film"></use>
-//  </svg>`;
-
-// const darkthemeBtn = document.querySelector('.darktheme-btn');
 const body = document.querySelector('body');
 const footer = document.querySelector('footer');
 
 const globalStyle = document.querySelector('[data-id ="global-page-style"]');
-const themeFromStorage = localStorage.getItem('THEME');
 
 export const currentTheme = {
   dark: 0,
@@ -36,10 +30,10 @@ export function doChangeThemeBtnMarkup() {
   return themeBtnMarkup;
 }
 
-// export function addEvLisToThemeBtn() {
+
 const darkthemeBtn = document.querySelector('.darktheme-btn');
 darkthemeBtn.addEventListener('click', changeTheme);
-// }
+
 
 export const changeTo = {
   dark: function () {
