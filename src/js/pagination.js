@@ -5,6 +5,10 @@ import templeteCard from './card-templete';
 const pagination = refs.paginationList;
 const root = refs.paginationWrapper;
 
+let currentLocalPage = 1;
+let totalLocalPages = 40;
+let localStorageOpened = true;
+
 export function renderPagination(totalPages, currentPage) {
   let liItem = '';
   let beforePages = currentPage - 2;
@@ -93,36 +97,54 @@ export function showPagination() {
 }
 
 async function onPrevBtnClick() {
-  movieService.page -= 1;
-  const data = await movieService.getSearchQuery(
-    movieService.query,
-    movieService.page
-  );
-  renderPagination(movieService.totalPage, movieService.page);
-  refs.moviesCard.innerHTML = '';
-  return data.results.map(data => renderCollection(data));
+  if (!localStorageOpened) {
+    movieService.page -= 1;
+    const data = await movieService.getSearchQuery(
+      movieService.query,
+      movieService.page
+    );
+    renderPagination(movieService.totalPage, movieService.page);
+    refs.moviesCard.innerHTML = '';
+    return data.results.map(data => renderCollection(data));
+  } else {
+    currentLocalPage -= 1;
+    renderPagination(totalLocalPages, currentLocalPage);
+    console.log('local storage current page', currentLocalPage);
+  }
 }
 
 async function onNextBtnClick() {
-  movieService.page += 1;
-  const data = await movieService.getSearchQuery(
-    movieService.query,
-    movieService.page
-  );
-  renderPagination(movieService.totalPage, movieService.page);
-  refs.moviesCard.innerHTML = '';
-  return data.results.map(data => renderCollection(data));
+  if (!localStorageOpened) {
+    movieService.page += 1;
+    const data = await movieService.getSearchQuery(
+      movieService.query,
+      movieService.page
+    );
+    renderPagination(movieService.totalPage, movieService.page);
+    refs.moviesCard.innerHTML = '';
+    return data.results.map(data => renderCollection(data));
+  } else {
+    currentLocalPage += 1;
+    renderPagination(totalLocalPages, currentLocalPage);
+    console.log('local storage current page', currentLocalPage);
+  }
 }
 
 async function onPaginationBtnClick(event) {
-  movieService.page = +event.target.innerText;
-  const data = await movieService.getSearchQuery(
-    movieService.query,
-    movieService.page
-  );
-  renderPagination(movieService.totalPage, movieService.page);
-  refs.moviesCard.innerHTML = '';
-  return data.results.map(data => renderCollection(data));
+  if (!localStorageOpened) {
+    movieService.page = +event.target.innerText;
+    const data = await movieService.getSearchQuery(
+      movieService.query,
+      movieService.page
+    );
+    renderPagination(movieService.totalPage, movieService.page);
+    refs.moviesCard.innerHTML = '';
+    return data.results.map(data => renderCollection(data));
+  } else {
+    currentLocalPage = +event.target.innerText;
+    renderPagination(totalLocalPages, currentLocalPage);
+    console.log('local storage current page', currentLocalPage);
+  }
 }
 
 function addListeners(element) {
@@ -135,18 +157,24 @@ function renderCollection(data) {
 }
 
 async function fetchPopularMovies() {
-  const data = await movieService.getSearchQuery(
-    movieService.query,
-    movieService.page
-  );
-  if (data.total_pages === 1) {
-    removePagination();
-    data.results.map(data => renderCollection(data));
+  if (!localStorageOpened) {
+    renderPagination(totalLocalPages, currentLocalPage);
+
     return;
-  }
-  if (data.total_pages > 1) {
-    data.results.map(data => renderCollection(data));
-    renderPagination(movieService.totalPage, movieService.page);
+  } else {
+    const data = await movieService.getSearchQuery(
+      movieService.query,
+      movieService.page
+    );
+    if (data.total_pages === 1) {
+      removePagination();
+      data.results.map(data => renderCollection(data));
+      return;
+    }
+    if (data.total_pages > 1) {
+      data.results.map(data => renderCollection(data));
+      renderPagination(movieService.totalPage, movieService.page);
+    }
   }
 }
 
