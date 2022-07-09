@@ -1,4 +1,4 @@
-import { set, throttle } from 'lodash';
+import { throttle } from 'lodash';
 
 const btn = document.querySelector('.scrolltop__btn');
 window.addEventListener('scroll', throttle(onScroll, 200));
@@ -18,7 +18,7 @@ function onScroll() {
   }
 }
 
-function toTop(e) {
+export function toTop(e) {
   e.preventDefault();
   window.scrollTo(0, 0);
 }
