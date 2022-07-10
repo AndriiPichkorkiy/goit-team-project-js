@@ -9,6 +9,10 @@ import {
   removePagination,
   showPagination,
 } from './pagination';
+import {
+  moreTwoCharacters,
+  correctionRequest
+} from './notifix';
 
 refs.searchForm = document.querySelector('.search-form');
 
@@ -57,12 +61,6 @@ async function fetchData(value) {
   }
 }
 
-// function moreTwoCharacters() {
-//   alert('Please enter more than 2 characters');
-// }
-// function correctionRequest(){
-//     alert('Please enter a correction request');
-// }
 function clearMarkup() {
   refs.moviesCard.innerHTML = '';
 }
