@@ -19,8 +19,8 @@ top: 0;
 width: 100vw;
 height: 100vh;
 background-color: rgba(5, 5, 5, 0.4);
-transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
-visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+// transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+// visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
 overflow-y: scroll;
 }
 
@@ -36,24 +36,24 @@ position: absolute;
 top: 0;
 left: 50%;
 transform: translate(-50%) scale(1);
-transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+// transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 padding: 48px 20px 40px 20px; 
 margin-top: 20px;
  
 overflow-y: auto;
 
- @media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
 width: 704px;
 min-height: auto;
 padding: 40px 72px 40px 36px; 
 margin-top: 219px;
-  }
+}
 
-  @media screen and (min-width: 1280px) {
-  width: 806px;
-  min-height: auto;
-  padding: 40px 12px 40px 12px; 
-  margin-top: 150px;
+@media screen and (min-width: 1280px) {
+width: 806px;
+min-height: auto;
+padding: 40px 12px 40px 12px; 
+margin-top: 150px;
   }
 
 }
@@ -66,6 +66,7 @@ align-items: center;
 top: 16px;
 right: 16px;
 padding: 0;
+cursor: pointer;
 }
 
 .modal-film__vector {
@@ -237,6 +238,7 @@ text-transform: uppercase;
 color: $primaryTextColor;
 background-color: $textColorOnDark;
 box-sizing: border-box;
+cursor: pointer;
 
 
 margin-top: 20px;

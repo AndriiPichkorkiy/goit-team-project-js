@@ -1,8 +1,11 @@
 import refs from '/src/js/refs';
 import * as iconSearch from '/src/images/icons.svg';
-import {activateHeadersBtn} from './myLibraryBtns'
+import { activateHeadersBtn } from './myLibraryBtns';
+import searchMovies from './search-form';
+
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
+
 let mainPage = 'homePage';
 
 markupForm();
@@ -10,6 +13,8 @@ markupForm();
 refs.home.classList.add('side-nav__link--current');
 refs.logoLink.setAttribute('style', 'cursor:default');
 logoPageHome.classList.add('reveal-text');
+refs.searchForm = document.querySelector('.search-form');
+refs.searchForm.addEventListener('submit', searchMovies);
 
 refs.home.addEventListener('click', e => {
   e.preventDefault();
@@ -17,6 +22,9 @@ refs.home.addEventListener('click', e => {
 
   markupPageHome();
   markupForm();
+
+  refs.searchForm = document.querySelector('.search-form');
+  refs.searchForm.addEventListener('submit', searchMovies);
 });
 
 refs.library.addEventListener('click', e => {
@@ -54,22 +62,23 @@ function markupPageLibrary() {
 }
 
 function markupForm() {
-  activeHeader.innerHTML = ` <form class="search-form" data-id="searchForm">
-          <input
-            type="text"
-            name="query"
-            autocomplete="off"
-            data-id="searchQuery"
-            placeholder="Movie search"
-            class="search-field"
-          />
-          <button type="submit" class="search-btn" data-id="searchBtn">
-            <svg class="search-icon" width="12" height="12">
-              <use href="${iconSearch}#icon-search"></use>
-            </svg>
-          </button>
-        </form>`;
+  activeHeader.innerHTML = `<form class="search-form" data-id="searchForm">
+            <input
+              type="text"
+              name="query"
+              autocomplete="off"
+              data-id="searchQuery"
+              placeholder="Movie search"
+              class="search-field"
+            />
+            <button type="submit" class="search-btn" data-id="searchBtn">
+              <svg class="search-icon" width="12" height="12">
+                <use href="${iconSearch}#icon-search"></use>
+              </svg>
+            </button>
+          </form>`;
 }
+
 export function markupButtons() {
   activeHeader.innerHTML = `<div class="buttons-wrapper"><button
             type="button"
@@ -80,5 +89,6 @@ export function markupButtons() {
           </button>
           <button type="button" class="library__buttons" data-id="queueBtn">
             Queue
-          </button></div>`;activateHeadersBtn()
+          </button></div>`;
+  activateHeadersBtn();
 }

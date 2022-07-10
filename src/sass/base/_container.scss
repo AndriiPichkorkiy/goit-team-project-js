@@ -1,4 +1,5 @@
 body {
+  height: 100%;
   color: $primaryTextColor;
   background-color: $textColorOnDark;
 
@@ -41,5 +42,16 @@ body {
 }
 
 html {
+  height: 100%;
   font-size: 12px;
+}
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1 1 auto;
 }
