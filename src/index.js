@@ -16,6 +16,8 @@ import refs from './js/refs.js';
 
 import './js/header.js';
 import './js/search-form.js';
+// import './js/register-modal';
+import './js/firebaseAuth';
 //
 //
 //
