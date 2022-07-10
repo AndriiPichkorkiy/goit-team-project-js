@@ -2,7 +2,7 @@ import refs from '/src/js/refs';
 import * as iconSearch from '/src/images/icons.svg';
 import { activateHeadersBtn } from './myLibraryBtns';
 import searchMovies from './search-form';
-import { fetchPopularMovies } from './pagination';
+import { fetchPopularMovies, showPagination } from './pagination';
 
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
@@ -27,7 +27,7 @@ refs.home.addEventListener('click', e => {
 
   refs.searchForm = document.querySelector('.search-form');
   refs.searchForm.addEventListener('submit', searchMovies);
-  fetchPopularMovies();
+  fetchPopularMovies();showPagination()
 });
 
 refs.library.addEventListener('click', e => {
