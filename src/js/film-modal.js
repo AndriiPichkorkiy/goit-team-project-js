@@ -3,6 +3,7 @@ import vectorSvg from '../images/icons.svg';
 import { movieService } from './movie-service';
 import renderCardTemplate from './card-templete';
 import { addEventsOnModalBtn } from './localStorage';
+import addEventsOnModalBtnTrailer from './trailer';
 
 const refs = {
   filmModal: document.querySelector('.modal-film'),
@@ -11,7 +12,7 @@ const refs = {
   filmCardTemplate: document.querySelector('.movies-card'),
 };
 
-refs.closeModalFilm.addEventListener('click', onCloseModal);
+
 refs.backdropFilmModal.addEventListener('click', onBackDropClick);
 refs.filmCardTemplate.addEventListener('click', onOpenFilmModal);
 
@@ -26,6 +27,7 @@ function onOpenFilmModal() {
 
 function onCloseModal() {
   document.body.classList.remove('show-modal');
+  refs.filmModal.innerHTML = "";
 }
 
 function onBackDropClick(event) {
@@ -52,10 +54,24 @@ export default async function onClickFilm(id) {
             data-film-vote = '${movie.vote_average}'
             data-film-genre = '${genreId}'
             >
+               <button type="button" class="modal-film-close__btn" data-action="close-modal" data-id="modalFilmCloseBtn">
+            <svg class="modal-film__vector" width="18" height="18">
+                <use href="${vectorSvg}#icon-close"></use>
+            </svg>
+        </button>
             <div class="film-info-container">
-                <img class="film-poster-img" src="https://image.tmdb.org/t/p/w500/${
-                  movie.poster_path
-                }" alt="${movie.tags}" loading="lazy"/>
+                <div class="btn-wrapper-trailer">
+  <button type="button" class="btn-trailer" data-id="trailerBtn">
+    <div class="btn-trailer-overlay-text">
+      <h3 class="btn-trailer-text">Watch Trailer</h3>
+    </div>
+  </button>
+  <img
+    class="film-poster-img"
+    src="https://image.tmdb.org/t/p/w500/${movie.poster_path}"
+    alt="${movie.tags}"
+    loading="lazy"
+  /></div>
             <div class="value-films">
             <h2 class="name-film">${movie.original_title}</h2>
             <table>
@@ -76,13 +92,18 @@ export default async function onClickFilm(id) {
                 </table>
             <h3 class="about-film-title">about</h3>
             <p><span class="about-film-text">${movie.overview}</span></p>
+            <div class="modal-btn-wrapper">
             <button type="button" class="film-modal-btn add-to-watched">add to watched</button>
             <button type="button" class="film-modal-btn add-to-queue">add to queue</button>
             </div>
             </div>
+            </div>
             </div>`;
     refs.filmModal.innerHTML = markup;
+
+    refs.closeModalFilm = document.querySelector('.modal-film-close__btn')
+      refs.closeModalFilm.addEventListener('click', onCloseModal);
     addEventsOnModalBtn();
+    addEventsOnModalBtnTrailer(movie.videos);
   });
-// }
-// onClickFilm(453395);
+}

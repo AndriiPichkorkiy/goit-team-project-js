@@ -1,7 +1,3 @@
-.header-section {
-  padding-top: 40px;
-}
-
 .header-bg {
   margin-left: auto;
   margin-right: auto;
@@ -67,24 +63,14 @@
 
   text-decoration: none;
 }
-// :root {
-//   --color1: white;
-//   --color2: red;
-// }
 
 .logo__icon {
-  //   fill: currentColor;
-  //   color: var(--color1);
   @include min768 {
     margin-right: 10px;
   }
 }
-// .logo__icon:hover {
-//   transform: scale(1.2);
-// }
 
 .logo__name {
-  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 30px;
   line-height: 2;
@@ -120,7 +106,7 @@
   text-shadow: 2px 2px 5px $textColorOnDark;
   animation-name: rise;
   animation-duration: 1s;
-  animation-delay: 1s;
+  animation-delay: 250ms;
   animation-iteration-count: 1;
   animation-timing-function: cubic-bezier(0, 0.25, 0.55, 1);
   animation-fill-mode: forwards;
@@ -138,7 +124,7 @@
 // }
 
 //* вариант 2
-$animation-delay: 1s;
+$animation-delay: 250ms;
 $duration: 1000ms;
 $iterations: 1;
 
@@ -210,15 +196,15 @@ $iterations: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 40px;
 }
 
 .side-nav {
   display: flex;
   justify-content: flex-end;
 
-  font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  font-size: 12px;
+  font-size: $font-size;
   line-height: 1.17;
   text-transform: uppercase;
 
@@ -226,9 +212,7 @@ $iterations: 1;
 }
 
 .side-nav__item {
-  &:first-child {
-    margin-right: 30px;
-  }
+  margin-left: 30px;
 }
 
 .side-nav__link {
@@ -324,25 +308,21 @@ $iterations: 1;
 .search-form {
   position: relative;
   text-align: center;
-  margin-top: 54px;
+  margin-top: 34px;
 
   @include min768 {
-    margin-top: 40px;
+    margin-top: 20px;
   }
 }
 
 .search-field {
-  width: 100%;
-
-  font-size: 14px;
+  font-size: 17px;
   line-height: 1.17;
-
+  width: 100%;
   background-color: transparent;
   border: transparent;
   border-bottom: 1px solid $textColorOnDark;
   color: $textColorOnDark;
-
-  font-family: 'Roboto', sans-serif;
 
   @include min768 {
     max-width: 336px;
@@ -353,6 +333,7 @@ $iterations: 1;
 
   &::placeholder {
     color: rgba(255, 255, 255, 0.56);
+    font-size: 14px;
   }
 }
 
