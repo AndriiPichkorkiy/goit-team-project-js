@@ -11,6 +11,7 @@ import {
   removePagination,
   showPagination,
 } from './pagination';
+import { moreTwoCharacters } from './notifix';
 // import { fromPairs } from 'lodash';
 
 refs.searchForm = document.querySelector('.search-form');
