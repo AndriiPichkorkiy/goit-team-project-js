@@ -11,7 +11,10 @@ import {
   removePagination,
   showPagination,
 } from './pagination';
-import { moreTwoCharacters } from './notifix';
+import {
+  moreTwoCharacters,
+  correctionRequest,
+} from './notifix';
 // import { fromPairs } from 'lodash';
 
 refs.searchForm = document.querySelector('.search-form');
@@ -45,11 +48,11 @@ async function fetchData(value) {
   const total_pages = movieService.totalPage;
     const data = await movieService.getSearchQuery(value, 1);
     console.log(data);
-    // if (data.results === false) {
-    //     loading.off();
-    //     correctionRequest();
-    //     return;
-    // }
+    if (!data) {
+        loading.off();
+        correctionRequest();
+        return;
+    }
   const card = data.results.map(result => renderCardTemplate(result)).join('');
     refs.moviesCard.innerHTML = card;
     
@@ -61,12 +64,6 @@ async function fetchData(value) {
   }
 }
 
-function moreTwoCharacters() {
-  alert('Please enter more than 2 characters');
-}
-function correctionRequest(){
-    alert('Please enter a correction request');
-}
 function clearMarkup() {
   refs.moviesCard.innerHTML = '';
 }
