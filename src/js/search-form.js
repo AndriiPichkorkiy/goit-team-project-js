@@ -1,5 +1,3 @@
-import throttle from 'lodash/throttle';
-import debounce from 'lodash/throttle';
 import refs from './refs';
 import { movieService } from './movie-service';
 import renderCardTemplate from './card-templete';
@@ -11,15 +9,8 @@ import {
   removePagination,
   showPagination,
 } from './pagination';
-// import { fromPairs } from 'lodash';
 
 refs.searchForm = document.querySelector('.search-form');
-
-
-// const DEBOUNCE_DELAY = 300;
-
-// refs.searchForm.addEventListener("input", debounce(searchMovies, DEBOUNCE_DELAY));
-// refs.searchForm.addEventListener('submit', searchMovies);
 
 export default function searchMovies(event) {
   event.preventDefault();
@@ -29,7 +20,7 @@ export default function searchMovies(event) {
   if (value.length <= 2 || value.length === 0) {
     moreTwoCharacters();
     return;
-    }
+  }
     
   loading.on();
 
@@ -42,15 +33,21 @@ export default function searchMovies(event) {
 
 async function fetchData(value) {
   const total_pages = movieService.totalPage;
-    const data = await movieService.getSearchQuery(value, 1);
-    console.log(data);
-    // if (data.results === false) {
-    //     loading.off();
-    //     correctionRequest();
-    //     return;
-    // }
+  const data = await movieService.getSearchQuery(value, 1);
+  
+  if (!data) {
+    loading.off();
+    
+    correctionRequest();
+
+    refs.searchForm.reset();
+
+    return;
+  }
+  
   const card = data.results.map(result => renderCardTemplate(result)).join('');
-    refs.moviesCard.innerHTML = card;
+
+  refs.moviesCard.innerHTML = card;
     
   loading.off();
 
@@ -60,12 +57,12 @@ async function fetchData(value) {
   }
 }
 
-function moreTwoCharacters() {
-  alert('Please enter more than 2 characters');
-}
-function correctionRequest(){
-    alert('Please enter a correction request');
-}
+// function moreTwoCharacters() {
+//   alert('Please enter more than 2 characters');
+// }
+// function correctionRequest(){
+//     alert('Please enter a correction request');
+// }
 function clearMarkup() {
   refs.moviesCard.innerHTML = '';
 }
