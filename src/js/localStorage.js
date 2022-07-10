@@ -33,7 +33,6 @@ function removeFromWatched() {
       watchedBtn.textContent='add to watched'
       queueBtn.removeAttribute('disabled')
       queueBtn.style.opacity = 1;
-
     }
   watchedBtn.removeEventListener('click', removeFromWatched)
   watchedBtn.addEventListener('click', addToWatched)

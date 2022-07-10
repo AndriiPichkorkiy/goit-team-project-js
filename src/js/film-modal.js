@@ -1,6 +1,7 @@
 import { result } from 'lodash';
 import vectorSvg from '../images/icons.svg';
 import { movieService } from './movie-service';
+import renderCardTemplate from './card-templete';
 import { addEventsOnModalBtn } from './localStorage';
 import addEventsOnModalBtnTrailer from './trailer';
 
@@ -13,7 +14,6 @@ const refs = {
 
 refs.backdropFilmModal.addEventListener('click', onBackDropClick);
 refs.filmCardTemplate.addEventListener('click', onOpenFilmModal);
-
 
 function onOpenFilmModal() {
   window.addEventListener('keydown', onEscKeyPress);
@@ -110,9 +110,8 @@ export default async function onClickFilm(id) {
             </div>
             </div>`;
     refs.filmModal.innerHTML = markup;
-
-    refs.closeModalFilm = document.querySelector('.modal-film-close__btn')
-      refs.closeModalFilm.addEventListener('click', onCloseModal);
+    refs.closeModalFilm = document.querySelector('.modal-film-close__btn');
+    refs.closeModalFilm.addEventListener('click', onCloseModal);
     addEventsOnModalBtn();
     addEventsOnModalBtnTrailer(videos);
   });
