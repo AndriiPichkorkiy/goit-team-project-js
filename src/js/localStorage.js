@@ -28,7 +28,8 @@ function addToWatched() {
 function removeFromWatched() {
   if (watchedBtn.textContent === 'remove from watched') {
       removeFromStorage(localStorageKeys.watchedFilm)
-      watchedBtn.style.backgroundColor = '#FF6B01' 
+      // watchedBtn.style.backgroundColor = '#FF6B01' 
+      // watchedBtn.style.backgroundColor = '#FFF' 
       watchedBtn.textContent='add to watched'
       queueBtn.removeAttribute('disabled')
       queueBtn.style.opacity = 1;
@@ -46,19 +47,19 @@ function addedToQueue() {
 
 function addedStyleToWatched() {
   watchedBtn.textContent = 'remove from watched'
-  watchedBtn.style.backgroundColor = 'green' 
+  // watchedBtn.style.backgroundColor = 'green' 
 
   queueBtn.setAttribute('disabled', 'disabled')
   queueBtn.style.opacity = 0.25;
-  watchedBtn.style.display="flex"
+  // watchedBtn.style.display="flex"
   watchedBtn.addEventListener('click', removeFromWatched)
   }
 
 function addedStyleToQueue() {
   queueBtn.textContent = 'remove from queue'
  
-    queueBtn.style.backgroundColor = 'green'
-    queueBtn.style.display='flex'
+    // queueBtn.style.backgroundColor = 'green'
+    // queueBtn.style.display='flex'
     watchedBtn.style.opacity = 0.25;
     watchedBtn.setAttribute('disabled', 'disabled')
     
