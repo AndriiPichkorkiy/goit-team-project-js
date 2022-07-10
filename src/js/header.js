@@ -1,15 +1,22 @@
 import refs from '/src/js/refs';
 import * as iconSearch from '/src/images/icons.svg';
 import { activateHeadersBtn } from './myLibraryBtns';
+import searchMovies from './search-form';
+import { fetchPopularMovies } from './pagination';
+
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
+
 let mainPage = 'homePage';
 
 markupForm();
+fetchPopularMovies();
 
 refs.home.classList.add('side-nav__link--current');
 refs.logoLink.setAttribute('style', 'cursor:default');
 logoPageHome.classList.add('reveal-text');
+refs.searchForm = document.querySelector('.search-form');
+refs.searchForm.addEventListener('submit', searchMovies);
 
 refs.home.addEventListener('click', e => {
   e.preventDefault();
@@ -17,6 +24,10 @@ refs.home.addEventListener('click', e => {
 
   markupPageHome();
   markupForm();
+
+  refs.searchForm = document.querySelector('.search-form');
+  refs.searchForm.addEventListener('submit', searchMovies);
+  fetchPopularMovies();
 });
 
 refs.library.addEventListener('click', e => {
@@ -31,6 +42,7 @@ refs.logoLink.addEventListener('click', e => {
   if (mainPage !== 'libraryPage') return;
   markupPageHome();
   markupForm();
+  fetchPopularMovies();
 });
 
 function markupPageHome() {
@@ -74,7 +86,7 @@ function markupForm() {
 export function markupButtons() {
   activeHeader.innerHTML = `<div class="buttons-wrapper"><button
             type="button"
-            class="library__buttons library__button--active library__button--trailer"
+            class="library__buttons"
             data-id="watchedBtn"
           >
             Watched
@@ -84,4 +96,3 @@ export function markupButtons() {
           </button></div>`;
   activateHeadersBtn();
 }
-
