@@ -25,15 +25,25 @@ function onOpenFilmModal() {
   onClickFilm(+id);
 }
 
+
+document.addEventListener('keydown', function(e) {
+if (e.key === 'Escape') {
+//ваша функция закрытия окна
+onCloseModal()
+}
+});
+
 function onCloseModal() {
   document.body.classList.remove('show-modal');
   refs.filmModal.innerHTML = "";
 }
 
 function onBackDropClick(event) {
+  
   if (event.currentTarget === event.target) {
     onCloseModal();
   }
+  
 }
 
 export default async function onClickFilm(id) {
