@@ -60,7 +60,7 @@ export default async function onClickFilm(id) {
             data-title = '${title}'
             data-poster = '${poster_path}'
             data-release="${release_date}"
-            data-vote = '${vote_average}'
+            data-vote_average = '${vote_average}'
             data-genre = '${genreId}'
             >
                <button type="button" class="modal-film-close__btn" data-action="close-modal" data-id="modalFilmCloseBtn">
