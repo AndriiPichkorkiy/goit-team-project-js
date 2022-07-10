@@ -1,0 +1,160 @@
+<!-- Modal section Sign in-->
+<div class="backdrop is-hidden" data-modal-sign-in>
+  <div class="modal">
+    <button type="button" class="close">
+      <svg class="close__icon" data-modal-close-sign-in width="12" height="12">
+        <use href="./images/icon.svg#icon-close"></use>
+      </svg>
+    </button>
+
+    <p class="modal__title">Please Sign in</p>
+    <form action="#" class="form-container" id="form-sign-in">
+      <div class="form-container__item">
+        <label class="form-container__name" for="user-email"> Mail </label>
+        <input
+          type="email"
+          name="user-mail"
+          class="form-container__text"
+          id="user-email"
+        />
+        <svg class="form-container__icon" width="15" height="12">
+          <use href="./images/icon.svg#icon-email-black"></use>
+        </svg>
+      </div>
+
+      <div class="form-container__item">
+        <label class="form-container__name" for="user-password">
+          Password
+        </label>
+        <input
+          type="password"
+          name="user-password"
+          class="form-container__text"
+          id="user-password"
+        />
+        <svg class="form-container__icon" width="15" height="12">
+          <use href="./images/sprite.svg#icon-lock"></use>
+        </svg>
+      </div>
+
+      <div class="btn-container">
+        <button
+          type="submit"
+          class="light-btn button form-box__btn"
+          id="btn-auth"
+        >
+          Enter
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal section Sign up-->
+<div class="backdrop is-hidden" data-modal-sign-up>
+  <div class="modal">
+    <button type="button" class="close">
+      <svg class="close__icon" data-modal-close-sign-up width="12" height="12">
+        <use href="./images/icon.svg#icon-close"></use>
+      </svg>
+    </button>
+
+    <p class="modal__title">Please Sign up</p>
+    <form action="#" class="form-container" id="form-sign-up">
+      <div class="form-container__item">
+        <label class="form-container__name" for="user-name"> Name </label>
+        <input
+          type="text"
+          name="user-name"
+          class="form-container__text"
+          id="user-name"
+        />
+        <svg class="form-container__icon" width="15" height="12">
+          <use href="./images/icon.svg#icon-person"></use>
+        </svg>
+      </div>
+      <div class="form-container__item">
+        <label class="form-container__name" for="user-email-register">
+          Mail
+        </label>
+        <input
+          type="email"
+          name="user-mail"
+          class="form-container__text"
+          id="user-email-register"
+        />
+        <svg class="form-container__icon" width="15" height="12">
+          <use href="./images/icon.svg#icon-email-black"></use>
+        </svg>
+      </div>
+
+      <div class="form-container__item">
+        <label class="form-container__name" for="user-password-register">
+          Password
+        </label>
+        <input
+          type="password"
+          name="user-password-register"
+          class="form-container__text"
+          id="user-password-register"
+        />
+        <svg class="form-container__icon" width="15" height="12">
+          <use href="./images/sprite.svg#icon-lock"></use>
+        </svg>
+      </div>
+
+      <label class="form-box form-box__agreement" for="agreement">
+        <input
+          type="checkbox"
+          name="agreement"
+          id="agreement"
+          class="form-box__check visually-hidden"
+        />
+        <span class="form-box__wrap">
+          <svg class="form-box__icon" width="16" height="15">
+            <use href="./images/icon.svg#icon-checked"></use>
+          </svg>
+        </span>
+        <span class="form-box__deal">
+          I agree width mail sending and
+          <a href="#" class="form-box__link">Private polycy </a></span
+        >
+      </label>
+
+      <div class="btn-container">
+        <button
+          type="submit"
+          class="light-btn button form-box__btn"
+          id="btn-register"
+        >
+          Register
+        </button>
+        <p class="sign-up-text">or</p>
+        <button
+          type="button"
+          class="light-btn button form-box__btn"
+          id="btn-open-sign-in"
+        >
+          You already have an account?
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="backdrop is-hidden" data-modal-greetings>
+  <div class="modal">
+    <button type="button" class="close">
+      <svg
+        class="close__icon"
+        data-modal-close-greetings
+        width="12"
+        height="12"
+      >
+        <use href="./images/icon.svg#icon-close"></use>
+      </svg>
+    </button>
+
+    <p class="modal__title">You have successfully registred!</p>
+  </div>
+</div>
