@@ -15,11 +15,15 @@ import {
 
 refs.searchForm = document.querySelector('.search-form');
 
+
+// const DEBOUNCE_DELAY = 300;
+
+// refs.searchForm.addEventListener("input", debounce(searchMovies, DEBOUNCE_DELAY));
 // refs.searchForm.addEventListener('submit', searchMovies);
 
-function searchMovies(event) {
-    event.preventDefault();
-    
+export default function searchMovies(event) {
+  event.preventDefault();
+
   const value = event.currentTarget.elements.query.value.trim();
 
   if (value.length <= 2 || value.length === 0) {
