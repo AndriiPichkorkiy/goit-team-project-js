@@ -58,8 +58,8 @@ export default async function onClickFilm(id) {
     const markup = `<div class="film-card"
             data-id = '${id}'
             data-title = '${title}'
-            data-poster = '${poster_path}'
-            data-release="${release_date}"
+            data-poster_path = '${poster_path}'
+            data-release_date="${release_date}"
             data-vote_average = '${vote_average}'
             data-genre = '${genreId}'
             >

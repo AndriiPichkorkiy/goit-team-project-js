@@ -1,3 +1,5 @@
+import { rerender } from "./myLibraryBtns";
+
 let watchedBtn;
 let queueBtn;
 let filmCard;
@@ -32,7 +34,8 @@ function removeFromWatched() {
     watchedBtn.style.border = '1px solid black'
       watchedBtn.textContent='add to watched'
       queueBtn.removeAttribute('disabled')
-      queueBtn.style.opacity = 1;
+    queueBtn.style.opacity = 1;
+    rerender()
     }
   watchedBtn.removeEventListener('click', removeFromWatched)
   watchedBtn.addEventListener('click', addToWatched)
@@ -73,14 +76,22 @@ function removeFromQueue() {
       queueBtn.textContent='add to queue'
       queueBtn.removeAttribute('disabled')
       watchedBtn.removeAttribute('disabled')
-      watchedBtn.style.opacity = 1;
+    watchedBtn.style.opacity = 1;
+    rerender()
     }
      queueBtn.removeEventListener('click', removeFromQueue)
 }
 
 function jsonLocalStorage(value) {
   const oldItems = JSON.parse(localStorage.getItem(value)) || [];
-  oldItems.push(filmCard.dataset)
+  const card = { ...filmCard.dataset }
+
+  card.genre_ids = filmCard.dataset.genre.split(',')
+  console.log(card);
+  console.log(typeof filmCard.dataset.genre.split(','));
+  oldItems.push(card)
+
+
   localStorage.setItem(value, JSON.stringify(oldItems));
 }
    
@@ -96,7 +107,7 @@ function removeFromStorage(value) {
 
 function filterArrObj(arr) {
 // console.log(arr);
-  const newArr = arr.filter(film => film.filmId !== filmCard.dataset.filmId)
+  const newArr = arr.filter(film => film.id !== filmCard.dataset.id)
   return newArr 
 }
 function searchByIdWatched(value) {
@@ -105,7 +116,7 @@ function searchByIdWatched(value) {
   else {
     for (let iterator of arr) {
  
-      if (filmCard.dataset.filmId === iterator.filmId) {
+      if (filmCard.dataset.id === iterator.id) {
         addedStyleToWatched()
       }
     }
@@ -119,7 +130,7 @@ function searchByIdQueue(value) {
   else {
     for (let iterator of arr) {
   
-      if (filmCard.dataset.filmId === iterator.filmId) {
+      if (filmCard.dataset.id === iterator.id) {
         addedStyleToQueue()
       }
     }
