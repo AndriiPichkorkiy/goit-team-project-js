@@ -2,6 +2,7 @@ import refs from '/src/js/refs';
 import * as iconSearch from '/src/images/icons.svg';
 import { activateHeadersBtn } from './myLibraryBtns';
 import searchMovies from './search-form';
+import { fetchPopularMovies } from './pagination';
 
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
@@ -9,6 +10,7 @@ const logoPageHome = document.querySelector('.logo__name');
 let mainPage = 'homePage';
 
 markupForm();
+fetchPopularMovies();
 
 refs.home.classList.add('side-nav__link--current');
 refs.logoLink.setAttribute('style', 'cursor:default');
@@ -25,6 +27,7 @@ refs.home.addEventListener('click', e => {
 
   refs.searchForm = document.querySelector('.search-form');
   refs.searchForm.addEventListener('submit', searchMovies);
+  fetchPopularMovies();
 });
 
 refs.library.addEventListener('click', e => {
@@ -39,6 +42,7 @@ refs.logoLink.addEventListener('click', e => {
   if (mainPage !== 'libraryPage') return;
   markupPageHome();
   markupForm();
+  fetchPopularMovies();
 });
 
 function markupPageHome() {
@@ -91,4 +95,13 @@ export function markupButtons() {
             Queue
           </button></div>`;
   activateHeadersBtn();
+}
+
+function markupLibraryContent() {
+  refs.contentLibrary.innerHTML = `<div class="content__wrapper">
+        <h2 class="content__title">There's nothing here!
+          Please add some movies to
+          <span class="content__text">Watched</span>!
+        </h2>
+      </div>`;
 }

@@ -16,6 +16,7 @@ import {
 
 let watchedBtn;
 let queueBtn;
+
 export function activateHeadersBtn() {
   const activeHeader = document.querySelector('.js-active-header');
   watchedBtn = document.querySelector('[data-id="watchedBtn"]');
@@ -23,6 +24,7 @@ export function activateHeadersBtn() {
 
   watchedBtn.addEventListener('click', pressWatchedBtn);
   queueBtn.addEventListener('click', pressQueuedBtn);
+  queueBtn.dispatchEvent(new Event('click'));
 }
 
 function pressWatchedBtn() {
@@ -50,8 +52,14 @@ function takeFromStorage(value) {
   if (oldItems === arr || oldItems.length === 0) {
     removePagination();
     // alert('no films here.please add film in main page')
-    document.querySelector('.movies-card').innerHTML =
-      "<li class='movies-card__item' data-card-id='453395'><div class='movies-card__thumb'><img src='https://image.tmdb.org/t/p/w500//9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg' onerror='this.onerror=null;this.src='https://subscribenow.com.au/time/asia/Solo/Content/Images/noCover.gif' alt='Doctor Strange in the Multiverse of Madness' loading='lazy'></div><div class='movies-card__content'><h2 class='movies-card__heading'>no films here.please add film in main page</h2><p class='movies-card__text'>Fantasy, Action, Other | 2022<span class='movies-card__rating'>7.5</span></p></div></li>";
+    document.querySelector(
+      '.movies-card'
+    ).innerHTML = `<div class="content__wrapper">
+        <h2 class="content__title">There's nothing here!
+          Please add some movies to
+          <span class="content__text">Watched</span>!
+        </h2>
+      </div>`;
     return;
   }
 
