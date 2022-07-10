@@ -75,7 +75,7 @@ function takeFromStorage(value) {
   }
 
   if (oldItems.length < 20) {
-    // removePagination();
+    removePagination();
   }
 
   quantityPages = Math.ceil(oldItems.length / 20);
