@@ -82,7 +82,7 @@ export async function onPaginationBtnClick(event) {
   if (!event.target.dataset.page) return;
   const page = +event.target.dataset.page;
   refs.moviesCard.innerHTML = '';
-
+console.log(pageInUse);
   if (pageInUse === 'home') {
     const data = await movieService.getSearchQuery(movieService.query, page);
     renderPagination(movieService.totalPage, page);
@@ -122,20 +122,21 @@ function renderCollection(data) {
 //                                Show home page
 
 export async function fetchPopularMovies() {
+  refs.moviesCard.innerHTML = '';
   const data = await movieService.getSearchQuery(
     movieService.query,
     movieService.page
   );
-  data.results.map(data => renderCollection(data));
+  // data.results.map(data => renderCollection(data));
 
-  if (data.total_pages === 1) {
-    pagination.innerHTML = '';
-    return;
-  }
-  if (data.total_pages > 1) {
+  // if (data.total_pages === 1) {
+  //   pagination.innerHTML = '';
+  //   return;
+  // }
+  // if (data.total_pages > 1) {
     data.results.map(data => renderCollection(data));
     renderPagination(movieService.totalPage, movieService.page);
-  }
+  // }
 }
 
-fetchPopularMovies();
+// fetchPopularMovies();

@@ -28,8 +28,8 @@ function addToWatched() {
 function removeFromWatched() {
   if (watchedBtn.textContent === 'remove from watched') {
       removeFromStorage(localStorageKeys.watchedFilm)
-      // watchedBtn.style.backgroundColor = '#FF6B01' 
-      // watchedBtn.style.backgroundColor = '#FFF' 
+      watchedBtn.style.backgroundColor = '#FF6B01' 
+      watchedBtn.style.backgroundColor = '#FFF' 
       watchedBtn.textContent='add to watched'
       queueBtn.removeAttribute('disabled')
       queueBtn.style.opacity = 1;

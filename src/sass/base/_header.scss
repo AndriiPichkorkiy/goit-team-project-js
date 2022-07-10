@@ -1,7 +1,3 @@
-.header-section {
-  padding-top: 40px;
-}
-
 .header-bg {
   margin-left: auto;
   margin-right: auto;
@@ -200,6 +196,7 @@ $iterations: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 40px;
 }
 
 .side-nav {
