@@ -122,6 +122,7 @@ function renderCollection(data) {
 //                                Show home page
 
 export async function fetchPopularMovies() {
+  refs.moviesCard.innerHTML = '';
   const data = await movieService.getSearchQuery(
     movieService.query,
     movieService.page
