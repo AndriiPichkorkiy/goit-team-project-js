@@ -283,9 +283,9 @@
   cursor: pointer;
 }
 
-// .btn-container {
-//   margin: 0 auto;
-// }
+.btn-container {
+  margin-top: 40px;
+}
 
 .btn-sign-in,
 .btn-sign-up {
@@ -298,4 +298,8 @@
   @include font(14px, null, 1.33, 0.09em);
   color: $textColorOnDark;
   text-align: center;
+}
+
+.modal-success {
+  @include flex(flex, center, center);
 }

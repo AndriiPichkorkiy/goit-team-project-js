@@ -3,6 +3,7 @@ import * as iconSearch from '/src/images/icons.svg';
 import { activateHeadersBtn } from './myLibraryBtns';
 import searchMovies from './search-form';
 import { fetchPopularMovies } from './pagination';
+import { FireBaseApi } from './fireBaseApi';
 
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');

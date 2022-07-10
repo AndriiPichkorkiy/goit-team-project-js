@@ -4,38 +4,67 @@ import {
   openGreetingsModal,
   openSignInModal,
 } from './register-modal';
+import { FireBaseApi } from './fireBaseApi';
 
-export let userName;
-
-export function authSignUpUser(event) {
+export async function authSignUpUser(event) {
   event.preventDefault();
 
-  userName = event.target.querySelector('#user-name').value;
-  const email = event.target.querySelector('#user-email-register').value;
-  const password = event.target.querySelector('#user-password-register').value;
-  console.log(email, password, userName);
+  // if (!formData['user-mail'] || !formData['user-password']) {
+  //   return alert('Please, fill all form fields');
+  // }
 
-  registerUser(email, password, userName)
+  // localStorage.removeItem(FORM_STORAGE_KEY);
+  // console.log(formData);
+  // event.currentTarget.reset();
+  // clearFormData(formData);
+
+  userName = await event.target.querySelector('#user-name').value;
+  const email = await event.target.querySelector('#user-email-register').value;
+  const password = await event.target.querySelector('#user-password-register')
+    .value;
+
+  await registerUser(email, password, userName)
     .then(response => response.json())
     .then(data => {
       if (data.error) {
         alert(data.error.message);
       } else {
         console.log('It*s ok!');
+        // FireBaseApi.authSuccess(userName);
+        FireBaseApi.authSuccess(data);
+        openGreetingsModal();
+        openSignUpModal();
       }
     });
-
-  openSignUpModal();
-  openGreetingsModal();
 }
 
-export function authSignInUser(event) {
+export async function authSignInUser(event) {
   event.preventDefault();
+
+  // if (!formData['user-mail'] || !formData['user-password']) {
+  //   return alert('Please, fill all form fields');
+  // }
+
+  // localStorage.removeItem(FORM_STORAGE_KEY);
+  // console.log(formData);
+  // event.currentTarget.reset();
+  // clearFormData(formData);
 
   const email = event.target.querySelector('#user-email').value;
   const password = event.target.querySelector('#user-password').value;
-  console.log(email, password);
-  authWithEmailAndPassword(email, password);
+
+  await authWithEmailAndPassword(email, password)
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        alert(data.error.message);
+      } else {
+        console.log('It*s ok!');
+        FireBaseApi.authSuccess(data);
+        console.log(data);
+        openSignInModal();
+      }
+    });
 }
 
 // create modal form
@@ -43,7 +72,7 @@ export function authSignInUser(event) {
 //   return ``;
 // }
 
-async function authWithEmailAndPassword(email, password) {
+export async function authWithEmailAndPassword(email, password) {
   const apiKey = 'AIzaSyAysL6D0-x9xs_8XCW-NbLtbtHl5P6b3V0';
   return await fetch(
     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
@@ -59,12 +88,10 @@ async function authWithEmailAndPassword(email, password) {
         'Content-Type': 'application/json',
       },
     }
-  )
-    .then(response => response.json())
-    .then(data => console.log(data));
+  );
 }
 
-async function registerUser(email, password, name) {
+export async function registerUser(email, password, name) {
   const apiKey = 'AIzaSyAysL6D0-x9xs_8XCW-NbLtbtHl5P6b3V0';
   return await fetch(
     `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`,

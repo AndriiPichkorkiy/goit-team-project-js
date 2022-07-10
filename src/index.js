@@ -2,6 +2,8 @@ import * as axios from 'axios';
 import throttle from 'lodash/throttle';
 import debounce from 'lodash/throttle';
 
+import './js/fireBaseApi';
+
 //=== === === === === === === ===
 //=== ===  GENERAL PART   === ===
 //=== === === === === === === ===
@@ -18,6 +20,7 @@ import './js/header.js';
 import './js/search-form.js';
 // import './js/register-modal';
 import './js/firebaseAuth';
+
 //
 //
 //

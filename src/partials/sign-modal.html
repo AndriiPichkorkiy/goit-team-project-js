@@ -45,6 +45,14 @@
         >
           Enter
         </button>
+        <p class="sign-up-text">or</p>
+        <button
+          type="button"
+          class="light-btn button form-box__btn"
+          id="btn-open-sign-in"
+        >
+          You can Sign Up?
+        </button>
       </div>
     </form>
   </div>
@@ -65,7 +73,7 @@
         <label class="form-container__name" for="user-name"> Name </label>
         <input
           type="text"
-          name="user-name"
+          name="name"
           class="form-container__text"
           id="user-name"
         />
@@ -94,7 +102,7 @@
         </label>
         <input
           type="password"
-          name="user-password-register"
+          name="user-password"
           class="form-container__text"
           id="user-password-register"
         />
@@ -129,21 +137,13 @@
         >
           Register
         </button>
-        <p class="sign-up-text">or</p>
-        <button
-          type="button"
-          class="light-btn button form-box__btn"
-          id="btn-open-sign-in"
-        >
-          You already have an account?
-        </button>
       </div>
     </form>
   </div>
 </div>
 
 <div class="backdrop is-hidden" data-modal-greetings>
-  <div class="modal">
+  <div class="modal modal-success">
     <button type="button" class="close">
       <svg
         class="close__icon"
