@@ -16,28 +16,39 @@ import {
 
 let watchedBtn;
 let queueBtn;
+let textContent = 'Watched';
 
 export function activateHeadersBtn() {
-  const activeHeader = document.querySelector('.js-active-header');
+  //   const activeHeader = document.querySelector('.js-active-header');
   watchedBtn = document.querySelector('[data-id="watchedBtn"]');
   queueBtn = document.querySelector('[data-id="queueBtn"]');
 
   watchedBtn.addEventListener('click', pressWatchedBtn);
   queueBtn.addEventListener('click', pressQueuedBtn);
-  queueBtn.dispatchEvent(new Event('click'));
+
+  if (textContent === 'Watched') {
+    watchedBtn.dispatchEvent(new Event('click'));
+  }
+  if (textContent === 'Queue') {
+    queueBtn.dispatchEvent(new Event('click'));
+  }
 }
 
 function pressWatchedBtn() {
   watchedBtn.classList.add('library__button--active');
   queueBtn.classList.remove('library__button--active');
+  textContent = 'Watched';
   takeFromStorage(localStorageKeys.watchedFilm);
+
   // switchPagination();
 }
 
 function pressQueuedBtn() {
   queueBtn.classList.add('library__button--active');
   watchedBtn.classList.remove('library__button--active');
+  textContent = 'Queue';
   takeFromStorage(localStorageKeys.filmInQueue);
+
   // switchPagination();
 }
 
@@ -55,9 +66,9 @@ function takeFromStorage(value) {
     document.querySelector(
       '.movies-card'
     ).innerHTML = `<div class="content__wrapper">
-        <h2 class="content__title">There's nothing here!
+        <h2 class="content__title">There's nothing here! <br/>
           Please add some movies to
-          <span class="content__text">Watched</span>!
+          <span class="content__text">${textContent}</span>!
         </h2>
       </div>`;
     return;
@@ -116,6 +127,8 @@ export function renderWatchedOrQueue(data) {
           </a>
         </li>`;
 }
+
+export { textContent };
 
 // function switchPagination() {
 //     const prevBtnEl = document.querySelector('.pagination__button--prev');

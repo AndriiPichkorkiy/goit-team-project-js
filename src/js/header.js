@@ -86,7 +86,7 @@ function markupForm() {
 export function markupButtons() {
   activeHeader.innerHTML = `<div class="buttons-wrapper"><button
             type="button"
-            class="library__buttons library__button--active library__button--trailer"
+            class="library__buttons"
             data-id="watchedBtn"
           >
             Watched
@@ -95,13 +95,4 @@ export function markupButtons() {
             Queue
           </button></div>`;
   activateHeadersBtn();
-}
-
-function markupLibraryContent() {
-  refs.contentLibrary.innerHTML = `<div class="content__wrapper">
-        <h2 class="content__title">There's nothing here!
-          Please add some movies to
-          <span class="content__text">Watched</span>!
-        </h2>
-      </div>`;
 }
