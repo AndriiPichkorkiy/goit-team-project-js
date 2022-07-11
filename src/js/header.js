@@ -18,6 +18,11 @@ logoPageHome.classList.add('reveal-text');
 refs.searchForm = document.querySelector('.search-form');
 refs.searchForm.addEventListener('submit', searchMovies);
 
+function fetchMoviesPagination() {
+  fetchPopularMovies();
+  showPagination();
+}
+
 refs.home.addEventListener('click', e => {
   e.preventDefault();
   if (mainPage === 'homePage') return;
@@ -27,8 +32,8 @@ refs.home.addEventListener('click', e => {
 
   refs.searchForm = document.querySelector('.search-form');
   refs.searchForm.addEventListener('submit', searchMovies);
-  fetchPopularMovies();
-  showPagination();
+
+  fetchMoviesPagination();
 });
 
 refs.library.addEventListener('click', e => {
@@ -41,9 +46,10 @@ refs.library.addEventListener('click', e => {
 refs.logoLink.addEventListener('click', e => {
   e.preventDefault();
   if (mainPage !== 'libraryPage') return;
+
   markupPageHome();
   markupForm();
-  fetchPopularMovies();
+  fetchMoviesPagination();
 });
 
 function markupPageHome() {
