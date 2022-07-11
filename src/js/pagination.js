@@ -2,7 +2,7 @@ import refs from '../js/refs';
 import { movieService } from './movie-service';
 import templeteCard from './card-templete';
 import { localStorageKeys } from './localStorage';
-import { renderWatchedOrQueue } from './myLibraryBtns';
+import { activateHeadersBtn,checkQuantityStorage} from './myLibraryBtns';
 
 const pagination = refs.paginationList;
 const root = refs.paginationWrapper;
@@ -12,7 +12,7 @@ export function renderPagination(totalPages, currentPage) {
   let beforePages = currentPage - 2;
   let nextPages = currentPage + 2;
   let currentLiItem;
-
+if(totalPages<=1)removePagination()
   if (currentPage > 1) {
     liItem += `<li>
     <button class="pagination__button pagination__button--prev" data-page="${
@@ -95,11 +95,23 @@ export async function onPaginationBtnClick(event) {
         : localStorageKeys.filmInQueue;
 
     const localData = JSON.parse(localStorage.getItem(value));
+
+    if (checkQuantityStorage(localData)) {
+      removePagination()
+      return
+
+    }
     const totalPages = Math.ceil(localData.length / 20);
     renderPagination(totalPages, page);
-    const arrToRender = localData.slice((page - 1) * 20, page * 20);
+    if (localData.length === 0) {
+   console.log(localData);
+    }
+    let arrToRender = localData.slice((page - 1) * 20, page * 20);
+    if (arrToRender.length === 0) {
+      arrToRender = localData.slice((page - 2) * 20, (page-1) * 20);
+    }
     refs.moviesCard.innerHTML = arrToRender
-      .map(data => renderWatchedOrQueue(data))
+      .map(data => templeteCard(data))
       .join('');
   }
 }
@@ -122,20 +134,21 @@ function renderCollection(data) {
 //                                Show home page
 
 export async function fetchPopularMovies() {
+  refs.moviesCard.innerHTML = '';
   const data = await movieService.getSearchQuery(
     movieService.query,
     movieService.page
   );
-  data.results.map(data => renderCollection(data));
+  // data.results.map(data => renderCollection(data));
 
   if (data.total_pages === 1) {
     pagination.innerHTML = '';
     return;
   }
-  if (data.total_pages > 1) {
+  // if (data.total_pages > 1) {
     data.results.map(data => renderCollection(data));
     renderPagination(movieService.totalPage, movieService.page);
-  }
+  // }
 }
 
-fetchPopularMovies();
+// fetchPopularMovies();
