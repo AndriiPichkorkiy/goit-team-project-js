@@ -3,6 +3,7 @@ import throttle from 'lodash/throttle';
 import debounce from 'lodash/throttle';
 
 import './js/fireBaseApi';
+import './js/init.js';
 
 //=== === === === === === === ===
 //=== ===  GENERAL PART   === ===
@@ -86,3 +87,4 @@ import './js/trailer';
 import './js/localStorage';
 import './js/loading.js';
 import './js/myLibraryBtns';
+import './js/notifix';

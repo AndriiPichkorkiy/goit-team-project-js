@@ -2,8 +2,8 @@ import refs from '/src/js/refs';
 import * as iconSearch from '/src/images/icons.svg';
 import { activateHeadersBtn } from './myLibraryBtns';
 import searchMovies from './search-form';
-import { fetchPopularMovies } from './pagination';
 import { FireBaseApi } from './fireBaseApi';
+import { fetchPopularMovies, showPagination } from './pagination';
 
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
@@ -11,7 +11,7 @@ const logoPageHome = document.querySelector('.logo__name');
 let mainPage = 'homePage';
 
 markupForm();
-fetchPopularMovies();
+// fetchPopularMovies();
 
 refs.home.classList.add('side-nav__link--current');
 refs.logoLink.setAttribute('style', 'cursor:default');
@@ -29,6 +29,7 @@ refs.home.addEventListener('click', e => {
   refs.searchForm = document.querySelector('.search-form');
   refs.searchForm.addEventListener('submit', searchMovies);
   fetchPopularMovies();
+  showPagination();
 });
 
 refs.library.addEventListener('click', e => {

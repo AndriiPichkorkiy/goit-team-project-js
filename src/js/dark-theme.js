@@ -58,6 +58,7 @@ export const changeTo = {
       '.about-film-title {color: orange;}' +
       '.about-film-text {color: orange;}' +
       '.film-modal-btn {background-color: orange; }' +
+      '.content__title {color: white; }' +
       '.modal-film-close__btn {fill: white;}';
   },
   light: function () {
@@ -79,6 +80,7 @@ export const changeTo = {
       '.about-film-title {color: black;}' +
       '.about-film-text {color: black;}' +
       '.film-modal-btn {background-color: white; }' +
+      '.content__title {color: #545454; }' +
       '.modal-film-close__btn {fill: black;}';
   },
 };

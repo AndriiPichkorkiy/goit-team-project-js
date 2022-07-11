@@ -1,17 +1,9 @@
-// import refs from '../js/refs';
-// import templeteCard from './card-templete';
-// import { movieService } from './movie-service';
+import refs from '../js/refs';
+import templeteCard from './card-templete';
 
-// const movieService = new MovieService();
-
-//-------- Рендер популярних фільмів -----------------------------
-// movieService
-//   .getPopularMovies()
-//   .then(data => data.results.map(data => renderCollection(data)));
-
-// function renderCollection(data) {
-//   const card = templeteCard(data);
-
-//   refs.moviesCard.innerHTML = card;
-// }
+//-------- Рендер фільмів -----------------------------
+export function renderCollection(data) {
+  const markup = data.map(templeteCard).join('');
+  refs.moviesCard.innerHTML = markup;
+}
 //----------------------------------------------------------------
