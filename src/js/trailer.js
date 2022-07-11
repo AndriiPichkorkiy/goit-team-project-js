@@ -1,4 +1,3 @@
-import refs from '/src/js/refs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
