@@ -6,10 +6,9 @@ const refs = {
   list: document.querySelector('.team-modal__list'),
   front: document.querySelector('.wrap-front'),
   back: document.querySelector('.wrap-back'),
-  backdrop: document.querySelector('.backdrop'),
 };
 
-refs.backdrop.addEventListener('click', onBackDropClick);
+refs.modal.addEventListener('click', onBackDropClick);
 
 refs.openModalBtn.addEventListener('click', onModalOpen);
 
@@ -64,11 +63,8 @@ function onEscKeyPress(event) {
   }
 }
 
-// function onBackDropClick(event) {
-//   console.log(event);
-//   if (event.currentTarget === event.target) {
-//     onModalClose();
-//   }
-//   console.log(event.currentTarget);
-//   console.log(event.target);
-// }
+function onBackDropClick(event) {
+  if (event.currentTarget === event.target) {
+    onModalClose();
+  }
+}
