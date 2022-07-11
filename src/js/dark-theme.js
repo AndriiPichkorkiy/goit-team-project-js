@@ -37,8 +37,8 @@ export const changeTo = {
   dark: function () {
     const moon = document.querySelector('.darktheme-icon__moon');
     const sun = document.querySelector('.darktheme-icon__sun');
-    sun.style.opacity = 0;
-    moon.style.opacity = 1;
+    sun.style.opacity = 1;
+    moon.style.opacity = 0;
     body.style.backgroundColor = 'rgb(17, 17, 17)';
     footer.style.backgroundColor = 'black';
     if (
@@ -48,40 +48,43 @@ export const changeTo = {
       localStorage.setItem('THEME', 'DARK');
     }
     globalStyle.innerHTML =
-      '.movies-card__heading { color: white;}' +
-      '.content { color: orange;}' +
-      '.team-modal { color: orange;}' +
-      '.pagination { background-color: rgb(17, 17, 17);}' +
-      '.modal-film {background-color: black;}' +
-      '.name-film {color: white;}' +
-      '.info-value {color: orange;}' +
-      '.about-film-title {color: orange;}' +
-      '.about-film-text {color: orange;}' +
+      '.movies-card__heading { transition: color; transition-duration: 500ms; color: white;}' +
+      '.content { transition: color; transition-duration: 500ms; color: orange;}' +
+      '.team-modal { transition: color; transition-duration: 500ms; color: orange;}' +
+      '.pagination { transition: background-color; transition-duration: 500ms; background-color: rgb(17, 17, 17);}' +
+      '.modal-film { background-color: black;}' +
+      '.name-film { color: white;}' +
+      '.info-value { color: orange;}' +
+      '.about-film-title { color: orange;}' +
+      '.about-film-text { color: orange;}' +
       '.film-modal-btn {background-color: orange; }' +
       '.content__title {color: white; }' +
-      '.modal-film-close__btn {fill: white;}';
+      '.modal-film-close__btn {fill: white;}' +
+      '.pagination__button {color:white;}' +
+      '.pagination__dots {color:white;}';
   },
   light: function () {
     const moon = document.querySelector('.darktheme-icon__moon');
     const sun = document.querySelector('.darktheme-icon__sun');
     body.style.backgroundColor = 'white';
     footer.style.backgroundColor = '#f7f7f7';
-    sun.style.opacity = 1;
-    moon.style.opacity = 0;
+    sun.style.opacity = 0;
+    moon.style.opacity = 1;
     localStorage.setItem('THEME', 'LIGHT');
     globalStyle.innerHTML =
-      '.movies-card__heading { color: black;}' +
-      '.content { color: #545454;}' +
-      '.team-modal { color: #545454;}' +
-      '.pagination { background-color: white;}' +
-      '.modal-film {background-color: white;}' +
-      '.name-film {color: black;}' +
+      '.movies-card__heading { transition: color; transition-duration: 500ms; color: black;}' +
+      '.content { transition: color; transition-duration: 500ms; color: #545454;}' +
+      '.team-modal { transition: color; transition-duration: 500ms; color: #545454;}' +
+      '.pagination { transition: background-color; transition-duration: 500ms; background-color: white;}' +
+      '.modal-film { background-color: white;}' +
+      '.name-film { color: black;}' +
       '.info-value {color: black;}' +
-      '.about-film-title {color: black;}' +
-      '.about-film-text {color: black;}' +
+      '.about-film-title { color: black;}' +
+      '.about-film-text { color: black;}' +
       '.film-modal-btn {background-color: white; }' +
       '.content__title {color: #545454; }' +
-      '.modal-film-close__btn {fill: black;}';
+      '.modal-film-close__btn {fill: black;}' +
+      '.pagination__button {color:black;}';
   },
 };
 
