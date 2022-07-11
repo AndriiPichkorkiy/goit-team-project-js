@@ -2,6 +2,8 @@ import * as axios from 'axios';
 import throttle from 'lodash/throttle';
 import debounce from 'lodash/throttle';
 
+import './js/init.js';
+
 //=== === === === === === === ===
 //=== ===  GENERAL PART   === ===
 //=== === === === === === === ===
