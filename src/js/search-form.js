@@ -11,7 +11,9 @@ import {
 } from './pagination';
 import {
   moreTwoCharacters,
-  correctionRequest
+
+  correctionRequest,
+
 } from './notifix';
 
 refs.searchForm = document.querySelector('.search-form');
@@ -37,18 +39,20 @@ export default function searchMovies(event) {
 
 async function fetchData(value) {
   const total_pages = movieService.totalPage;
-  const data = await movieService.getSearchQuery(value, 1);
-  
+
+    const data = await movieService.getSearchQuery(value, 1);
+    console.log(data);
   if (!data) {
+      
     loading.off();
     
-    correctionRequest();
-
     refs.searchForm.reset();
-
+    
+    correctionRequest();
+    
     return;
-  }
-  
+    }
+
   const card = data.results.map(result => renderCardTemplate(result)).join('');
 
   refs.moviesCard.innerHTML = card;
