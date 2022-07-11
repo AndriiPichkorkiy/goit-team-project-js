@@ -10,7 +10,6 @@ const logoPageHome = document.querySelector('.logo__name');
 let mainPage = 'homePage';
 
 markupForm();
-// fetchPopularMovies();
 
 refs.home.classList.add('side-nav__link--current');
 refs.logoLink.setAttribute('style', 'cursor:default');
