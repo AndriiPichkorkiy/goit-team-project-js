@@ -103,3 +103,21 @@
   box-shadow: 0 0 10px $btnHoverColor, 0 0 20px $btnHoverColor,
     0 0 40px $btnHoverColor;
 }
+.content__wrapper {
+  margin: auto;
+}
+
+.content__title {
+  color: $footerTextColor;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1.1;
+  @include min768 {
+    font-size: 18px;
+  }
+}
+
+.content__text {
+  color: $accentColor;
+}

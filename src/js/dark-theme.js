@@ -62,6 +62,7 @@ export const changeTo = {
       '.modal-film-close__btn {fill: white;}' +
       '.pagination__button {color:white;}' +
       '.pagination__dots {color:white;}';
+
   },
   light: function () {
     const moon = document.querySelector('.darktheme-icon__moon');
@@ -85,6 +86,7 @@ export const changeTo = {
       '.content__title {color: #545454; }' +
       '.modal-film-close__btn {fill: black;}' +
       '.pagination__button {color:black;}';
+      '.pagination__dots {color:black;}';
   },
 };
 
