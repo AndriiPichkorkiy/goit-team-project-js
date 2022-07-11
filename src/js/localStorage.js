@@ -1,137 +1,130 @@
-import { rerender } from "./myLibraryBtns";
+import { renderAfterAddAndRemoveFilm } from './myLibraryBtns';
 
 let watchedBtn;
 let queueBtn;
 let filmCard;
 
- function addEventsOnModalBtn(){
-  watchedBtn = document.querySelector(".add-to-watched");
+function addEventsOnModalBtn() {
+  watchedBtn = document.querySelector('.add-to-watched');
   queueBtn = document.querySelector('.add-to-queue');
-  filmCard = document.querySelector('.film-card')
+  filmCard = document.querySelector('.film-card');
 
-  watchedBtn.addEventListener('click', addToWatched,{once:true})
+  watchedBtn.addEventListener('click', addToWatched, { once: true });
   queueBtn.addEventListener('click', addedToQueue);
-  searchByIdWatched(localStorageKeys.watchedFilm)
-  searchByIdQueue(localStorageKeys.filmInQueue)
+  searchByIdWatched(localStorageKeys.watchedFilm);
+  searchByIdQueue(localStorageKeys.filmInQueue);
 }
-export { addEventsOnModalBtn }
-
+export { addEventsOnModalBtn };
 
 export const localStorageKeys = {
-  watchedFilm:'watchedFilm',
-  filmInQueue:'filmInQueue'
-}
+  watchedFilm: 'watchedFilm',
+  filmInQueue: 'filmInQueue',
+};
 
 function addToWatched() {
-    jsonLocalStorage(localStorageKeys.watchedFilm)
-   addedStyleToWatched()
-    // watchedBtn.removeEventListener('click', addToWatched)
+  jsonLocalStorage(localStorageKeys.watchedFilm);
+  addedStyleToWatched();
+
+  // watchedBtn.removeEventListener('click', addToWatched)
 }
 function removeFromWatched() {
   if (watchedBtn.textContent === 'remove from watched') {
-      removeFromStorage(localStorageKeys.watchedFilm) 
+    removeFromStorage(localStorageKeys.watchedFilm);
     watchedBtn.style.backgroundColor = '#FFF';
-    watchedBtn.style.border = '1px solid black'
-      watchedBtn.textContent='add to watched'
-      queueBtn.removeAttribute('disabled')
+    watchedBtn.style.border = '1px solid black';
+    watchedBtn.textContent = 'add to watched';
+    queueBtn.disabled = false;
     queueBtn.style.opacity = 1;
-    rerender()
-    }
-  watchedBtn.removeEventListener('click', removeFromWatched)
-  watchedBtn.addEventListener('click', addToWatched)
+  }
+  watchedBtn.removeEventListener('click', removeFromWatched);
+  watchedBtn.addEventListener('click', addToWatched);
 }
 
 function addedToQueue() {
-  jsonLocalStorage(localStorageKeys.filmInQueue)
-  addedStyleToQueue()
-
+  jsonLocalStorage(localStorageKeys.filmInQueue);
+  addedStyleToQueue();
 }
 
 function addedStyleToWatched() {
-  watchedBtn.textContent = 'remove from watched'
-  watchedBtn.style.backgroundColor = '#FF6B01'
-  watchedBtn.style.border = 'none'
+  watchedBtn.textContent = 'remove from watched';
+  watchedBtn.style.backgroundColor = '#FF6B01';
+  watchedBtn.style.border = 'none';
 
-  queueBtn.setAttribute('disabled', 'disabled')
+  queueBtn.disabled = true;
   queueBtn.style.opacity = 0.25;
-  watchedBtn.addEventListener('click', removeFromWatched)
-  }
+  watchedBtn.addEventListener('click', removeFromWatched);
+}
 
 function addedStyleToQueue() {
-  queueBtn.textContent = 'remove from queue'
-  queueBtn.style.backgroundColor = '#FF6B01'
-  queueBtn.style.border = 'none'
+  queueBtn.textContent = 'remove from queue';
+  queueBtn.style.backgroundColor = '#FF6B01';
+  queueBtn.style.border = 'none';
   watchedBtn.style.opacity = 0.25;
-  watchedBtn.setAttribute('disabled', 'disabled')
-    
-    queueBtn.addEventListener('click',removeFromQueue)
+  watchedBtn.disabled = true;
+
+  queueBtn.addEventListener('click', removeFromQueue);
 }
 
 function removeFromQueue() {
   if (queueBtn.textContent === 'remove from queue') {
-       removeFromStorage(localStorageKeys.filmInQueue)
-      queueBtn.style.backgroundColor = '#FFF'
-      queueBtn.style.border = '1px solid black'
-      queueBtn.style.color='black'
-      queueBtn.textContent='add to queue'
-      queueBtn.removeAttribute('disabled')
-      watchedBtn.removeAttribute('disabled')
+    removeFromStorage(localStorageKeys.filmInQueue);
+    queueBtn.style.backgroundColor = '#FFF';
+    queueBtn.style.border = '1px solid black';
+    queueBtn.style.color = 'black';
+    queueBtn.textContent = 'add to queue';
+    queueBtn.disabled = false;
+    watchedBtn.disabled = false;
     watchedBtn.style.opacity = 1;
-    rerender()
-    }
-     queueBtn.removeEventListener('click', removeFromQueue)
+  }
+  queueBtn.removeEventListener('click', removeFromQueue);
 }
 
 function jsonLocalStorage(value) {
   const oldItems = JSON.parse(localStorage.getItem(value)) || [];
-  const card = { ...filmCard.dataset }
+  const card = { ...filmCard.dataset };
 
-  card.genre_ids = filmCard.dataset.genre.split(',')
-  console.log(card);
-  console.log(typeof filmCard.dataset.genre.split(','));
-  oldItems.push(card)
+  card.genre_ids = filmCard.dataset.genre.split(',');
 
+  oldItems.push(card);
 
   localStorage.setItem(value, JSON.stringify(oldItems));
+
+  renderAfterAddAndRemoveFilm();
 }
-   
-  
 
 function removeFromStorage(value) {
-  const arr = JSON.parse(localStorage.getItem(value))
-  const newArray=filterArrObj(arr)
-  localStorage.setItem(value, JSON.stringify(newArray))
-
-
+  const arr = JSON.parse(localStorage.getItem(value));
+  const newArray = filterArrObj(arr);
+  localStorage.setItem(value, JSON.stringify(newArray));
+  renderAfterAddAndRemoveFilm();
 }
 
 function filterArrObj(arr) {
-// console.log(arr);
-  const newArr = arr.filter(film => film.id !== filmCard.dataset.id)
-  return newArr 
+  const newArr = arr.filter(film => film.id !== filmCard.dataset.id);
+  return newArr;
 }
 function searchByIdWatched(value) {
-  const arr = JSON.parse(localStorage.getItem(value))
-  if (arr === null) { return }
-  else {
+  const arr = JSON.parse(localStorage.getItem(value));
+  if (arr === null) {
+    return;
+  } else {
     for (let iterator of arr) {
- 
       if (filmCard.dataset.id === iterator.id) {
-        addedStyleToWatched()
+        addedStyleToWatched();
+        return;
       }
     }
   }
- 
 }
 function searchByIdQueue(value) {
-
-    const arr = JSON.parse(localStorage.getItem(value))
-  if (arr === null) { return }
-  else {
+  const arr = JSON.parse(localStorage.getItem(value));
+  if (arr === null) {
+    return;
+  } else {
     for (let iterator of arr) {
-  
       if (filmCard.dataset.id === iterator.id) {
-        addedStyleToQueue()
+        addedStyleToQueue();
+        return;
       }
     }
   }

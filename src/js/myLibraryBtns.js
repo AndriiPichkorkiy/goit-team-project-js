@@ -11,8 +11,9 @@ import {
   renderPagination,
   removePagination,
   onPaginationBtnClick,
-  
 } from './pagination';
+
+import { renderCollection } from './render-movies';
 
 let watchedBtn;
 let queueBtn;
@@ -26,6 +27,10 @@ export function activateHeadersBtn() {
   watchedBtn.addEventListener('click', pressWatchedBtn);
   queueBtn.addEventListener('click', pressQueuedBtn);
 
+  activeLastBtn();
+}
+
+function activeLastBtn() {
   if (textContent === 'Watched') {
     watchedBtn.dispatchEvent(new Event('click'));
   }
@@ -39,7 +44,6 @@ function pressWatchedBtn() {
   queueBtn.classList.remove('library__button--active');
   textContent = 'Watched';
   takeFromStorage(localStorageKeys.watchedFilm);
-
 }
 
 function pressQueuedBtn() {
@@ -47,29 +51,29 @@ function pressQueuedBtn() {
   watchedBtn.classList.remove('library__button--active');
   textContent = 'Queue';
   takeFromStorage(localStorageKeys.filmInQueue);
-
 }
 
-export function rerender() {
- 
+export function renderAfterAddAndRemoveFilm() {
   const pageInUse = document.querySelector('.side-nav__link--current').dataset
     .id;
 
   if (pageInUse === 'home') {
-    return
+    return;
   } else if (pageInUse === 'library') {
     const activeBtn = document.querySelector('.library__button--active');
-    const value =activeBtn.dataset.id
- 
-      const el = refs.paginationList.querySelector('.pagination__button--current');
-      console.log(el);
-      const obj = {}
-      obj.target = el
-      
-      onPaginationBtnClick(obj)
-   
-  
-}
+    const value = activeBtn.dataset.id;
+
+    const el = refs.paginationList.querySelector(
+      '.pagination__button--current'
+    );
+    // if (!el) console.log('!EL');
+    // if (!el) return activeLastBtn();
+
+    const objEvent = { target: el };
+    // console.log('renderAfterAddAndRemoveFilm');
+    // console.log(objEvent);
+    onPaginationBtnClick(objEvent);
+  }
 }
 
 let currentPage = 1;
@@ -77,9 +81,9 @@ let quantityPages;
 let index = 0;
 
 export function checkQuantityStorage(oldItems) {
-  if ( oldItems.length === 0) {
+  if (oldItems.length === 0) {
     removePagination();
-   
+
     document.querySelector(
       '.movies-card'
     ).innerHTML = `<div class="content__wrapper">
@@ -90,33 +94,28 @@ export function checkQuantityStorage(oldItems) {
       </div>`;
     return true;
   }
-  return false
+  return false;
 }
 
 function takeFromStorage(value) {
-  let arr=[] ;
-  showPagination();
+  let arr = [];
+  // showPagination();
   const oldItems = JSON.parse(localStorage.getItem(value)) || arr;
-  
-  if (checkQuantityStorage(oldItems)) {
-      removePagination()
-      return
 
-    }
-  if (oldItems.length < 20) {
+  if (checkQuantityStorage(oldItems)) {
     removePagination();
+    return;
   }
+  // if (oldItems.length < 20) {
+  //   removePagination();
+  // }
 
   quantityPages = Math.ceil(oldItems.length / 20);
 
   const arrayOfArrays = chunkArrayInGroups(oldItems, 20);
 
   renderPagination(quantityPages, currentPage);
-  const card = arrayOfArrays[index]
-    .map(result => renderCardTemplate(result))
-    .join('');
- 
-  refs.moviesCard.innerHTML = card;
+  renderCollection(arrayOfArrays[0]);
 }
 
 function chunkArrayInGroups(arr, size) {
@@ -127,34 +126,33 @@ function chunkArrayInGroups(arr, size) {
   return newArr;
 }
 
-export function renderWatchedOrQueue(data) {
-  const { cardRelease, filmGenre, filmId, filmPoster, filmTitle, filmVote } =
-    data;
+// export function renderWatchedOrQueue(data) {
+//   const { cardRelease, filmGenre, filmId, filmPoster, filmTitle, filmVote } =
+//     data;
 
-  return `<li class="movies-card__item">
-          <a
-            href="#"
-            class="movies-card__link"
-            data-modal-open
-            data-card-id="${filmId}"
-          >
-            <div class="movies-card__thumb">
-              <img
-                src="https://image.tmdb.org/t/p/w500/${filmPoster}"
-                alt="${filmTitle}"
-                loading="lazy"
-              />
-            </div>
-            <div class="movies-card__content">
-              <h2 class="movies-card__heading text">${filmTitle}</h2>
-              <p class="movies-card__text ">
-                ${filmGenre} | ${cardRelease}
-                <span class="movies-card__rating">${filmVote}</span>
-              </p>
-            </div>
-          </a>
-        </li>`;
-}
+//   return `<li class="movies-card__item">
+//           <a
+//             href="#"
+//             class="movies-card__link"
+//             data-modal-open
+//             data-card-id="${filmId}"
+//           >
+//             <div class="movies-card__thumb">
+//               <img
+//                 src="https://image.tmdb.org/t/p/w500/${filmPoster}"
+//                 alt="${filmTitle}"
+//                 loading="lazy"
+//               />
+//             </div>
+//             <div class="movies-card__content">
+//               <h2 class="movies-card__heading text">${filmTitle}</h2>
+//               <p class="movies-card__text ">
+//                 ${filmGenre} | ${cardRelease}
+//                 <span class="movies-card__rating">${filmVote}</span>
+//               </p>
+//             </div>
+//           </a>
+//         </li>`;
+// }
 
-export { textContent };
-
+// export { textContent };

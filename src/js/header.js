@@ -27,7 +27,7 @@ let mainPage = 'homePage';
 
 
 markupForm();
-fetchPopularMovies();
+// fetchPopularMovies();
 
 refs.home.classList.add('side-nav__link--current');
 refs.logoLink.setAttribute('style', 'cursor:default');
@@ -44,7 +44,8 @@ refs.home.addEventListener('click', e => {
 
   refs.searchForm = document.querySelector('.search-form');
   refs.searchForm.addEventListener('submit', searchMovies);
-  fetchPopularMovies();showPagination()
+  fetchPopularMovies();
+  showPagination();
 });
 
 refs.library.addEventListener('click', e => {
