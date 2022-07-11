@@ -15,15 +15,8 @@ import {
   moreTwoCharacters,
   correctionRequest,
 } from './notifix';
-// import { fromPairs } from 'lodash';
 
 refs.searchForm = document.querySelector('.search-form');
-
-
-// const DEBOUNCE_DELAY = 300;
-
-// refs.searchForm.addEventListener("input", debounce(searchMovies, DEBOUNCE_DELAY));
-// refs.searchForm.addEventListener('submit', searchMovies);
 
 export default function searchMovies(event) {
   event.preventDefault();
@@ -48,10 +41,15 @@ async function fetchData(value) {
   const total_pages = movieService.totalPage;
     const data = await movieService.getSearchQuery(value, 1);
     console.log(data);
-    if (!data) {
-        loading.off();
-        correctionRequest();
-        return;
+  if (!data) {
+      
+    loading.off();
+    
+    refs.searchForm.reset();
+    
+    correctionRequest();
+    
+    return;
     }
   const card = data.results.map(result => renderCardTemplate(result)).join('');
     refs.moviesCard.innerHTML = card;
