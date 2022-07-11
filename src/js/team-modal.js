@@ -6,7 +6,10 @@ const refs = {
   list: document.querySelector('.team-modal__list'),
   front: document.querySelector('.wrap-front'),
   back: document.querySelector('.wrap-back'),
+  backdrop: document.querySelector('.backdrop'),
 };
+
+refs.backdrop.addEventListener('click', onBackDropClick);
 
 refs.openModalBtn.addEventListener('click', onModalOpen);
 
@@ -19,22 +22,8 @@ function toggleModal() {
   refs.modal.classList.toggle('visually-hidden');
 }
 
-function onModalOpen() {
-  refs.closeModalBtn.removeAttribute('disabled');
-  refs.modalContent.style.opacity = 1;
-  let delay = 250;
-  toggleModal();
-  cardArr.forEach(element => {
-    delay += 250;
-    setTimeout(() => {
-      element.firstElementChild.style.transform = 'rotateY(360deg)';
-
-      element.lastElementChild.style.transform = 'rotateY(180deg)';
-    }, delay);
-  });
-}
-
 function onModalClose() {
+  window.removeEventListener('keydown', onEscKeyPress);
   refs.closeModalBtn.setAttribute('disabled', 'disabled');
   refs.modalContent.style.opacity = 1;
   let delay = 150;
@@ -51,3 +40,35 @@ function onModalClose() {
     }, delay);
   });
 }
+
+function onModalOpen() {
+  window.addEventListener('keydown', onEscKeyPress);
+  refs.closeModalBtn.removeAttribute('disabled');
+  refs.modalContent.style.opacity = 1;
+  let delay = 250;
+  toggleModal();
+  cardArr.forEach(element => {
+    delay += 250;
+    setTimeout(() => {
+      element.firstElementChild.style.transform = 'rotateY(360deg)';
+
+      element.lastElementChild.style.transform = 'rotateY(180deg)';
+    }, delay);
+  });
+}
+
+function onEscKeyPress(event) {
+  const ESC_KEY_CODE = 'Escape';
+  if (event.code === ESC_KEY_CODE) {
+    onModalClose();
+  }
+}
+
+// function onBackDropClick(event) {
+//   console.log(event);
+//   if (event.currentTarget === event.target) {
+//     onModalClose();
+//   }
+//   console.log(event.currentTarget);
+//   console.log(event.target);
+// }
