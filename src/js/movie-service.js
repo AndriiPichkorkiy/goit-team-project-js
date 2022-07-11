@@ -12,7 +12,7 @@ class MovieService {
     // Тут інформація про жанри, масив об'єктів:
     this.genres = this.galleryData();
     //Налаштування мови. За замовчуванням, англійська
-    this.langauge = 'en-US';
+    this.langauge;
   }
 
   // Пошук 1 фільма за айдішніком (для отримання детальної інформації по фільму);
@@ -92,7 +92,6 @@ class MovieService {
       //без "контенту для дорослих"
       include_adult: false,
       //мова - англійська
-      // language: 'en-US',
       language: this.langauge,
     });
     return baseUrl + action + '?' + baseParameters + '&' + parameters;

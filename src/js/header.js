@@ -3,11 +3,28 @@ import * as iconSearch from '/src/images/icons.svg';
 import { activateHeadersBtn } from './myLibraryBtns';
 import searchMovies from './search-form';
 import { fetchPopularMovies, showPagination } from './pagination';
+import {firstRunTranslator} from './translator';
+import { librarySelection } from './nameLibrary';
+
+
 
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
 
+//---Translator---
+firstRunTranslator();
+let library = librarySelection();
+const {homeBtn, myLibraryBtn, checkInBtn, InputSearch} = library;
+const homeBtnHeader = document.querySelector('[data-id="home"]');
+const libraryBtnHeader = document.querySelector('[data-id="library"]');
+const checkBtnHeader = document.querySelector('[data-id="auth"]');
+
+homeBtnHeader.textContent =homeBtn;
+libraryBtnHeader.textContent = myLibraryBtn;
+checkBtnHeader.textContent = checkInBtn;
+
 let mainPage = 'homePage';
+
 
 markupForm();
 fetchPopularMovies();
@@ -72,7 +89,7 @@ function markupForm() {
               name="query"
               autocomplete="off"
               data-id="searchQuery"
-              placeholder="Movie search"
+              placeholder="${InputSearch}"
               class="search-field"
             />
             <button type="submit" class="search-btn" data-id="searchBtn">
