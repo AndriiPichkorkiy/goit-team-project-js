@@ -10,9 +10,10 @@ import {
   showPagination,
   renderPagination,
   removePagination,
-  onNextBtnClick,
-  onPrevBtnClick,
+  onPaginationBtnClick,
 } from './pagination';
+
+import { renderCollection } from './render-movies';
 
 let watchedBtn;
 let queueBtn;
@@ -26,6 +27,10 @@ export function activateHeadersBtn() {
   watchedBtn.addEventListener('click', pressWatchedBtn);
   queueBtn.addEventListener('click', pressQueuedBtn);
 
+  activeLastBtn();
+}
+
+function activeLastBtn() {
   if (textContent === 'Watched') {
     watchedBtn.dispatchEvent(new Event('click'));
   }
@@ -39,8 +44,6 @@ function pressWatchedBtn() {
   queueBtn.classList.remove('library__button--active');
   textContent = 'Watched';
   takeFromStorage(localStorageKeys.watchedFilm);
-
-  // switchPagination();
 }
 
 function pressQueuedBtn() {
@@ -48,21 +51,39 @@ function pressQueuedBtn() {
   watchedBtn.classList.remove('library__button--active');
   textContent = 'Queue';
   takeFromStorage(localStorageKeys.filmInQueue);
+}
 
-  // switchPagination();
+export function renderAfterAddAndRemoveFilm() {
+  const pageInUse = document.querySelector('.side-nav__link--current').dataset
+    .id;
+
+  if (pageInUse === 'home') {
+    return;
+  } else if (pageInUse === 'library') {
+    const activeBtn = document.querySelector('.library__button--active');
+    const value = activeBtn.dataset.id;
+
+    const el = refs.paginationList.querySelector(
+      '.pagination__button--current'
+    );
+    // if (!el) console.log('!EL');
+    // if (!el) return activeLastBtn();
+
+    const objEvent = { target: el };
+    // console.log('renderAfterAddAndRemoveFilm');
+    // console.log(objEvent);
+    onPaginationBtnClick(objEvent);
+  }
 }
 
 let currentPage = 1;
 let quantityPages;
 let index = 0;
 
-function takeFromStorage(value) {
-  let arr = [];
-  showPagination();
-  const oldItems = JSON.parse(localStorage.getItem(value)) || arr;
-  if (oldItems === arr || oldItems.length === 0) {
+export function checkQuantityStorage(oldItems) {
+  if (oldItems.length === 0) {
     removePagination();
-    // alert('no films here.please add film in main page')
+
     document.querySelector(
       '.movies-card'
     ).innerHTML = `<div class="content__wrapper">
@@ -71,24 +92,30 @@ function takeFromStorage(value) {
           <span class="content__text">${textContent}</span>!
         </h2>
       </div>`;
+    return true;
+  }
+  return false;
+}
+
+function takeFromStorage(value) {
+  let arr = [];
+  // showPagination();
+  const oldItems = JSON.parse(localStorage.getItem(value)) || arr;
+
+  if (checkQuantityStorage(oldItems)) {
+    removePagination();
     return;
   }
-
-  if (oldItems.length < 20) {
-    removePagination();
-  }
+  // if (oldItems.length < 20) {
+  //   removePagination();
+  // }
 
   quantityPages = Math.ceil(oldItems.length / 20);
 
   const arrayOfArrays = chunkArrayInGroups(oldItems, 20);
-  // console.log(arrayOfArrays[index]);
 
   renderPagination(quantityPages, currentPage);
-  const card = arrayOfArrays[index]
-    .map(result => renderWatchedOrQueue(result))
-    .join('');
-  // console.log("1 card :",card);
-  refs.moviesCard.innerHTML = card;
+  renderCollection(arrayOfArrays[0]);
 }
 
 function chunkArrayInGroups(arr, size) {
@@ -99,80 +126,33 @@ function chunkArrayInGroups(arr, size) {
   return newArr;
 }
 
-export function renderWatchedOrQueue(data) {
-  const { cardRelease, filmGenre, filmId, filmPoster, filmTitle, filmVote } =
-    data;
+// export function renderWatchedOrQueue(data) {
+//   const { cardRelease, filmGenre, filmId, filmPoster, filmTitle, filmVote } =
+//     data;
 
-  return `<li class="movies-card__item">
-          <a
-            href="#"
-            class="movies-card__link"
-            data-modal-open
-            data-card-id="${filmId}"
-          >
-            <div class="movies-card__thumb">
-              <img
-                src="https://image.tmdb.org/t/p/w500/${filmPoster}"
-                alt="${filmTitle}"
-                loading="lazy"
-              />
-            </div>
-            <div class="movies-card__content">
-              <h2 class="movies-card__heading text">${filmTitle}</h2>
-              <p class="movies-card__text ">
-                ${filmGenre} | ${cardRelease}
-                <span class="movies-card__rating">${filmVote}</span>
-              </p>
-            </div>
-          </a>
-        </li>`;
-}
-
-export { textContent };
-
-// function switchPagination() {
-//     const prevBtnEl = document.querySelector('.pagination__button--prev');
-//     const nextBtnEl = document.querySelector('.pagination__button--next');
-//     const btnEl = document.querySelectorAll('.pagination__button--js');
-//     console.log(prevBtnEl);
-
-//   if (prevBtnEl) {
-//       console.log(onPrevBtnClick);
-//       prevBtnEl.removeEventListener('click', onPrevBtnClick);
-//       prevBtnEl.addEventListener('click',prevBtnClick)
-//     }
-//   if (nextBtnEl) {
-
-//     nextBtnEl.removeEventListener('click',onNextBtnClick)
-//     nextBtnEl.addEventListener('click', NextBtnClick);
-//     }
-//     }
-
-// function NextBtnClick() {
-//   const oldItems =
-//     JSON.parse(localStorage.getItem(localStorageKeys.watchedFilm)) || arr;
-//   const arrayOfArrays = chunkArrayInGroups(oldItems, 20);
-//   console.log(arrayOfArrays[index + 1]);
-
-//   renderPagination(quantityPages, currentPage + 1);
-//   const card = arrayOfArrays[index + 1]
-//     .map(result => renderWatchedOrQueue(result))
-//     .join('');
-//   console.log('1 card :', card);
-
-//   refs.moviesCard.innerHTML = card;
+//   return `<li class="movies-card__item">
+//           <a
+//             href="#"
+//             class="movies-card__link"
+//             data-modal-open
+//             data-card-id="${filmId}"
+//           >
+//             <div class="movies-card__thumb">
+//               <img
+//                 src="https://image.tmdb.org/t/p/w500/${filmPoster}"
+//                 alt="${filmTitle}"
+//                 loading="lazy"
+//               />
+//             </div>
+//             <div class="movies-card__content">
+//               <h2 class="movies-card__heading text">${filmTitle}</h2>
+//               <p class="movies-card__text ">
+//                 ${filmGenre} | ${cardRelease}
+//                 <span class="movies-card__rating">${filmVote}</span>
+//               </p>
+//             </div>
+//           </a>
+//         </li>`;
 // }
-// function prevBtnClick() {
-//   const oldItems =
-//     JSON.parse(localStorage.getItem(localStorageKeys.watchedFilm)) || arr;
-//   const arrayOfArrays = chunkArrayInGroups(oldItems, 20);
-//   console.log(arrayOfArrays[index]);
 
-//   renderPagination(quantityPages, currentPage);
-//   const card = arrayOfArrays[index]
-//     .map(result => renderWatchedOrQueue(result))
-//     .join('');
-//   // console.log("1 card :",card);
-
-//   refs.moviesCard.innerHTML = card;
-// }
+// export { textContent };
