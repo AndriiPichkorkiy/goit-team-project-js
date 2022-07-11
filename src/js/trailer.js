@@ -1,4 +1,3 @@
-import refs from '/src/js/refs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
@@ -24,23 +23,10 @@ function watchToTrailer(videos) {
   const video = videos.find(el => {
     return el.site === 'YouTube';
   });
+
   const key = video.key;
   const instance = basicLightbox.create(`
     <iframe src="https://www.youtube.com/embed/${key}" width="560" height="315" frameborder="0"></iframe>
 `);
   instance.show();
 }
-
-// function modalClBtTrailer(instance) {
-//   const modalBox = document.querySelector('.basicLightbox--iframe');
-//   modalBox.insertAdjacentHTML(
-//     'afterbegin',
-//     `<button
-//         type="button"
-//         class="lightbox__button"
-//         data-id="closeLightbox"
-//         ></button>
-//     `
-//   );
-//   refs.closeLightbox.addEventListener('click', () => instance.close());
-// }
