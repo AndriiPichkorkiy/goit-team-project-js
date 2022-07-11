@@ -88,7 +88,7 @@ export async function onPaginationBtnClick(event) {
   if (pageInUse === 'home') {
     const data = await movieService.getSearchQuery(movieService.query, page);
     renderPagination(movieService.totalPage, page);
-    return data.results.map(data => renderCollection(data));
+    renderCollection(data.results);
   } else if (pageInUse === 'library') {
     const activeBtn = document.querySelector('.library__button--active');
     const value =
