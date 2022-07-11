@@ -2,7 +2,7 @@ import refs from '/src/js/refs';
 import * as iconSearch from '/src/images/icons.svg';
 import { activateHeadersBtn } from './myLibraryBtns';
 import searchMovies from './search-form';
-import { fetchPopularMovies } from './pagination';
+import { fetchPopularMovies, showPagination } from './pagination';
 
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
@@ -27,7 +27,7 @@ refs.home.addEventListener('click', e => {
 
   refs.searchForm = document.querySelector('.search-form');
   refs.searchForm.addEventListener('submit', searchMovies);
-  fetchPopularMovies();
+  fetchPopularMovies();showPagination()
 });
 
 refs.library.addEventListener('click', e => {
@@ -86,7 +86,7 @@ function markupForm() {
 export function markupButtons() {
   activeHeader.innerHTML = `<div class="buttons-wrapper"><button
             type="button"
-            class="library__buttons library__button--active library__button--trailer"
+            class="library__buttons"
             data-id="watchedBtn"
           >
             Watched
@@ -95,13 +95,4 @@ export function markupButtons() {
             Queue
           </button></div>`;
   activateHeadersBtn();
-}
-
-function markupLibraryContent() {
-  refs.contentLibrary.innerHTML = `<div class="content__wrapper">
-        <h2 class="content__title">There's nothing here!
-          Please add some movies to
-          <span class="content__text">Watched</span>!
-        </h2>
-      </div>`;
 }
