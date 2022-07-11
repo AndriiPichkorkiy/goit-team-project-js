@@ -1,5 +1,3 @@
-import throttle from 'lodash/throttle';
-import debounce from 'lodash/throttle';
 import refs from './refs';
 import { movieService } from './movie-service';
 import renderCardTemplate from './card-templete';
@@ -13,7 +11,9 @@ import {
 } from './pagination';
 import {
   moreTwoCharacters,
+
   correctionRequest,
+
 } from './notifix';
 
 refs.searchForm = document.querySelector('.search-form');
@@ -26,7 +26,7 @@ export default function searchMovies(event) {
   if (value.length <= 2 || value.length === 0) {
     moreTwoCharacters();
     return;
-    }
+  }
     
   loading.on();
 
@@ -39,6 +39,7 @@ export default function searchMovies(event) {
 
 async function fetchData(value) {
   const total_pages = movieService.totalPage;
+
     const data = await movieService.getSearchQuery(value, 1);
     console.log(data);
   if (!data) {
@@ -51,8 +52,10 @@ async function fetchData(value) {
     
     return;
     }
+
   const card = data.results.map(result => renderCardTemplate(result)).join('');
-    refs.moviesCard.innerHTML = card;
+
+  refs.moviesCard.innerHTML = card;
     
   loading.off();
 
