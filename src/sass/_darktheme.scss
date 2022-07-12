@@ -2,13 +2,6 @@ body {
     transition: 500ms;
 }
 
-.btn-shadow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
 .darktheme-btn {
     padding: 0;
     background-color: transparent;
@@ -31,7 +24,6 @@ body {
     height: 30px;
     transition: 250ms;
     position: absolute;
-    
 }
 
 .darktheme-icon__moon {
