@@ -1,0 +1,305 @@
+// Модальное окно регистрации
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  transition: opacity 250ms, visibility 250ms;
+  overflow-y: scroll;
+  perspective: 400px;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 450px;
+  width: calc(100% - 30px);
+  min-height: 330px;
+
+  @media screen and (max-width: 610px) {
+    top: 2rem;
+    transform: translate(-50%);
+  }
+
+  @media screen and(min-width: 1200px) {
+    min-width: 528px;
+    min-height: 330px;
+  }
+  padding: 40px;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms;
+  // rotate(0)
+  background: $footerTextColor;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+
+  .backdrop.is-hidden & {
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  // rotate(180deg)
+  &__title {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: $textColorOnDark;
+
+    @include font(30px, 700, 1.5, null);
+
+    text-align: center;
+
+    @media screen and (min-width: 1200px) {
+      line-height: 1.15;
+    }
+  }
+}
+
+.close {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  top: 8px;
+  right: 8px;
+
+  @include flex(flex, center, center);
+
+  background-color: $footerTextColor;
+  border: 1px solid rgba(157, 164, 189, 0.4);
+  color: rgba(157, 164, 189, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  transition: color linear;
+
+  &:hover,
+  &:focus {
+    color: $accentColor;
+    border-color: $accentColor;
+  }
+
+  &__icon {
+    fill: currentColor;
+  }
+}
+
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.form-container {
+  width: 100%;
+  height: 100%;
+}
+
+.form-container__item {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.form-comment.form-container__item {
+  margin-bottom: 20px;
+}
+
+.form-container__icon {
+  position: absolute;
+  left: 14px;
+  transform: translateY(50%);
+
+  width: 18px;
+  height: 18px;
+
+  fill: $footerTextColor;
+  transition: fill linear;
+
+  .form-container__text:hover + &,
+  .form-container__text:focus + & {
+    fill: $accentColor;
+  }
+}
+
+.form-container__name {
+  display: block;
+  margin-bottom: 4px;
+
+  color: $textColorOnDark;
+
+  @include font(null, 12px, 1.16, 0.01em);
+}
+
+.form-container__text {
+  width: 100%;
+  height: 40px;
+  padding: 14px 0px 14px 45px;
+  font-size: 18px;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  border-radius: 4px;
+  outline: none;
+  transition: border-color linear;
+
+  &:hover,
+  &:focus {
+    border-color: $accentColor;
+  }
+}
+
+.form-comment__area {
+  width: 100%;
+  height: 120px;
+  padding: 12px 16px;
+  margin-bottom: 0;
+  resize: none;
+  font-size: 18px;
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  border-radius: 4px;
+  outline: none;
+
+  &:hover,
+  &:focus {
+    border-color: $accentColor;
+  }
+
+  &::placeholder {
+    color: $footerTextColor;
+
+    @include font(null, 12px, 1.16, 0.01em);
+  }
+}
+
+.form-box {
+  @include flex(flex, center, center);
+}
+
+.form-box__deal {
+  color: $textColorOnDark;
+
+  @include font(null, 12px, 1.16, null);
+
+  @media screen and (min-width: 480px) {
+    white-space: nowrap;
+  }
+
+  @media screen and (min-width: 1200px) {
+    @include font(null, 14px, 1.71, null);
+  }
+}
+.form-box__link {
+  color: $accentColor;
+  // white-space: nowrap;
+}
+
+.form-box__agreement {
+  margin-bottom: 30px;
+
+  & .form-box__wrap {
+    width: 16px;
+    height: 15px;
+    border: 2px solid $textColorOnDark;
+    border-radius: 2px;
+    margin-right: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.form-box__icon {
+  fill: transparent;
+  @include flex(flex, center, center);
+}
+
+.form-box__check:checked + .form-box__wrap {
+  border: none;
+  background-color: $accentColor;
+}
+
+.form-box__check:checked + .form-box__wrap .form-box__icon {
+  fill: $textColorOnDark;
+}
+
+.form-box__btn {
+  display: block;
+  margin: 0 auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.button {
+  min-width: 160px;
+  max-height: 40px;
+  border: 1px solid $accentColor;
+  border-radius: 25px;
+  padding: 12px 20px;
+
+  font-family: 'Open Sans', sans-serif;
+  @include font(12px, 600, 1.33, 0.09em);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+// Button styles
+
+.dark-btn {
+  color: $footerTextColor;
+  background-color: transparent;
+
+  transition: color linear, background-color linear;
+
+  &:hover,
+  &:focus {
+    color: $textColorOnDark;
+    background-color: $accentColor;
+  }
+}
+
+.light-btn {
+  color: $textColorOnDark;
+  background-color: transparent;
+  transition: background-color linear;
+  &:hover,
+  &:focus {
+    background-color: $accentColor;
+  }
+}
+
+.btn-sign-in {
+  cursor: pointer;
+}
+
+.btn-container {
+  margin-top: 40px;
+}
+
+.btn-sign-in,
+.btn-sign-up {
+  background: transparent;
+}
+
+.sign-up-text {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  @include font(14px, null, 1.33, 0.09em);
+  color: $textColorOnDark;
+  text-align: center;
+}
+
+.modal-success {
+  @include flex(flex, center, center);
+}

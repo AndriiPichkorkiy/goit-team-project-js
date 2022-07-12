@@ -383,3 +383,13 @@ $iterations: 1;
   transform: scale(1.5);
   transition: 0.7s;
 }
+
+.useName {
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
+
+  color: white;
+
+  font-size: 30px;
+}

@@ -2,6 +2,7 @@ import refs from '/src/js/refs';
 import * as iconSearch from '/src/images/icons.svg';
 import { activateHeadersBtn } from './myLibraryBtns';
 import searchMovies from './search-form';
+import { FireBaseApi } from './fireBaseApi';
 import { fetchPopularMovies, showPagination } from './pagination';
 
 const activeHeader = document.querySelector('.js-active-header');
