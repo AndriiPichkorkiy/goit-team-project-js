@@ -1,27 +1,14 @@
+body {
+  transition-duration: 0s;
+}
+
 .background__main {
-  background-image: url(/src/images/bg-main/backggroundOpacity.png),
-    url(/src/images/bg-main/kinolenta.png);
-  background-repeat: repeat;
+  background: url(/src/images/bg-main/backggroundOpacity.png) repeat,
+    url(/src/images/bg-main/kinolenta.png) center repeat;
   background-size: contain;
 }
 
 .background__main--lib {
   background: url(/src/images/bg-main/backggroundOpacity.png) repeat,
-    url(/src/images/bg-main/pngegg.png) bottom/350px no-repeat;
-  @include min480 {
-    background: url(/src/images/bg-main/backggroundOpacity.png) repeat,
-      url(/src/images/bg-main/pngegg.png) bottom/400px no-repeat;
-  }
-  @include min768 {
-    background: url(/src/images/bg-main/backggroundOpacity.png) repeat,
-      url(/src/images/bg-main/pngegg.png) bottom/400px no-repeat;
-  }
-  @include min1280 {
-    background: url(/src/images/bg-main/backggroundOpacity.png) repeat,
-      url(/src/images/bg-main/pngegg.png) bottom/400px no-repeat;
-  }
-}
-
-.background__main--libNight {
-  background: url(/src/images/bg-main/pngegg.png) center/300px no-repeat;
+    url(/src/images/bg-main/pngegg.png) center no-repeat;
 }
