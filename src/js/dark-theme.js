@@ -1,4 +1,6 @@
 import * as anyNameThatYouWant from '../images/icons.svg';
+import * as backgroundBody from '../images/bg-main/lenta-night.png';
+import * as backgroundBodyLib from '../images/bg-main/lenta2-night.png';
 
 const body = document.querySelector('body');
 const footer = document.querySelector('footer');
@@ -58,14 +60,22 @@ export const changeTo = {
       '.about-film-title { color: $accentColor;}' +
       '.about-film-text { color: $accentColor;}' +
       '.film-modal-btn {background-color: $accentColor; }' +
-      '.content__title {color: $textColorOnDark; }' +
+      '.content__title {color: #ffffff; }' +
       '.modal-film-close__btn {fill: white;}' +
       '.pagination__button {color:$textColorOnDark;}' +
-      '.pagination__dots {color:$textColorOnDark;}';
-       '.background__main {background-image: url(/src/images/bg-main/lenta-night.png); }' +
-      '.background__main--lib {background-image: url(/src/images/bg-main/lenta2-night.png); }' +
+      '.pagination__dots {color:$textColorOnDark;}' +
+      `.background__main {background-image: url("${backgroundBody}"); background-position: center;
+    background-repeat: repeat-y;
+    background-size: contain;
+    background-attachment: scroll, scroll;
+    background-origin: padding-box, padding-box;
+    background-clip: border-box, border-box;}` +
+      `.background__main--lib {background-image: url("${backgroundBodyLib}"); background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll, scroll;
+    background-origin: padding-box, padding-box;
+    background-clip: border-box, border-box; }` +
       '.modal-film-close__btn {fill: white;}';
-
   },
   light: function () {
     const moon = document.querySelector('.darktheme-icon__moon');

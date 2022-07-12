@@ -3,8 +3,11 @@ import * as iconSearch from '/src/images/icons.svg';
 import { activateHeadersBtn } from './myLibraryBtns';
 import searchMovies from './search-form';
 import { FireBaseApi } from './fireBaseApi';
-import { fetchPopularMovies, showPagination } from './pagination';
-
+import {
+  fetchPopularMovies,
+  showPagination,
+  removePagination,
+} from './pagination';
 
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
@@ -24,11 +27,12 @@ refs.searchForm.addEventListener('submit', searchMovies);
 
 function fetchMoviesPagination() {
   fetchPopularMovies();
-  showPagination();
+  //   showPagination();
 }
 
 refs.home.addEventListener('click', e => {
   e.preventDefault();
+  removePagination();
   if (mainPage === 'homePage') return;
 
   markupPageHome();
@@ -42,6 +46,7 @@ refs.home.addEventListener('click', e => {
 
 refs.library.addEventListener('click', e => {
   e.preventDefault();
+  removePagination();
   if (mainPage === 'libraryPage') return;
   markupPageLibrary();
   markupButtons();
