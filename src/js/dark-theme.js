@@ -59,6 +59,8 @@ export const changeTo = {
       '.about-film-text {color: orange;}' +
       '.film-modal-btn {background-color: orange; }' +
       '.content__title {color: white; }' +
+      '.background__main {background-image: url(/src/images/bg-main/lenta-night.png); }' +
+      '.background__main--lib {background-image: url(/src/images/bg-main/lenta2-night.png); }' +
       '.modal-film-close__btn {fill: white;}';
   },
   light: function () {

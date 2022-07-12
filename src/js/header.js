@@ -6,17 +6,24 @@ import { fetchPopularMovies, showPagination } from './pagination';
 
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
+const backgroundMain = document.querySelector('.background__main');
 
 let mainPage = 'homePage';
 
 markupForm();
-// fetchPopularMovies();
 
 refs.home.classList.add('side-nav__link--current');
 refs.logoLink.setAttribute('style', 'cursor:default');
 logoPageHome.classList.add('reveal-text');
+backgroundMain.classList.remove('background__main--lib');
+
 refs.searchForm = document.querySelector('.search-form');
 refs.searchForm.addEventListener('submit', searchMovies);
+
+function fetchMoviesPagination() {
+  fetchPopularMovies();
+  showPagination();
+}
 
 refs.home.addEventListener('click', e => {
   e.preventDefault();
@@ -27,8 +34,8 @@ refs.home.addEventListener('click', e => {
 
   refs.searchForm = document.querySelector('.search-form');
   refs.searchForm.addEventListener('submit', searchMovies);
-  fetchPopularMovies();
-  showPagination();
+
+  fetchMoviesPagination();
 });
 
 refs.library.addEventListener('click', e => {
@@ -41,9 +48,10 @@ refs.library.addEventListener('click', e => {
 refs.logoLink.addEventListener('click', e => {
   e.preventDefault();
   if (mainPage !== 'libraryPage') return;
+
   markupPageHome();
   markupForm();
-  fetchPopularMovies();
+  fetchMoviesPagination();
 });
 
 function markupPageHome() {
@@ -54,6 +62,7 @@ function markupPageHome() {
   refs.logoLink.setAttribute('style', 'cursor:default');
   logoPageHome.classList.add('reveal-text');
   logoPageHome.classList.remove('rise-text');
+  backgroundMain.classList.remove('background__main--lib');
 }
 
 function markupPageLibrary() {
@@ -64,6 +73,7 @@ function markupPageLibrary() {
   refs.logoLink.setAttribute('style', 'cursor:pointer;');
   logoPageHome.classList.remove('reveal-text');
   logoPageHome.classList.add('rise-text');
+  backgroundMain.classList.add('background__main--lib');
 }
 
 function markupForm() {
