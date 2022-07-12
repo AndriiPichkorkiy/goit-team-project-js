@@ -75,6 +75,7 @@ export const changeTo = {
         background-attachment: scroll, scroll;
         background-origin: padding-box, padding-box;
         background-clip: border-box, border-box; }` +
+      '.movies-filter__button {color:white; background-color:black;}' +
       '.modal-film-close__btn {fill: white;}';
   },
   light: function () {
