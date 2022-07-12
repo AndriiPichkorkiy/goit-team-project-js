@@ -31,7 +31,7 @@ function removeFromWatched() {
   if (watchedBtn.textContent === 'remove from watched') {
     removeFromStorage(localStorageKeys.watchedFilm);
     watchedBtn.style.backgroundColor = '#FFF';
-    watchedBtn.style.border = '1px solid black';
+    watchedBtn.style.border = '1px solid #FF6B08';
     watchedBtn.textContent = 'add to watched';
     queueBtn.disabled = false;
     queueBtn.style.opacity = 1;
@@ -69,7 +69,7 @@ function removeFromQueue() {
   if (queueBtn.textContent === 'remove from queue') {
     removeFromStorage(localStorageKeys.filmInQueue);
     queueBtn.style.backgroundColor = '#FFF';
-    queueBtn.style.border = '1px solid black';
+    queueBtn.style.border = '1px solid #FF6B08';
     queueBtn.style.color = 'black';
     queueBtn.textContent = 'add to queue';
     queueBtn.disabled = false;
