@@ -74,20 +74,7 @@ export const changeTo = {
     sun.style.opacity = 0;
     moon.style.opacity = 1;
     localStorage.setItem('THEME', 'LIGHT');
-    globalStyle.innerHTML =
-      '.movies-card__heading { transition: color; transition-duration: 500ms; color: $primaryTextColor;}' +
-      '.content { transition: color; transition-duration: 500ms; color: #545454;}' +
-      '.team-modal { transition: color; transition-duration: 500ms; color: #545454;}' +
-      '.pagination { transition: background-color; transition-duration: 500ms; background-color: white;}' +
-      '.modal-film { background-color: white;}' +
-      '.name-film { color: $primaryTextColor;}' +
-      '.info-value {color: $primaryTextColor;}' +
-      '.about-film-title { color: $primaryTextColor;}' +
-      '.about-film-text { color: $primaryTextColor;}' +
-      '.film-modal-btn {background-color: white; }' +
-      '.content__title {color: #545454; }' +
-      '.modal-film-close__btn {fill: $primaryTextColor;}' +
-      '.pagination__button {color:$primaryTextColor;}';
+    globalStyle.innerHTML = '';
   },
 };
 
