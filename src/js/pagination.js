@@ -135,7 +135,7 @@ export function showPagination() {
 
 //                                Show home page
 
-export async function fetchPopularMovies(e) {
+export async function fetchPopularMovies() {
   refs.moviesCard.innerHTML = '';
   const data = await movieService.getSearchQuery(
     movieService.query,

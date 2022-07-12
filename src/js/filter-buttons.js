@@ -7,19 +7,20 @@ const filterButtons = document.querySelector('.movies-filter__list');
 filterButtons.addEventListener('click', onFilterButtonClick);
 
 function onFilterButtonClick(event) {
-  if (event.target.dataset.id === 'popular') {
-    console.log('popular');
-    fetchPopularMovies();
-    return;
-  }
-  if (event.target.dataset.id === 'future') {
-    console.log('future');
-    return;
-  }
-  if (event.target.dataset.id === 'rating') {
-    console.log('rating');
-    return;
-  }
+  // if (event.target.dataset.id === 'popular') {
+  //   console.log('popular');
+  //   fetchPopularMovies();
+  //   return;
+  // }
+  // if (event.target.dataset.id === 'future') {
+  //   console.log('future');
+  //   return;
+  // }
+  // if (event.target.dataset.id === 'rating') {
+  //   console.log('rating');
+  //   return;
+  // }
+  fetchPopularMovies();
 }
 
 // function fetchFutureFilms() {
