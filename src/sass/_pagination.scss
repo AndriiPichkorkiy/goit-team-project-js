@@ -13,13 +13,30 @@
 .pagination__list {
   display: flex;
   background-color: #fff;
-  padding: 10px;
+  padding: 10px 0;
   border-radius: 50px;
   background-color: rgba(128, 128, 128, 0.207);
 
   @include min768 {
     padding: 20px;
   }
+}
+
+i {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.arrow-right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.arrow-left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
 }
 
 .pagination__button {
@@ -43,11 +60,11 @@
   }
 }
 
-.pagination__button:not(:last-child) {
-  margin-left: 3px;
+.pagination__list li:not(:last-child) {
+  margin-right: 2px;
 
   @include min768 {
-    margin-left: 10px;
+    margin-left: 5px;
   }
 }
 
