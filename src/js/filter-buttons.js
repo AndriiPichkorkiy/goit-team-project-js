@@ -31,8 +31,6 @@ async function onFilterButtonClick(event) {
       return;
     }
     renderCollection(data.results);
-
-    // console.log('popular', data);
   }
 
   if (
@@ -50,8 +48,6 @@ async function onFilterButtonClick(event) {
       return;
     }
     renderCollection(data.results);
-
-    // console.log('future', data);
   }
 
   if (
@@ -69,11 +65,14 @@ async function onFilterButtonClick(event) {
       return;
     }
     renderCollection(data.results);
-
-    // console.log('rating', data);
   }
   renderPagination(movieService.totalPage, movieService.page);
-  // renderCollection(data.results);
-  // console.log(movieService.totalPage);
-  // console.log(movieService.page);
+}
+
+export function hideFilters() {
+  filterButtonsEl.classList.add('visually-hidden');
+}
+
+export function showFilters() {
+  filterButtonsEl.classList.remove('visually-hidden');
 }

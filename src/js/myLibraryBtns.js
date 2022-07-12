@@ -70,8 +70,7 @@ export function renderAfterAddAndRemoveFilm() {
     // if (!el) return activeLastBtn();
 
     const objEvent = { target: el };
-    // console.log('renderAfterAddAndRemoveFilm');
-    // console.log(objEvent);
+
     onPaginationBtnClick(objEvent);
   }
 }
