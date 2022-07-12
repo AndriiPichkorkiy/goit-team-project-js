@@ -19,9 +19,9 @@ export function renderPagination(totalPages, currentPage) {
 
   if (currentPage > 1) {
     liItem += `<li>
-    <button class="pagination__button pagination__button--prev" data-page="${
+    <button class="pagination__button" data-page="${
       currentPage - 1
-    }">Prev</button>
+    }"><i class="arrow-left"></i></button>
   </li>`;
   }
 
@@ -70,9 +70,9 @@ export function renderPagination(totalPages, currentPage) {
 
   if (currentPage < totalPages) {
     liItem += `<li>
-    <button class="pagination__button pagination__button--next" data-page="${
+    <button class="pagination__button" data-page="${
       currentPage + 1
-    }">Next</button>
+    }"><i class="arrow-right"></i></button>
   </li>`;
   }
 
