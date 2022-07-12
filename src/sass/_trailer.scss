@@ -1,3 +1,18 @@
+.trailer-size {
+  height: 315px;
+  @include min480 {
+    width: 450px;
+    height: 315px;
+  }
+  @include min768 {
+    width: 704px;
+    height: 515px;
+  }
+  @include min1280 {
+    width: 782px;
+  }
+}
+
 .btn-trailer {
   position: absolute;
   z-index: 1;

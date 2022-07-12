@@ -15,6 +15,8 @@ export function renderPagination(totalPages, currentPage) {
   let nextPages = currentPage + 2;
   let currentLiItem;
   if (totalPages <= 1) removePagination();
+  else showPagination();
+
   if (currentPage > 1) {
     liItem += `<li>
     <button class="pagination__button pagination__button--prev" data-page="${

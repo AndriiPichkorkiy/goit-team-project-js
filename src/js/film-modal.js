@@ -15,7 +15,7 @@ const refs = {
 refs.backdropFilmModal.addEventListener('click', onBackDropClick);
 refs.filmCardTemplate.addEventListener('click', onOpenFilmModal);
 
-function onOpenFilmModal() {
+export function onOpenFilmModal() {
   window.addEventListener('keydown', onEscKeyPress);
   event.preventDefault();
   const id = event.target.parentNode.parentNode.dataset.cardId;
@@ -25,18 +25,20 @@ function onOpenFilmModal() {
   onClickFilm(+id);
 }
 
-function onCloseModal() {
+export function onCloseModal() {
   window.removeEventListener('keydown', onEscKeyPress);
   document.body.classList.remove('show-modal');
-  refs.filmModal.innerHTML = "";
+  refs.filmModal.innerHTML = '';
 }
 
 function onEscKeyPress(event) {
-  const ESC_KEY_CODE = 'Escape'
+  const ESC_KEY_CODE = 'Escape';
+  if (document.querySelector('.trailer-size')) return;
+
   if (event.code === ESC_KEY_CODE) {
-    onCloseModal()
+    onCloseModal();
   }
-};
+}
 
 function onBackDropClick(event) {
   if (event.currentTarget === event.target) {
@@ -46,7 +48,20 @@ function onBackDropClick(event) {
 
 export default async function onClickFilm(id) {
   const answer = await movieService.getOneMovie(id).then(movie => {
-    const { original_title, id, title, poster_path, release_date, vote_average, vote_count, popularity, overview, genres, tags, videos } = movie;
+    const {
+      original_title,
+      id,
+      title,
+      poster_path,
+      release_date,
+      vote_average,
+      vote_count,
+      popularity,
+      overview,
+      genres,
+      tags,
+      videos,
+    } = movie;
     const genre = Object.values(genres);
 
     let genreValue = [];
@@ -85,17 +100,12 @@ export default async function onClickFilm(id) {
             <div class="value-films">
             <h2 class="name-film">${original_title}</h2>
             <table>
+<<<<<<< HEAD
             <tbody><tr><td class="info-film"">Vote / Votes</td><td class="info-value"><span class="vote">${vote_average.toFixed(1)}
             </span> / <span class="vote-count">${vote_count}</span> </td></tr>
-            <tbody><tr><td class="info-film"">Popularity</td><td class="info-value">${
-              popularity
-            }</td></tr>
-            <tbody><tr><td class="info-film"">Original Title</td><td class="info-value original-title">${
-              original_title
-            }</td></tr>
-            <tbody><tr><td class="info-film"">Genre</td><td class="info-value genres-film">${genreValue.join(
-              ', '
-            )}</td></tr>
+            <tbody><tr><td class="info-film"">Popularity</td><td class="info-value">${popularity}</td></tr>
+            <tbody><tr><td class="info-film"">Original Title</td><td class="info-value original-title">${original_title}</td></tr>
+            <tbody><tr><td class="info-film"">Genre</td><td class="info-value genres-film">${genreValue.join(', ')}</td></tr>
                 </table>
             <h3 class="about-film-title">about</h3>
             <p><span class="about-film-text">${overview}</span></p>
