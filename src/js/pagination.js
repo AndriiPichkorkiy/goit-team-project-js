@@ -15,6 +15,8 @@ export function renderPagination(totalPages, currentPage) {
   let nextPages = currentPage + 2;
   let currentLiItem;
   if (totalPages <= 1) removePagination();
+  else showPagination();
+
   if (currentPage > 1) {
     liItem += `<li>
     <button class="pagination__button pagination__button--prev" data-page="${
@@ -88,7 +90,7 @@ export async function onPaginationBtnClick(event) {
   if (pageInUse === 'home') {
     const data = await movieService.getSearchQuery(movieService.query, page);
     renderPagination(movieService.totalPage, page);
-    return data.results.map(data => renderCollection(data));
+    renderCollection(data.results);
   } else if (pageInUse === 'library') {
     const activeBtn = document.querySelector('.library__button--active');
     const value =
