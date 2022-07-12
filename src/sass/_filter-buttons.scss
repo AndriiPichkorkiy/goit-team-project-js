@@ -1,17 +1,102 @@
 .movies-filter__wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex(flex, center, center);
 }
 .movies-filter__list {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex(flex, center, center);
 }
 .movies-filter__item:not(:last-child) {
   margin-right: 20px;
 }
 .movies-filter__button {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.16;
+  position: relative;
+  padding: 10px;
+  overflow: hidden;
+  transition: 0.2s;
+  border-radius: 5px;
+  border: 2px solid $accentColor;
   background-color: transparent;
-  outline: 1px solid orange;
+  &:hover {
+    background-color: $accentColor;
+    box-shadow: 0 0 10px $accentColor, 0 0 40px $accentColor,
+      0 0 80px $accentColor;
+    transition-delay: 0.6s;
+  }
+}
+
+.movies-filter__button span {
+  position: absolute;
+  display: block;
+}
+
+.movies-filter__button span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, $accentColor);
+}
+
+.movies-filter__button:hover span:nth-child(1) {
+  left: 100%;
+  transition: 0.6s;
+}
+
+.movies-filter__button span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, $accentColor);
+}
+
+.movies-filter__button:hover span:nth-child(2) {
+  top: 100%;
+  transition: 0.6s;
+  transition-delay: 0.15s;
+}
+
+.movies-filter__button span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, $accentColor);
+}
+
+.movies-filter__button:hover span:nth-child(3) {
+  right: 100%;
+  transition: 0.6s;
+  transition-delay: 0.3s;
+}
+
+.movies-filter__button span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, $accentColor);
+}
+
+.movies-filter__button:hover span:nth-child(4) {
+  bottom: 100%;
+  transition: 0.6s;
+  transition-delay: 0.45s;
+}
+
+.movies-filter__button--current {
+  &::after {
+    content: '';
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    height: 2px;
+    width: 100%;
+
+    background-color: $accentColor;
+  }
 }
