@@ -7,13 +7,7 @@ export default function sayGenres(genre_ids) {
 
   //Максимальна довжина рядка. Рекомендовано від 22 до 25
   const maxLength = 24;
-  let other;
-
-  switch (movieService.langauge) {
-    case 'en-US': other = 'Other'; break;
-    case 'uk': other = 'Інше'; break;
-    default: other = 'Other';
-  }
+  const other = 'Other';
 
   let i = 0;
   let genreNames = '';

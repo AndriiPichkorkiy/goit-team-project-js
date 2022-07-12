@@ -193,12 +193,10 @@ $iterations: 1;
 
 // *navigation
 .navigation {
-  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 40px;
-  
 }
 
 .side-nav {
@@ -214,10 +212,7 @@ $iterations: 1;
 }
 
 .side-nav__item {
-  margin-left:12px;
-  @include min768 {
-    margin-left: 30px;
-  }
+  margin-left:30px;
 }
 
 .side-nav__link {

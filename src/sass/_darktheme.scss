@@ -4,15 +4,12 @@
 
 .darktheme-btn {
     padding: 0;
-    margin-right: 18px;
     background-color: transparent;
     color: white;
     cursor: pointer;
     width: 30px;
     height: 30px;
     display: flex;
-
-
 }
 
 .darktheme-icon {
@@ -20,8 +17,6 @@
     height: 30px;
     transition: 250ms;
     position: absolute;
-    width: 24px;
-    height: 24px;
 }
     
 .darktheme-icon__moon {
