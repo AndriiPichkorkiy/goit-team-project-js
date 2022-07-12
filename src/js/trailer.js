@@ -2,6 +2,8 @@ import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
 let buttonTrailer;
+let getOpanModal;
+let getCloseModal;
 
 export default function addEventsOnModalBtnTrailer(el) {
   const videos = el.results;
@@ -26,7 +28,26 @@ function watchToTrailer(videos) {
 
   const key = video.key;
   const instance = basicLightbox.create(`
-    <iframe src="https://www.youtube.com/embed/${key}" width="560" height="315" frameborder="0"></iframe>
+    <iframe src="https://www.youtube.com/embed/${key}" width="" height="" frameborder="0" class = "trailer-size"></iframe>
 `);
-  instance.show();
+
+  getOpanModal = instance.show;
+  getCloseModal = instance.close;
+  openModalTailer();
+}
+
+function onCloseModalForEsc(e) {
+  if (e.code === 'Escape') {
+    closeModalTailer();
+  }
+}
+
+function closeModalTailer() {
+  window.removeEventListener('keydown', onCloseModalForEsc);
+  getCloseModal();
+}
+
+function openModalTailer() {
+  window.addEventListener('keydown', onCloseModalForEsc);
+  getOpanModal();
 }
