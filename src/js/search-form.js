@@ -10,11 +10,13 @@ import {
   showPagination,
 } from './pagination';
 import { moreTwoCharacters, correctionRequest } from './notifix';
+import { hideFilters } from './filter-buttons';
 
 refs.searchForm = document.querySelector('.search-form');
 
 export default function searchMovies(event) {
   event.preventDefault();
+  hideFilters();
 
   const value = event.currentTarget.elements.query.value.trim();
 
@@ -38,14 +40,14 @@ async function fetchData(value) {
   const total_pages = movieService.totalPage;
 
   const data = await movieService.getSearchQuery(value, 1);
-  
+
   if (!data) {
     removePagination();
 
     loading.off();
 
     refs.searchForm.reset();
-    
+
     correctionRequest();
 
     return;
