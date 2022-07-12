@@ -202,24 +202,34 @@ $iterations: 1;
 .side-nav {
   display: flex;
   justify-content: flex-end;
-
-  font-weight: 500;
-  font-size: $font-size;
+  align-items: center;
+  font-size: 10px;
   line-height: 1.17;
   text-transform: uppercase;
 
   color: $textColorOnDark;
+
+  @include min768 {
+    font-weight: 500;
+    font-size: $font-size;
+  }
 }
 
 .side-nav__item {
-  margin-left: 30px;
+  margin-left: 15px;
+  @include min480 {
+    margin-left: 20px;
+  }
+  @include min768 {
+    margin-left: 30px;
+  }
 }
 
 .side-nav__link {
   display: inline-block;
   color: inherit;
   position: relative;
-  padding: 10px;
+  padding: 5px;
   overflow: hidden;
   transition: 0.2s;
   &:hover {
@@ -227,6 +237,9 @@ $iterations: 1;
     box-shadow: 0 0 10px $accentColor, 0 0 40px $accentColor,
       0 0 80px $accentColor;
     transition-delay: 0.6s;
+  }
+  @include min480 {
+    padding: 10px;
   }
 }
 .side-nav__link span {
@@ -369,4 +382,14 @@ $iterations: 1;
 .search-btn:hover {
   transform: scale(1.5);
   transition: 0.7s;
+}
+
+.useName {
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
+
+  color: white;
+
+  font-size: 30px;
 }

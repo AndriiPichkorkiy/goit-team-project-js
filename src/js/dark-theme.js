@@ -62,6 +62,10 @@ export const changeTo = {
       '.modal-film-close__btn {fill: white;}' +
       '.pagination__button {color:$textColorOnDark;}' +
       '.pagination__dots {color:$textColorOnDark;}';
+       '.background__main {background-image: url(/src/images/bg-main/lenta-night.png); }' +
+      '.background__main--lib {background-image: url(/src/images/bg-main/lenta2-night.png); }' +
+      '.modal-film-close__btn {fill: white;}';
+
   },
   light: function () {
     const moon = document.querySelector('.darktheme-icon__moon');
