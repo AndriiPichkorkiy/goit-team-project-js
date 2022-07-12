@@ -1,6 +1,6 @@
-// .body {
-//     background-color: rgb(184, 184, 184) rgb(44, 24, 24);
-// }
+body {
+  transition: 500ms;
+}
 
 .darktheme-btn {
   padding: 0;
@@ -10,6 +10,12 @@
   width: 30px;
   height: 30px;
   display: flex;
+  position: relative;
+  transition: transform;
+  transition-duration: 500ms;
+  &:hover {
+    transform: scale(1.2);
+  }
 }
 
 .darktheme-icon {

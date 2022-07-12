@@ -3,26 +3,36 @@
 }
 .movies-filter__list {
   @include flex(flex, center, center);
+  margin-top: 20px;
+  // @include min768 {
+  //   margin-top: 60px;
+  // }
 }
 .movies-filter__item:not(:last-child) {
   margin-right: 20px;
 }
 .movies-filter__button {
   display: inline-block;
-  font-size: 12px;
-  line-height: 1.16;
   position: relative;
+  font-size: 10px;
+  line-height: 1.16;
+  font-weight: 500;
+  text-transform: uppercase;
   padding: 10px;
   overflow: hidden;
   transition: 0.2s;
+  background-color: rgba(255, 107, 8, 0.412);
   border-radius: 5px;
-  border: 2px solid $accentColor;
-  background-color: transparent;
+  border: 3px solid $accentColor;
   &:hover {
     background-color: $accentColor;
+    transform: scale(1.03);
     box-shadow: 0 0 10px $accentColor, 0 0 40px $accentColor,
       0 0 80px $accentColor;
     transition-delay: 0.6s;
+  }
+  @include min768 {
+    font-size: $font-size;
   }
 }
 
@@ -87,16 +97,20 @@
 }
 
 .movies-filter__button--current {
-  &::after {
-    content: '';
-
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    height: 2px;
-    width: 100%;
-
-    background-color: $accentColor;
+  display: inline-block;
+  position: relative;
+  font-size: 10px;
+  line-height: 1.16;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 10px;
+  border: 3px solid $accentColor;
+  border-radius: 5px;
+  background-color: $accentColor;
+  transform: scale(1.03);
+  box-shadow: 0 0 10px $accentColor, 0 0 40px $accentColor,
+    0 0 80px $accentColor;
+  @include min768 {
+    font-size: $font-size;
   }
 }

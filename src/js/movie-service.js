@@ -11,9 +11,13 @@ class MovieService {
     this.message = '';
     // Тут інформація про жанри, масив об'єктів:
     this.genres = this.galleryData();
+    //Налаштування мови. За замовчуванням, англійська
+    this.langauge = 'en-US';
   }
 
-  // Пошук 1 фільма за айдішніком (для отримання детальної інформації по фільму);
+
+  // -----Методи для використання-------
+  // Пошук 1 фільма за айдішніком;
   async getOneMovie(id) {
     this.message = 'OK!';
     if (!id){this.message = 'There is no search query'; return;}
@@ -23,35 +27,13 @@ class MovieService {
     });
     return this.getMovies(action, parameters);
   }
-
   //Пошук фільмів за популярністю АБО ключовим словом
   async getSearchQuery(searchQuery, page){
     if(!searchQuery){return await this.getPopularMovies(page)}
     return await this.getMoviesByTitle(searchQuery, page);
   };
-
-  // пошук фільмів за популярністю. Можна передавати необов'язковий параметр page(ціле число), повертає 20 фільмів
-  async getPopularMovies(page) {
-    this.message = 'OK!';
-    if (page < 1) {
-      this.message = 'Small value page';
-      return;
-    }
-    if (this.totalPagePopular !== 1 && page > this.totalPagePopular) {
-      this.message = 'Great value "page"';
-      return;
-    }
-
-    const action = 'trending/movie/week';
-    const parameters = new URLSearchParams({
-      page: page || 1,
-    });
-
-    return await this.getMovies(action, parameters);
-  }
-
-  // Пошук фільмів за назвою(ключовим словом). searchQuery - обов'язковий елемент, строка без пропусків на початку та кінці. Page - необов'язковий аргумент, ціле число.
-  async getMoviesByTitle(searchQuery, page) {
+   // Пошук фільмів за ключовим словом
+   async getMoviesByTitle(searchQuery, page) {
     this.message = 'OK!';
     if (!searchQuery) {
       this.message = 'Empty request';
@@ -79,7 +61,37 @@ class MovieService {
     this.query = searchQuery;
     return answer;
   }
+  // пошук фільмів за популярністю
+  async getPopularMovies(page) {
+    return await this.SearchMoviesByCategory('trending/movie/week', page);
+  }
+  // пошук фільмів з найбільшим рейтингом.
+  async getTopRated(page) {
+    return await this.SearchMoviesByCategory('movie/top_rated', page);
+  }
+  // пошук майбутніх фільмів.
+  async getUpcoming(page) {
+    return await this.SearchMoviesByCategory('movie/upcoming', page);
+  }
 
+
+  //-----Системні методи-------
+   //Спільний метод для знаходження фільмів за популярністю, з найюільшим рейтингом, майбутніх фільмів
+   async SearchMoviesByCategory(action, page){
+    this.message = 'OK!';
+    if (page < 1) {
+      this.message = 'Small value page';
+      return;
+    }
+    if (this.totalPage !== 1 && page > this.totalPage) {
+      this.message = 'Great value "page"';
+      return;
+    }
+    const parameters = new URLSearchParams({
+      page: page || 1,
+    });
+    return await this.getMovies(action, parameters);
+  }
   //Формування URL для подальшого запиту на сервер. Допоміжний метод
   createUrl(action, param) {
     const API_KEY = '833791a5e754a1f0443be5fc62646bdb';
@@ -90,11 +102,10 @@ class MovieService {
       //без "контенту для дорослих"
       include_adult: false,
       //мова - англійська
-      language: 'en-US',
+      language: this.langauge,
     });
     return baseUrl + action + '?' + baseParameters + '&' + parameters;
   }
-
   //запрос на сервер по раніше сформованому URL
   async fetchMovies(url) {
     try {
@@ -109,26 +120,7 @@ class MovieService {
       return;
     }
   }
-
-  //Запит для отримання конфігурації відповіді. Додатковий метод
-  getConfiguration() {
-    const url = this.createUrl('configuration');
-    return this.fetchMovies(url);
-  }
-
-  //Додає масив об'єктів з жанрами
-  async galleryData() {
-    this.genres = await this.getGenres();
-  }
-
-  //Запит для отримання масива з жанрами фільмів
-  async getGenres() {
-    const url = this.createUrl('genre/movie/list');
-    const { genres } = await this.fetchMovies(url);
-    return genres;
-  }
-
-  //----Повертає об'єкт відповіді----
+  //Повертає об'єкт відповіді
   async getMovies(action, parameters) {
     const url = this.createUrl(action, parameters);
     const movies = await this.fetchMovies(url);
@@ -149,6 +141,19 @@ class MovieService {
     this.totalPage = movies.total_pages;
 
     return movies;
+  }
+
+
+  //-----Додаткові методи-------
+  //Запит для отримання масива з жанрами фільмів
+  async getGenres() {
+    const url = this.createUrl('genre/movie/list');
+    const { genres } = await this.fetchMovies(url);
+    return genres;
+  }
+  //Додає масив об'єктів з жанрами
+  async galleryData() {
+    this.genres = await this.getGenres();
   }
 };
 

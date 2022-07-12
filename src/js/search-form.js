@@ -27,6 +27,8 @@ export default function searchMovies(event) {
 
   blockSreen();
 
+  removePagination();
+
   fetchData(value);
 
   clearMarkup();
@@ -36,12 +38,14 @@ async function fetchData(value) {
   const total_pages = movieService.totalPage;
 
   const data = await movieService.getSearchQuery(value, 1);
-  console.log(data);
+  
   if (!data) {
+    removePagination();
+
     loading.off();
 
     refs.searchForm.reset();
-    removePagination();
+    
     correctionRequest();
 
     return;
