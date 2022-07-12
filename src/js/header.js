@@ -5,6 +5,7 @@ import searchMovies from './search-form';
 import { FireBaseApi } from './fireBaseApi';
 import { fetchPopularMovies, showPagination } from './pagination';
 
+
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
 const backgroundMain = document.querySelector('.background__main');
