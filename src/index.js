@@ -25,6 +25,7 @@ import './js/search-form.js';
 //=== === === === === === === ===
 //=== === = MAIN'S PART = === ===
 //=== === === === === === === ===
+import './js/filter-buttons';
 import './js/card-templete';
 // import './js/render-movies';
 //

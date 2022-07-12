@@ -1,0 +1,17 @@
+.movies-filter__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.movies-filter__list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.movies-filter__item:not(:last-child) {
+  margin-right: 20px;
+}
+.movies-filter__button {
+  background-color: transparent;
+  outline: 1px solid orange;
+}
