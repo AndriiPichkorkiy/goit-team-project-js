@@ -95,12 +95,11 @@ export default async function onClickFilm(id) {
     src="https://image.tmdb.org/t/p/w500/${poster_path}"
     onError="this.onerror=null;this.src='https://subscribenow.com.au/time/asia/Solo/Content/Images/noCover.gif';"
     alt="${tags}"
-    loading="lazy"
-  /></div>
+    loading="lazy"/>
+    </div>
             <div class="value-films">
             <h2 class="name-film">${original_title}</h2>
             <table>
-<<<<<<< HEAD
             <tbody><tr><td class="info-film"">Vote / Votes</td><td class="info-value"><span class="vote">${vote_average.toFixed(1)}
             </span> / <span class="vote-count">${vote_count}</span> </td></tr>
             <tbody><tr><td class="info-film"">Popularity</td><td class="info-value">${popularity}</td></tr>

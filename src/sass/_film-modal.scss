@@ -277,6 +277,12 @@ outline-color: rgba(255, 255, 255, 0);
 outline-offset: 15px;
 }
 
+&:disabled {
+transform: scale(1);
+outline: none;
+box-shadow: none;
+}
+
 
 margin-top: 20px;
 border: 1px solid $btnHoverColor;
