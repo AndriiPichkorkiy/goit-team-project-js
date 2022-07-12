@@ -1,4 +1,5 @@
 import { openSignInModal } from './register-modal';
+import refs from '/src/js/refs';
 export class FireBaseApi {
   button = null;
   menuAuth = null;
@@ -15,7 +16,11 @@ export class FireBaseApi {
   }
 
   static authSuccess({ email }) {
-    this.menuAuth.innerHTML = `<p>Hello ${email}</p>`;
+    refs.placeForName.innerHTML = `<p>${email.split('@')[0]}</p>`;
+    this.menuAuth.innerHTML = `<p>LOG OUT</p>`;
+
+    const btn = document.querySelector('[data-id = "auth"]');
+    btn.setAttribute('data-status', 'logOut');
     // this.libraryContent.innerHTML = `<div class="content__wrapper">
     //     <h2 class="content__title">There's nothing here! <br/>
     //       Please add some movies to

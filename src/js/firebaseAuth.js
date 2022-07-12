@@ -1,4 +1,5 @@
 const { pad } = require('lodash');
+// import refs from '/src/js/refs';
 import {
   openSignUpModal,
   openGreetingsModal,
@@ -11,7 +12,7 @@ const refs = {
   formSignUp: document.querySelector('#form-sign-up'),
 };
 
-let userName;
+// let userName;
 const FORM_STORAGE_KEY = 'register-form-state';
 
 let formData = {};
@@ -22,109 +23,78 @@ refs.formSignUp.addEventListener('submit', authSignUpUser);
 refs.formSignIn.addEventListener('input', addFormFields);
 refs.formSignUp.addEventListener('input', addFormFields);
 
+//Зареєструватися
 async function authSignUpUser(event) {
   event.preventDefault();
 
-  if (!formData['mail'] || !formData['password']) {
-    return alert('Please, fill all form fields');
-  }
+  const {
+    email: { value: email },
+    password: { value: password },
+    agreement: { checked },
+  } = event.target;
 
-  localStorage.removeItem(FORM_STORAGE_KEY);
-  console.log(formData);
-  event.currentTarget.reset();
-  clearFormData(formData);
+  if (!email || !password || !checked) return showNotificashka('noValidForm');
 
-  userName = await event.target.querySelector('#user-name').value;
-  const email = await event.target.querySelector('#user-email-register').value;
-  const password = await event.target.querySelector('#user-password-register')
-    .value;
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(userCredential => {
+      // Signed in
+      const user = userCredential.user;
+      showNotificashka('registerSuccess', user);
+      console.log('user', user);
 
-  await registerUser(email, password, userName)
-    .then(response => response.json())
-    .then(data => {
-      if (data.error) {
-        alert(data.error.message);
-      } else {
-        console.log('It*s ok!');
-        // FireBaseApi.authSuccess(userName);
-        FireBaseApi.authSuccess(data);
-        openGreetingsModal();
-        openSignUpModal();
-      }
+      clearFormData(formData);
+
+      FireBaseApi.authSuccess(user);
+      openGreetingsModal();
+      openSignUpModal();
+    })
+    .catch(error => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(errorMessage);
+      showNotificashka('registerFaild', error);
+      // ..
     });
+
+  event.currentTarget.reset();
 }
 
+//Зайти в кабінет
 export async function authSignInUser(event) {
   event.preventDefault();
 
-  if (!formData['mail'] || !formData['password']) {
-    return alert('Please, fill all form fields');
-  }
+  const {
+    email: { value: email },
+    password: { value: password },
+  } = event.target;
 
-  localStorage.removeItem(FORM_STORAGE_KEY);
-  console.log(formData);
-  event.currentTarget.reset();
-  clearFormData(formData);
+  if (!email || !password) return showNotificashka('noValidForm');
 
-  const email = event.target.querySelector('#user-email').value;
-  const password = event.target.querySelector('#user-password').value;
+  signInWithEmailAndPassword(auth, email, password)
+    .then(userCredential => {
+      // Signed in
+      const user = userCredential.user;
+      console.log(userCredential.user);
+      FireBaseApi.authSuccess(user);
+      openSignInModal();
 
-  await authWithEmailAndPassword(email, password)
-    .then(response => response.json())
-    .then(data => {
-      if (data.error) {
-        alert(data.error.message);
-      } else {
-        console.log('It*s ok!');
-        FireBaseApi.authSuccess(data);
-        console.log(data);
-        openSignInModal();
-      }
+      showNotificashka('signInSuccess', user);
+    })
+    .catch(error => {
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      showNotificashka('signInFaild', error);
     });
+
+  // event.currentTarget.reset();
 }
 
-export async function authWithEmailAndPassword(email, password) {
-  const apiKey = 'AIzaSyAysL6D0-x9xs_8XCW-NbLtbtHl5P6b3V0';
-  return await fetch(
-    `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
-
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        email,
-        password,
-        returnSecureToken: true,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-}
-
-export async function registerUser(email, password, name) {
-  const apiKey = 'AIzaSyAysL6D0-x9xs_8XCW-NbLtbtHl5P6b3V0';
-  return await fetch(
-    `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`,
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        email,
-        password,
-        name,
-        returnSecureToken: true,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-}
-
+//функція для роботи з формою
 function clearFormData(obj) {
   for (const key in obj) {
     delete obj[key];
   }
+  localStorage.removeItem(FORM_STORAGE_KEY);
 }
 
 function addFormFields(event) {
@@ -162,5 +132,58 @@ function setFormFieldsSignUp(obj) {
   }
 }
 
+//заповнити форму з локал сторедж
 window.addEventListener('load', getStorageDataSignIn);
 window.addEventListener('load', getStorageDataSignUp);
+
+//===================
+
+import { initializeApp } from 'firebase/app';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyCFrUsAa2GnJsQSsnbY7n2RsUa4nEwcnLw',
+  authDomain: 'test-accaunts.firebaseapp.com',
+  databaseURL: 'https://test-accaunts-default-rtdb.firebaseio.com',
+  projectId: 'test-accaunts',
+  storageBucket: 'test-accaunts.appspot.com',
+  messagingSenderId: '438814438695',
+  appId: '1:438814438695:web:19b67e8971090cb7cda502',
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
+
+const auth = getAuth();
+
+export function showNotificashka(code, data) {
+  console.log('show!');
+  switch (code) {
+    case 'registerSuccess':
+      alert(`${data.email} register was success and you have been sign in`);
+      break;
+    case 'registerFaild':
+      alert(`${data.message}`);
+      break;
+    case 'signInSuccess':
+      alert(`${data.email} you have been sign in`);
+      break;
+    case 'signInFaild':
+      alert(`${data.message}`);
+      break;
+    case 'noValidForm':
+      alert(`Please, fill all form fields`);
+      break;
+    case 'logOut':
+      alert(`${data} was loged out`);
+      break;
+    default:
+      break;
+  }
+}
