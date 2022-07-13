@@ -13,7 +13,7 @@
 .pagination__list {
   display: flex;
   background-color: #fff;
-  padding: 10px 0;
+  padding: 10px;
   border-radius: 50px;
   background-color: rgba(128, 128, 128, 0.207);
 
@@ -40,9 +40,9 @@ i {
 }
 
 .pagination__button {
-  line-height: 30px;
-  height: 30px;
-  width: 30px;
+  line-height: 28px;
+  height: 28px;
+  width: 28px;
   padding: 0;
   background-color: transparent;
   text-align: center;
