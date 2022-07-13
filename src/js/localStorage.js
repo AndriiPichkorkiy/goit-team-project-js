@@ -24,7 +24,7 @@ export const localStorageKeys = {
 function addToWatched() {
   jsonLocalStorage(localStorageKeys.watchedFilm);
   addedStyleToWatched();
-
+  removeFromQueue()
   // watchedBtn.removeEventListener('click', addToWatched)
 }
 function removeFromWatched() {
@@ -60,8 +60,8 @@ function addedStyleToQueue() {
   queueBtn.textContent = 'remove from queue';
   queueBtn.style.backgroundColor = '#FF6B01';
   queueBtn.style.border = 'none';
-  watchedBtn.style.opacity = 0.25;
-  watchedBtn.disabled = true;
+  // watchedBtn.style.opacity = 0.25;
+  // watchedBtn.disabled = true;
 
   queueBtn.addEventListener('click', removeFromQueue);
 }
@@ -85,8 +85,7 @@ function jsonLocalStorage(value) {
 
   const card = { ...filmCard.dataset };
 
-  card.genre_ids = filmCard.dataset.genre.split(',');
-
+  card.genre_ids = filmCard.dataset.genre.split(','); 
   oldItems.push(card);
 
   localStorage.setItem(value, JSON.stringify(oldItems));
