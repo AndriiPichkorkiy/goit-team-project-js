@@ -6,6 +6,7 @@ import {
   openSignInModal,
 } from './register-modal';
 import { FireBaseApi } from './fireBaseApi';
+import renderNotifix from './notifix';
 
 const refs = {
   formSignIn: document.querySelector('#form-sign-in'),
@@ -50,9 +51,9 @@ async function authSignUpUser(event) {
     })
     .catch(error => {
       const errorCode = error.code;
-      const errorMessage = error.message;
+      const errorMessage = error.message.split(': ')[1];
       console.error(errorMessage);
-      showNotificashka('registerFaild', error);
+      showNotificashka('registerFaild', errorMessage);
       // ..
     });
 
@@ -81,9 +82,8 @@ export async function authSignInUser(event) {
       showNotificashka('signInSuccess', user);
     })
     .catch(error => {
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      showNotificashka('signInFaild', error);
+      const errorMessage = error.message.split(': ')[1];
+      showNotificashka('signInFaild', errorMessage);
     });
 
   // event.currentTarget.reset();
@@ -163,25 +163,35 @@ import {
 const auth = getAuth();
 
 export function showNotificashka(code, data) {
-  console.log('show!');
+
+  if (data === 'Error (auth/user-not-found).') {
+    data = 'Enter the correct login'
+  } else if (data === 'Error (auth/wrong-password).') {
+    data = 'Enter the correct password'
+  } else if (data === 'Password should be at least 6 characters (auth/weak-password).') {
+    data = 'Password should be at least 6 characters'
+  } else if (data === 'Error (auth/email-already-in-use).') {
+    data = 'User already registered'
+  } 
+
   switch (code) {
     case 'registerSuccess':
-      alert(`${data.email} register was success and you have been sign in`);
+      renderNotifix(`${data.email} register was success and you have been sign in`, "info");
       break;
     case 'registerFaild':
-      alert(`${data.message}`);
+      renderNotifix(`${data}`, "rupor");
       break;
     case 'signInSuccess':
-      alert(`${data.email} you have been sign in`);
+      renderNotifix(`${data.email} you have been sign in`, "info");
       break;
     case 'signInFaild':
-      alert(`${data.message}`);
+      renderNotifix(`${data}`, "rupor");
       break;
     case 'noValidForm':
-      alert(`Please, fill all form fields`);
+      renderNotifix('Please, fill all form fields', "info");
       break;
     case 'logOut':
-      alert(`${data} was loged out`);
+      renderNotifix(`${data} was loged out`, "rupor");
       break;
     default:
       break;
