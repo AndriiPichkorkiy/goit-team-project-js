@@ -31,7 +31,7 @@ function removeFromWatched() {
   if (watchedBtn.textContent === 'remove from watched') {
     removeFromStorage(localStorageKeys.watchedFilm);
     watchedBtn.style.backgroundColor = '#FFF';
-    watchedBtn.style.border = '1px solid black';
+    watchedBtn.style.border = '1px solid #FF6B08';
     watchedBtn.textContent = 'add to watched';
     queueBtn.disabled = false;
     queueBtn.style.opacity = 1;
@@ -46,6 +46,7 @@ function addedToQueue() {
 }
 
 function addedStyleToWatched() {
+
   watchedBtn.textContent = 'remove from watched';
   watchedBtn.style.backgroundColor = '#FF6B01';
   watchedBtn.style.border = 'none';
@@ -69,7 +70,7 @@ function removeFromQueue() {
   if (queueBtn.textContent === 'remove from queue') {
     removeFromStorage(localStorageKeys.filmInQueue);
     queueBtn.style.backgroundColor = '#FFF';
-    queueBtn.style.border = '1px solid black';
+    queueBtn.style.border = '1px solid #FF6B08';
     queueBtn.style.color = 'black';
     queueBtn.textContent = 'add to queue';
     queueBtn.disabled = false;
@@ -81,6 +82,7 @@ function removeFromQueue() {
 
 function jsonLocalStorage(value) {
   const oldItems = JSON.parse(localStorage.getItem(value)) || [];
+
   const card = { ...filmCard.dataset };
 
   card.genre_ids = filmCard.dataset.genre.split(',');
@@ -88,6 +90,7 @@ function jsonLocalStorage(value) {
   oldItems.push(card);
 
   localStorage.setItem(value, JSON.stringify(oldItems));
+  
 
   renderAfterAddAndRemoveFilm();
 }
@@ -101,6 +104,7 @@ function removeFromStorage(value) {
 
 function filterArrObj(arr) {
   const newArr = arr.filter(film => film.id !== filmCard.dataset.id);
+
   return newArr;
 }
 function searchByIdWatched(value) {

@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   min-width: 280px;
+  margin-top: 20px;
   &__item {
     display: block;
   }
@@ -9,7 +10,7 @@
 
 @media screen and (max-width: 767px) {
   .movies-card {
-    padding-top: 20px;
+    margin-top: 20px;
 
     &__item {
       width: 100%;
@@ -22,10 +23,6 @@
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .movies-card {
-    padding-top: 60px;
-    padding-left: 55px;
-    padding-right: 55px;
-
     &__item {
       width: calc((100% - 30px) / 2);
     }
@@ -42,10 +39,6 @@
 
 @media screen and (min-width: 1280px) {
   .movies-card {
-    padding-top: 60px;
-    padding-left: 51px;
-    padding-right: 51px;
-
     &__item {
       width: calc((100% - 60px) / 3);
     }
