@@ -13,7 +13,7 @@
 .pagination__list {
   display: flex;
   background-color: #fff;
-  padding: 10px 0;
+  padding: 10px;
   border-radius: 50px;
   background-color: rgba(128, 128, 128, 0.207);
 
@@ -22,27 +22,10 @@
   }
 }
 
-i {
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-}
-
-.arrow-right {
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
-
-.arrow-left {
-  transform: rotate(135deg);
-  -webkit-transform: rotate(135deg);
-}
-
 .pagination__button {
-  line-height: 30px;
-  height: 30px;
-  width: 30px;
+  line-height: 28px;
+  height: 28px;
+  width: 28px;
   padding: 0;
   background-color: transparent;
   text-align: center;
