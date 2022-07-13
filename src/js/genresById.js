@@ -1,6 +1,9 @@
 import { movieService } from './movie-service';
 
 export default function sayGenres(genre_ids) {
+  if (genre_ids.length === 1 && genre_ids[0] === "") {
+    return 'No genre';
+  }
   if (!genre_ids || genre_ids.length === 0) {
     return 'No genre';
   }

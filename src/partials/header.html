@@ -1,13 +1,15 @@
 <header class="header-bg" data-id="header">
   <div class="container">
       <nav class="navigation">
-        <a class="navigation__logo" data-id="logoLink">
-          <svg class="logo__icon" width="24" height="24">
+			<div class="wrapper-logo">
+        <a class="navigation__logo " data-id="logoLink">
+          <svg class="logo__icon animate__animated animate__flip" width="24" height="24">
+				 <!-- animate__animated animate__backInLeft -->
             <use href="/src/images/icons.svg#icon-film"></use>
           </svg>
           <span class="logo__name">Filmoteka</span>
         </a>
-		  
+		  </div>
         <ul class="side-nav">
 
           <button class="darktheme-btn">
@@ -28,8 +30,11 @@
               Home
             </a>
           </li>
-          <li class="side-nav__item">
-            <a href="" class="side-nav__link" data-id="library">
+          <li class="side-nav__item ">
+            <a href="" class="side-nav__link disabled" data-id="library">
+					<svg class="disabled-icon" width="20" height="20">
+              <use href="./images/icons.svg#icon-lock">
+            </svg>
               <span></span>
               <span></span>
               <span></span>

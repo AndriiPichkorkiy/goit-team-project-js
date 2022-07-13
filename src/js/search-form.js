@@ -9,7 +9,7 @@ import {
   removePagination,
   showPagination,
 } from './pagination';
-import notifix from './notifix';
+import {notifix} from './notifix';
 import { deactivateButtons } from './filter-buttons';
 
 refs.searchForm = document.querySelector('.search-form');
@@ -53,7 +53,10 @@ async function fetchData(value) {
 
     return;
   }
-  showNotificashka('totalResults');
+  
+  if (movieService.isnotification) {
+    showNotificashka('totalResults', movieService.totalResults);
+  }
   const card = data.results.map(result => renderCardTemplate(result)).join('');
 
   refs.moviesCard.innerHTML = card;
@@ -70,7 +73,7 @@ function clearMarkup() {
   refs.moviesCard.innerHTML = '';
 }
 
-function showNotificashka(code, data) {
+export function showNotificashka(code, data) {
 
   switch (code) {
     case 'moreTwoCharacters':
@@ -80,7 +83,7 @@ function showNotificashka(code, data) {
       notifix(`Please enter a correction request`, "rupor");
       break;
     case 'totalResults':
-      // notifix(`${data.email} you have been sign in`, "info");
+      notifix(`We found ${data} movies for you`, "info");
       break;
     default:
       break;
