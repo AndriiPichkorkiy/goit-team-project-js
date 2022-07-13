@@ -40,7 +40,7 @@ async function authSignUpUser(event) {
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
-      FireBaseApi.currentUser = user;
+      FireBaseApi.changeCurrentUser(user);
       showNotificashka('registerSuccess', user);
       // console.log('user', user);
 
@@ -51,9 +51,9 @@ async function authSignUpUser(event) {
       openSignUpModal();
     })
     .catch(error => {
-      const errorCode = error.code;
+      // const errorCode = error.code;
       const errorMessage = error.message.split(': ')[1];
-      console.error(errorMessage);
+      // console.error(errorMessage);
       showNotificashka('registerFaild', errorMessage);
       // ..
     });
@@ -76,7 +76,7 @@ export async function authSignInUser(event) {
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
-      FireBaseApi.currentUser = user;
+      FireBaseApi.changeCurrentUser(user);
       // console.log(userCredential.user);
       FireBaseApi.authSuccess(user);
       openSignInModal();
@@ -124,12 +124,14 @@ function getStorageDataSignUp() {
 
 function setFormFieldsSignIn(obj) {
   for (const key in obj) {
+    if (key === 'agreement') continue;
     refs.formSignIn[key].value = obj[key];
   }
 }
 
 function setFormFieldsSignUp(obj) {
   for (const key in obj) {
+    if (key === 'agreement') continue;
     refs.formSignUp[key].value = obj[key];
   }
 }

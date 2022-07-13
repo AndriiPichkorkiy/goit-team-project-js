@@ -9,12 +9,21 @@ import {
   signOut,
   updateCurrentUser,
 } from 'firebase/auth';
+import { addEventsOnModalBtn } from './localStorage';
 
 export class FireBaseApi {
   button = null;
   menuAuth = null;
   libraryContent = null;
   currentUser = null;
+  refsLibrarysElements = {};
+
+  static changeCurrentUser(user) {
+    this.currentUser = user;
+
+    if (!user) this.unlockLibrary();
+    else this.blockLibrary();
+  }
 
   static init() {
     this.button = document.querySelector('[data-id = "auth"]');
@@ -44,12 +53,14 @@ export class FireBaseApi {
         FireBaseApi.button.addEventListener('click', openSignInModal);
         FireBaseApi.button.removeEventListener('click', FireBaseApi.logOut);
 
-        FireBaseApi.currentUser = null;
+        FireBaseApi.changeCurrentUser(null);
       })
       .catch(error => {
         // An error happened.
         console.log(error);
       });
   }
+
+  static unlockLibrary() {}
 }
 FireBaseApi.init();

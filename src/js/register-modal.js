@@ -126,3 +126,8 @@ function onEscKeyPressPrivacy(event) {
   const ESC_KEY_CODE = 'Escape';
   if (event.code === ESC_KEY_CODE) closeModalPrivacy();
 }
+
+//return modals
+[refs.backdropPrivacy, refs.signIn, refs.signUp].forEach(el =>
+  el.removeAttribute('style')
+);
