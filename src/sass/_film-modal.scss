@@ -1,15 +1,15 @@
-.show-modal{
+.show-film-modal{
 overflow: hidden;
 }
 
-body.show-modal .backdrop-film-modal {
+body.show-film-modal .backdrop-film-modal {
 opacity: 1;
 pointer-events: initial;
 visibility: visible;
 position: fixed;
 }
 
-.show-modal .modal-film {
+.show-film-modal .modal-film {
 left: 50%;
 transform: translate(-50%);
 opacity: 1;
@@ -36,16 +36,18 @@ transition: all 0.8s ease 0s;
 .modal-film {
 opacity: 0;
 
+width: 280px;
+min-height: 714px;
+
 position: absolute;
 top: 0;
 left: 0;
 transform: translate(-150%);
 background-color: #ffffff;
 border-radius: 5px;
-width: 280px;
-min-height: 560px;
 
 overflow-y: auto;
+overflow-x: hidden;
 transition: all 0.8s ease 0s;
 
 padding: 48px 20px 40px 20px; 
@@ -55,13 +57,13 @@ margin-top: 20px;
 @media screen and (min-width: 768px) {
 top: 50%;
 width: 704px;
-min-height: auto;
+min-height: 453px;
 padding: 40px 72px 40px 36px; 
 }
 
 @media screen and (min-width: 1280px) {
 width: 806px;
-min-height: auto;
+min-height: 558px;
 padding: 40px 12px 40px 12px; 
   }
 
@@ -109,17 +111,20 @@ outline-offset: 15px;
 
 .film-poster-img {
 max-width: 100%;
-height: auto;
+min-height: 357px;
 display: block;
  
 @media screen and (min-width: 768px) {
+min-width: 264px;
 max-width: 264px;
 padding-top: 0;
 margin-right: 68px;
   }
 
   @media screen and (min-width: 1280px) {
+min-width: 375px;
 max-width: 375px;
+min-height: 478px;
 margin-right: 16px;
   }
 }
@@ -148,7 +153,6 @@ line-height: 35px;
 }
 
 .value-films {
-padding-bottom: 20px;
 @media screen and (min-width: 768px) {
 max-width: 264px;
   }

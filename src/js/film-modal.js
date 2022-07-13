@@ -21,13 +21,13 @@ export function onOpenFilmModal() {
   const id = event.target.parentNode.parentNode.dataset.cardId;
 
   if (!id) return;
-  document.body.classList.add('show-modal');
+  document.body.classList.add('show-film-modal');
   onClickFilm(+id);
 }
 
 export function onCloseModal() {
   window.removeEventListener('keydown', onEscKeyPress);
-  document.body.classList.remove('show-modal');
+  document.body.classList.remove('show-film-modal');
   refs.filmModal.innerHTML = '';
 }
 
