@@ -6,7 +6,6 @@ export default function renderCardTemplate(data) {
 
   const avarage = Number(vote_average).toFixed(1);
 
-
   const releaseYear = release_date?.slice(0, 4) || '';
   const genre = sayGenres(genre_ids);
 
