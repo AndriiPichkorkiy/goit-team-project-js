@@ -51,7 +51,9 @@ async function fetchData(value) {
 
     return;
   }
-
+  if (movieService.isnotification) {
+    alert (`Знайдено ${movieService.totalResults} фільмів`)
+  }
   const card = data.results.map(result => renderCardTemplate(result)).join('');
 
   refs.moviesCard.innerHTML = card;

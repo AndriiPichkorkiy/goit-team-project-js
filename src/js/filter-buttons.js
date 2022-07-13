@@ -30,6 +30,9 @@ async function onFilterButtonClick(event) {
       pagination.innerHTML = '';
       return;
     }
+    if (movieService.isnotification) {
+    alert (`Знайдено ${movieService.totalResults} фільмів`)
+  }
     renderCollection(data.results);
   }
 
@@ -47,6 +50,9 @@ async function onFilterButtonClick(event) {
       pagination.innerHTML = '';
       return;
     }
+    if (movieService.isnotification) {
+    alert (`Знайдено ${movieService.totalResults} фільмів`)
+  }
     renderCollection(data.results);
   }
 
@@ -64,6 +70,9 @@ async function onFilterButtonClick(event) {
       pagination.innerHTML = '';
       return;
     }
+    if (movieService.isnotification) {
+    alert (`Знайдено ${movieService.totalResults} фільмів`)
+  }
     renderCollection(data.results);
   }
   renderPagination(movieService.totalPage, movieService.page);
