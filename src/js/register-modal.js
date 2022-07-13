@@ -5,6 +5,7 @@ import {
 } from './firebaseAuth';
 import refs from '/src/js/refs';
 import { signOut, getAuth } from 'firebase/auth';
+import { FireBaseApi } from './fireBaseApi';
 
 const refs1 = {
   formSignIn: document.querySelector('#form-sign-in'),
@@ -19,11 +20,11 @@ const refs1 = {
   buttonCloseGreetings: null,
 };
 
-refs1.buttonClose = document.querySelector('[data-modal-close-sign-in]');
-refs1.buttonClose.addEventListener('click', openSignInModal);
+refs1.buttonCloseSignIn = document.querySelector('[data-modal-close-sign-in]');
+refs1.buttonCloseSignIn.addEventListener('click', openSignInModal);
 
-refs1.buttonClose = document.querySelector('[data-modal-close-sign-up]');
-refs1.buttonClose.addEventListener('click', openSignUpModal);
+refs1.buttonCloseSignUp = document.querySelector('[data-modal-close-sign-up]');
+refs1.buttonCloseSignUp.addEventListener('click', openSignUpModal);
 
 //buttons for change between modals
 refs1.buttonChangeToSignIn = document.getElementById('btn-open-sign-in');
@@ -40,30 +41,41 @@ refs1.buttonCloseGreetings.addEventListener('click', openGreetingsModal);
 
 export function openSignInModal() {
   const button = document.querySelector('[data-id = "auth"]');
-  if (button.dataset.status === 'logOut') {
-    //log out
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        const menuAuth = document.querySelector('.enter-btn');
-        menuAuth.innerHTML = `<p>Check in</p>`;
-        button.dataset.status = 'none';
-        showNotificashka('logOut', refs.placeForName.innerText);
-        refs.placeForName.innerHTML = '';
-      })
-      .catch(error => {
-        // An error happened.
-        console.log(error);
-      });
-  } else {
-    //open modal window
-    refs1.modalWrapperSignIn.classList.toggle('is-hidden');
-  }
+
+  //open modal window
+  refs1.modalWrapperSignIn.classList.toggle('is-hidden');
+}
+
+export function logOut() {
+  const auth = getAuth();
+  signOut(auth)
+    .then(() => {
+      // Sign-out successful.
+      const menuAuth = document.querySelector('.enter-btn');
+      menuAuth.innerHTML = `<p>Check in</p>`;
+      showNotificashka('logOut', refs.placeForName.innerText);
+      refs.placeForName.innerHTML = '';
+
+      refs1.buttonCloseSignIn.addEventListener('click', openSignInModal);
+      refs1.buttonCloseSignIn.removeEventListener('click', logOut);
+
+      FireBaseApi.currentUser = null;
+    })
+    .catch(error => {
+      // An error happened.
+      console.log(error);
+    });
 }
 
 export function openSignUpModal() {
-  refs1.modalWrapperSignUp.classList.toggle('is-hidden');
+  const modal = refs1.modalWrapperSignUp;
+  if (modal.classList.contains('is-hidden')) {
+    modal.classList.remove('is-hidden');
+    window.addEventListener('keydown', onEscKeyPress);
+  } else {
+    modal.classList.add('is-hidden');
+    window.removeEventListener('keydown', onEscKeyPress);
+  }
 }
 
 export function openGreetingsModal() {
@@ -73,6 +85,23 @@ export function openGreetingsModal() {
 function changeModal() {
   openSignUpModal();
   openSignInModal();
+}
+
+function onEscKeyPress(event) {
+  const ESC_KEY_CODE = 'Escape';
+  if (event.code !== ESC_KEY_CODE) {
+    return;
+  }
+  let modal = refs1.modalWrapperSignUp;
+  if (!modal.classList.contains('is-hidden')) {
+    console.log('SignUp');
+    openSignUpModal();
+  }
+  modal = refs1.modalWrapperSignIn;
+  if (!modal.classList.contains('is-hidden')) {
+    console.log('SignIn');
+    openSignInModal();
+  }
 }
 
 // function onFormSignInSubmit(event) {

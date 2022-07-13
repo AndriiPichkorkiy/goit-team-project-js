@@ -66,12 +66,11 @@ export function renderAfterAddAndRemoveFilm() {
     const el = refs.paginationList.querySelector(
       '.pagination__button--current'
     );
-    // if (!el) console.log('!EL');
-    // if (!el) return activeLastBtn();
+
+    if (!el) return activeLastBtn();
 
     const objEvent = { target: el };
-    // console.log('renderAfterAddAndRemoveFilm');
-    // console.log(objEvent);
+
     onPaginationBtnClick(objEvent);
   }
 }

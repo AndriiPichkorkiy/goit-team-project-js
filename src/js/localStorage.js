@@ -46,6 +46,7 @@ function addedToQueue() {
 }
 
 function addedStyleToWatched() {
+
   watchedBtn.textContent = 'remove from watched';
   watchedBtn.style.backgroundColor = '#FF6B01';
   watchedBtn.style.border = 'none';
@@ -81,6 +82,7 @@ function removeFromQueue() {
 
 function jsonLocalStorage(value) {
   const oldItems = JSON.parse(localStorage.getItem(value)) || [];
+
   const card = { ...filmCard.dataset };
 
   card.genre_ids = filmCard.dataset.genre.split(',');
@@ -88,6 +90,7 @@ function jsonLocalStorage(value) {
   oldItems.push(card);
 
   localStorage.setItem(value, JSON.stringify(oldItems));
+  
 
   renderAfterAddAndRemoveFilm();
 }
@@ -101,6 +104,7 @@ function removeFromStorage(value) {
 
 function filterArrObj(arr) {
   const newArr = arr.filter(film => film.id !== filmCard.dataset.id);
+
   return newArr;
 }
 function searchByIdWatched(value) {

@@ -98,6 +98,8 @@ export async function onPaginationBtnClick(event) {
         ? localStorageKeys.watchedFilm
         : localStorageKeys.filmInQueue;
 
+    if (!localStorage.getItem(value)) return console.error(value);
+
     const localData = JSON.parse(localStorage.getItem(value));
 
     if (checkQuantityStorage(localData)) {
@@ -106,15 +108,12 @@ export async function onPaginationBtnClick(event) {
     }
     const totalPages = Math.ceil(localData.length / 20);
     renderPagination(totalPages, page);
-    // if (localData.length === 0) {
-    //   console.log(localData);
-    // }
+
     let arrToRender = localData.slice((page - 1) * 20, page * 20);
     if (arrToRender.length === 0) {
-      // console.log('no ARR to render');
       arrToRender = localData.slice((page - 2) * 20, (page - 1) * 20);
     }
-    // console.log('arrToRender', arrToRender);
+
     renderCollection(arrToRender);
     // refs.moviesCard.innerHTML = arrToRender
     //   .map(data => templeteCard(data))

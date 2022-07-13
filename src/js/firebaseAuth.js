@@ -39,8 +39,9 @@ async function authSignUpUser(event) {
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
+      FireBaseApi.currentUser = user;
       showNotificashka('registerSuccess', user);
-      console.log('user', user);
+      // console.log('user', user);
 
       clearFormData(formData);
 
@@ -49,9 +50,9 @@ async function authSignUpUser(event) {
       openSignUpModal();
     })
     .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error(errorMessage);
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      // console.error(errorMessage);
       showNotificashka('registerFaild', error);
       // ..
     });
@@ -74,7 +75,8 @@ export async function authSignInUser(event) {
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
-      console.log(userCredential.user);
+      FireBaseApi.currentUser = user;
+      // console.log(userCredential.user);
       FireBaseApi.authSuccess(user);
       openSignInModal();
 
@@ -158,12 +160,15 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateCurrentUser,
 } from 'firebase/auth';
 
 const auth = getAuth();
 
 export function showNotificashka(code, data) {
-  console.log('show!');
+  // console.dir(data.errors);
+  // console.log(data.message);
+  // console.log('show!');
   switch (code) {
     case 'registerSuccess':
       alert(`${data.email} register was success and you have been sign in`);
