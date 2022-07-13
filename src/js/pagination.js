@@ -81,23 +81,25 @@ export function renderPagination(totalPages, currentPage) {
 export async function onPaginationBtnClick(event) {
   const pageInUse = document.querySelector('.side-nav__link--current').dataset
     .id;
-  const filterPageinUse = document.querySelector(
-    '.movies-filter__button--current'
-  ).dataset.id;
-
+  const filterPageinUse =
+    document.querySelector('.movies-filter__button--current') ?? 'default';
   if (!event.target.dataset.page) return;
   const page = +event.target.dataset.page;
   refs.moviesCard.innerHTML = '';
 
-  if (pageInUse === 'home' && filterPageinUse === 'popular') {
+  if (pageInUse === 'home' && filterPageinUse === 'default') {
     const data = await movieService.getSearchQuery(movieService.query, page);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
-  } else if (pageInUse === 'home' && filterPageinUse === 'rating') {
+  } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'popular') {
+    const data = await movieService.getSearchQuery(movieService.query, page);
+    renderPagination(movieService.totalPage, page);
+    renderCollection(data.results);
+  } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'rating') {
     const data = await movieService.getTopRated(page);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
-  } else if (pageInUse === 'home' && filterPageinUse === 'future') {
+  } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'future') {
     const data = await movieService.getUpcoming(page);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
@@ -116,16 +118,12 @@ export async function onPaginationBtnClick(event) {
     }
     const totalPages = Math.ceil(localData.length / 20);
     renderPagination(totalPages, page);
-    // if (localData.length === 0) {
-    // }
+
     let arrToRender = localData.slice((page - 1) * 20, page * 20);
     if (arrToRender.length === 0) {
       arrToRender = localData.slice((page - 2) * 20, (page - 1) * 20);
     }
     renderCollection(arrToRender);
-    // refs.moviesCard.innerHTML = arrToRender
-    //   .map(data => templeteCard(data))
-    //   .join('');
   }
 }
 

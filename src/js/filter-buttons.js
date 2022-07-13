@@ -76,3 +76,9 @@ export function hideFilters() {
 export function showFilters() {
   filterButtonsEl.classList.remove('visually-hidden');
 }
+
+export function deactivateButtons() {
+  mostPopularBtnEl.classList.remove('movies-filter__button--current');
+  byRatingBtnEL.classList.remove('movies-filter__button--current');
+  comingSoonBtnEl.classList.remove('movies-filter__button--current');
+}
