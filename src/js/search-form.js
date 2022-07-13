@@ -10,14 +10,13 @@ import {
   showPagination,
 } from './pagination';
 import { moreTwoCharacters, correctionRequest } from './notifix';
-import { hideFilters } from './filter-buttons';
+import { deactivateButtons } from './filter-buttons';
 
 refs.searchForm = document.querySelector('.search-form');
 
 export default function searchMovies(event) {
   event.preventDefault();
-  hideFilters();
-
+  deactivateButtons();
   const value = event.currentTarget.elements.query.value.trim();
 
   if (value.length <= 2 || value.length === 0) {
