@@ -3,7 +3,7 @@ import { movieService } from './movie-service';
 import templeteCard from './card-templete';
 import { localStorageKeys } from './localStorage';
 import { activateHeadersBtn, checkQuantityStorage } from './myLibraryBtns';
-
+import {changeNavigation,currentHistoryPage} from './history'
 import { renderCollection } from './render-movies';
 
 export const pagination = refs.paginationList;
@@ -86,7 +86,8 @@ export async function onPaginationBtnClick(event) {
   if (!event.target.dataset.page) return;
   const page = +event.target.dataset.page;
   refs.moviesCard.innerHTML = '';
-
+  history.pushState({page: 1}, "title 1", `?page=${page}`);
+  changeNavigation(page)
   if (pageInUse === 'home' && filterPageinUse === 'default') {
     const data = await movieService.getSearchQuery(movieService.query, page);
     renderPagination(movieService.totalPage, page);
