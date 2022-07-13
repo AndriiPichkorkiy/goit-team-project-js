@@ -12,19 +12,19 @@ function addEventsOnModalBtn() {
   filmCard = document.querySelector('.film-card');
 
   //lock buttons if there is not user
-  if (!FireBaseApi.currentUser) {
-    [watchedBtn, queueBtn].forEach(el => {
-      el.disabled = true;
-      el.classList.add('btn-lock');
-      el.insertAdjacentHTML(
-        'beforeend',
-        `<svg class="disabled-icon" width="40" height="40">
-           <use href="${vectorSvg}#icon-lock">
-         </svg>`
-      );
-    });
-    return;
-  }
+  // if (!FireBaseApi.currentUser) {
+  //   [watchedBtn, queueBtn].forEach(el => {
+  //     el.disabled = true;
+  //     el.classList.add('btn-lock');
+  //     el.insertAdjacentHTML(
+  //       'beforeend',
+  //       `<svg class="disabled-icon" width="40" height="40">
+  //          <use href="${vectorSvg}#icon-lock">
+  //        </svg>`
+  //     );
+  //   });
+  //   return;
+  // }
 
   watchedBtn.addEventListener('click', addToWatched, { once: true });
   queueBtn.addEventListener('click', addedToQueue);

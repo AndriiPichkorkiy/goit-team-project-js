@@ -39,15 +39,21 @@ async function authSignUpUser(event) {
   createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       // Signed in
+      console.log(0);
       const user = userCredential.user;
+      console.log('abc');
       FireBaseApi.changeCurrentUser(user);
+      console.log('qweqweqwe');
       showNotificashka('registerSuccess', user);
       // console.log('user', user);
-
+      debugger;
+      console.log(1);
       clearFormData(formData);
-
+      console.log(2);
       FireBaseApi.authSuccess(user);
+      console.log(3);
       openGreetingsModal();
+      console.log(4);
       openSignUpModal();
     })
     .catch(error => {
@@ -168,6 +174,7 @@ import {
 const auth = getAuth();
 
 export function showNotificashka(code, data) {
+  console.error(code, data);
   if (data === 'Error (auth/user-not-found).') {
     data = 'Enter the correct login';
   } else if (data === 'Error (auth/wrong-password).') {
