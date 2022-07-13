@@ -110,6 +110,7 @@
   transform: scale(1.03);
   box-shadow: 0 0 10px $accentColor, 0 0 40px $accentColor,
     0 0 80px $accentColor;
+  pointer-events: none;
   @include min768 {
     font-size: $font-size;
   }

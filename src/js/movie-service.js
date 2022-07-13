@@ -13,6 +13,8 @@ class MovieService {
     this.genres = this.galleryData();
     //Налаштування мови. За замовчуванням, англійська
     this.langauge = 'en-US';
+    this.isnotification = false;
+    this.totalResults = 1;
   }
 
 
@@ -57,8 +59,10 @@ class MovieService {
     const answer = await this.getMovies(action, parameters);
     if (!answer) {
       return;
-    }
+    };
+    this.isnotification =  (this.query !== searchQuery) ? true : false
     this.query = searchQuery;
+    
     return answer;
   }
   // пошук фільмів за популярністю
@@ -76,7 +80,7 @@ class MovieService {
 
 
   //-----Системні методи-------
-   //Спільний метод для знаходження фільмів за популярністю, з найюільшим рейтингом, майбутніх фільмів
+   //Спільний метод для знаходження фільмів за популярністю, з найбільшим рейтингом, майбутніх фільмів
    async SearchMoviesByCategory(action, page){
     this.message = 'OK!';
     if (page < 1) {
@@ -90,7 +94,10 @@ class MovieService {
     const parameters = new URLSearchParams({
       page: page || 1,
     });
-    return await this.getMovies(action, parameters);
+    const movies = await this.getMovies(action, parameters);
+    this.isnotification =  (this.page === 1) ? true : false;
+        
+    return movies
   }
   //Формування URL для подальшого запиту на сервер. Допоміжний метод
   createUrl(action, param) {
@@ -126,7 +133,7 @@ class MovieService {
     const movies = await this.fetchMovies(url);
 
     //Якщо запрос карточки по Id
-    if(action.slice(0, 6) === "movie/"){
+    if(action.slice(0, 6) === "movie/" && action.slice(0, 9) !== "movie/top" && action.slice(0, 8) !== "movie/up"){
       if(!movies ){this.message = 'No information found'; return;}
       else {return movies;}
     };
@@ -135,11 +142,11 @@ class MovieService {
       this.message = 'No information found';
       return;
     };
-    
+
     this.data = movies;
     this.page = movies.page;
     this.totalPage = movies.total_pages;
-
+    this.totalResults = movies.total_results;
     return movies;
   }
 

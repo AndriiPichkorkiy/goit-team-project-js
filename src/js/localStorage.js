@@ -24,7 +24,7 @@ export const localStorageKeys = {
 function addToWatched() {
   jsonLocalStorage(localStorageKeys.watchedFilm);
   addedStyleToWatched();
-
+  removeFromQueue()
   // watchedBtn.removeEventListener('click', addToWatched)
 }
 function removeFromWatched() {
@@ -46,6 +46,7 @@ function addedToQueue() {
 }
 
 function addedStyleToWatched() {
+
   watchedBtn.textContent = 'remove from watched';
   watchedBtn.style.backgroundColor = '#FF6B01';
   watchedBtn.style.border = 'none';
@@ -59,8 +60,8 @@ function addedStyleToQueue() {
   queueBtn.textContent = 'remove from queue';
   queueBtn.style.backgroundColor = '#FF6B01';
   queueBtn.style.border = 'none';
-  watchedBtn.style.opacity = 0.25;
-  watchedBtn.disabled = true;
+  // watchedBtn.style.opacity = 0.25;
+  // watchedBtn.disabled = true;
 
   queueBtn.addEventListener('click', removeFromQueue);
 }
@@ -81,13 +82,14 @@ function removeFromQueue() {
 
 function jsonLocalStorage(value) {
   const oldItems = JSON.parse(localStorage.getItem(value)) || [];
+
   const card = { ...filmCard.dataset };
 
-  card.genre_ids = filmCard.dataset.genre.split(',');
-
+  card.genre_ids = filmCard.dataset.genre.split(','); 
   oldItems.push(card);
 
   localStorage.setItem(value, JSON.stringify(oldItems));
+  
 
   renderAfterAddAndRemoveFilm();
 }
@@ -101,6 +103,7 @@ function removeFromStorage(value) {
 
 function filterArrObj(arr) {
   const newArr = arr.filter(film => film.id !== filmCard.dataset.id);
+
   return newArr;
 }
 function searchByIdWatched(value) {

@@ -21,7 +21,7 @@
   min-height: 330px;
 
   @media screen and (max-width: 610px) {
-    top: 2rem;
+    top: 9rem;
     transform: translate(-50%);
   }
 
@@ -302,4 +302,55 @@
 
 .modal-success {
   @include flex(flex, center, center);
+  flex-wrap: wrap;
+}
+
+.modal__title__icon{
+  width: 105px;
+    height: 105px;
+    margin: 5px;
+    animation: zoom-in-down 2s 0.3s cubic-bezier(0, 0.3, 0.85, 1),
+    tada 2s 0.3s cubic-bezier(0, 0.3, 0.8, 1);
+}
+
+@keyframes zoom-in-down {
+  from {
+    opacity: 0;
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+
+@keyframes tada {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
+
+  10%,
+  20% {
+    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg);
+  }
+
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: scale3d(1.3, 1.3, 1.3) rotate3d(0, 0, 1, 3deg);
+  }
+
+  40%,
+  60%,
+  80% {
+    transform: scale3d(1.2, 1.2, 1.2) rotate3d(0, 0, 1, -3deg);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
 }

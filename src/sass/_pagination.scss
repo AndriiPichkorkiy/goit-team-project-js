@@ -23,9 +23,9 @@
 }
 
 .pagination__button {
-  line-height: 30px;
-  height: 30px;
-  width: 30px;
+  line-height: 28px;
+  height: 28px;
+  width: 28px;
   padding: 0;
   background-color: transparent;
   text-align: center;
@@ -43,11 +43,11 @@
   }
 }
 
-.pagination__button:not(:last-child) {
-  margin-left: 3px;
+.pagination__list li:not(:last-child) {
+  margin-right: 2px;
 
   @include min768 {
-    margin-left: 10px;
+    margin-left: 5px;
   }
 }
 

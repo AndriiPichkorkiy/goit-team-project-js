@@ -1,8 +1,9 @@
 <!-- Modal section Sign in-->
+<div class="container-notifix" data-id="notifixSign"></div>
 <div class="backdrop is-hidden" data-modal-sign-in>
   <div class="modal">
-    <button type="button" class="close">
-      <svg class="close__icon" data-modal-close-sign-in width="12" height="12">
+    <button type="button" class="close" data-modal-close-sign-in>
+      <svg class="close__icon" width="12" height="12">
         <use href="./images/icon.svg#icon-close"></use>
       </svg>
     </button>
@@ -59,10 +60,10 @@
 </div>
 
 <!-- Modal section Sign up-->
-<div class="backdrop is-hidden" data-modal-sign-up>
+<div class="backdrop is-hidden" data-modal-sign-up style="">
   <div class="modal">
-    <button type="button" class="close">
-      <svg class="close__icon" data-modal-close-sign-up width="12" height="12">
+    <button type="button" class="close" data-modal-close-sign-up>
+      <svg class="close__icon" width="12" height="12">
         <use href="./images/icon.svg#icon-close"></use>
       </svg>
     </button>
@@ -164,5 +165,8 @@
     </button>
 
     <p class="modal__title">You have successfully registred!</p>
+    <svg class="modal__title__icon" width="50" height="50">
+      <use href="./images/icons.svg#icon-cake"></use>
+    </svg>
   </div>
 </div>
