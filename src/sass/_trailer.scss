@@ -74,3 +74,16 @@
   opacity: 1;
   transform: translateX(-30%);
 }
+
+.modal__close-trailer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 12px;
+  background-color: transparent;
+  fill: $textColorOnDark;
+}
+
+.modal__close-trailer:hover {
+  fill: $accentColor;
+}
