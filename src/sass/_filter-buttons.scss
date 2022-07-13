@@ -4,9 +4,6 @@
 .movies-filter__list {
   @include flex(flex, center, center);
   margin-top: 20px;
-  // @include min768 {
-  //   margin-top: 60px;
-  // }
 }
 .movies-filter__item:not(:last-child) {
   margin-right: 20px;
