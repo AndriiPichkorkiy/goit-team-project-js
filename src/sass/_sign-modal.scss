@@ -190,6 +190,11 @@
 }
 .form-box__link {
   color: $accentColor;
+  display: inline;
+  cursor: pointer;
+  // &:hover {
+  //   transform: scale(105%);
+  // }
   // white-space: nowrap;
 }
 
@@ -305,7 +310,7 @@
   flex-wrap: wrap;
 }
 
-.modal__title__icon{
+.modal__title__icon {
   width: 105px;
     height: 105px;
     margin: 5px;

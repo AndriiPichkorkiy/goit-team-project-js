@@ -32,49 +32,44 @@ refs1.buttonChangeToSignIn.addEventListener('click', changeModal);
 
 refs1.buttonChangeToSignUp = document.getElementById('btn-open-register');
 refs1.buttonChangeToSignUp.addEventListener('click', changeModal);
-//end of buttons
+//====================================
+
+//add close for modal by click on wrapper
+refs1.modalWrapperSignIn.addEventListener('click', onBackDropClick);
+refs1.modalWrapperSignUp.addEventListener('click', onBackDropClick);
+//====================================
+
+//add close for privacy modal
+refs.closePrivacyBottom.addEventListener('click', closeModalPrivacy);
+refs.closePrivacy.addEventListener('click', closeModalPrivacy);
+refs.backdropPrivacy.addEventListener('click', closeModalPrivacy);
+
+//add open for privacy modal
+refs.polycy.addEventListener('click', openModalPrivacy);
+//====================================
 
 refs1.buttonCloseGreetings = document.querySelector(
   '[data-modal-close-greetings]'
 );
 refs1.buttonCloseGreetings.addEventListener('click', openGreetingsModal);
 
-export function openSignInModal() {
-  const button = document.querySelector('[data-id = "auth"]');
-
-  //open modal window
-  refs1.modalWrapperSignIn.classList.toggle('is-hidden');
+export function openSignInModal(undefined, isChange) {
+  const modal = refs1.modalWrapperSignIn;
+  openOrCloseFireBaseModals(modal, isChange);
 }
 
-export function logOut() {
-  const auth = getAuth();
-  signOut(auth)
-    .then(() => {
-      // Sign-out successful.
-      const menuAuth = document.querySelector('.enter-btn');
-      menuAuth.innerHTML = `<p>Check in</p>`;
-      showNotificashka('logOut', refs.placeForName.innerText);
-      refs.placeForName.innerHTML = '';
-
-      refs1.buttonCloseSignIn.addEventListener('click', openSignInModal);
-      refs1.buttonCloseSignIn.removeEventListener('click', logOut);
-
-      FireBaseApi.currentUser = null;
-    })
-    .catch(error => {
-      // An error happened.
-      console.log(error);
-    });
-}
-
-export function openSignUpModal() {
+export function openSignUpModal(event, isChange) {
   const modal = refs1.modalWrapperSignUp;
+  openOrCloseFireBaseModals(modal, isChange);
+}
+
+function openOrCloseFireBaseModals(modal, isChange) {
   if (modal.classList.contains('is-hidden')) {
     modal.classList.remove('is-hidden');
-    window.addEventListener('keydown', onEscKeyPress);
+    if (!isChange) window.addEventListener('keydown', onEscKeyPress);
   } else {
     modal.classList.add('is-hidden');
-    window.removeEventListener('keydown', onEscKeyPress);
+    if (!isChange) window.removeEventListener('keydown', onEscKeyPress);
   }
 }
 
@@ -83,8 +78,8 @@ export function openGreetingsModal() {
 }
 
 function changeModal() {
-  openSignUpModal();
-  openSignInModal();
+  openSignUpModal(undefined, 'change');
+  openSignInModal(undefined, 'change');
 }
 
 function onEscKeyPress(event) {
@@ -92,75 +87,47 @@ function onEscKeyPress(event) {
   if (event.code !== ESC_KEY_CODE) {
     return;
   }
+  closeOpenedModal();
+}
+
+function onBackDropClick(event) {
+  if (event.currentTarget === event.target) {
+    closeOpenedModal();
+  }
+}
+
+function closeOpenedModal() {
   let modal = refs1.modalWrapperSignUp;
   if (!modal.classList.contains('is-hidden')) {
-    console.log('SignUp');
     openSignUpModal();
   }
   modal = refs1.modalWrapperSignIn;
   if (!modal.classList.contains('is-hidden')) {
-    console.log('SignIn');
     openSignInModal();
   }
 }
 
-// function onFormSignInSubmit(event) {
-//   event.preventDefault();
+function openModalPrivacy() {
+  refs.backdropPrivacy.classList.remove('is-hidden');
+  window.removeEventListener('keydown', onEscKeyPressPrivacy);
+  // document.body.classList.add('show-film-modal');
+  document.body.style.overflow = 'hidden';
+}
 
-//   if (!formData['user-mail'] || !formData['user-password']) {
-//     return alert('Please, fill all form fields');
-//   }
+function closeModalPrivacy() {
+  console.log('');
+  refs.backdropPrivacy.classList.add('is-hidden');
+  window.addEventListener('keydown', onEscKeyPressPrivacy);
+  // document.body.classList.remove('show-film-modal');
+  document.body.removeAttribute('style');
+}
 
-//   localStorage.removeItem(FORM_STORAGE_KEY);
-//   console.log(formData);
-//   event.currentTarget.reset();
-//   clearFormData(formData);
+function onEscKeyPressPrivacy(event) {
+  const ESC_KEY_CODE = 'Escape';
+  if (event.code === ESC_KEY_CODE) closeModalPrivacy();
+}
 
-//   const email = event.target.querySelector('#user-email').value;
-//   const password = event.target.querySelector('#user-password').value;
-
-//   authWithEmailAndPassword(email, password)
-//     .then(response => response.json())
-//     .then(data => {
-//       if (data.error) {
-//         alert(data.error.message);
-//       } else {
-//         console.log('It*s ok!');
-//         FireBaseApi.authSuccess(data);
-//         console.log(data);
-//         openSignInModal();
-//       }
-//     });
-// }
-
-// async function onFormSignUpSubmit(event) {
-//   event.preventDefault();
-
-//   if (!formData['user-mail'] || !formData['user-password']) {
-//     return alert('Please, fill all form fields');
-//   }
-
-//   localStorage.removeItem(FORM_STORAGE_KEY);
-//   console.log(formData);
-//   event.currentTarget.reset();
-//   clearFormData(formData);
-
-//   userName = await event.target.querySelector('#user-name').value;
-//   const email = await event.target.querySelector('#user-email-register').value;
-//   const password = await event.target.querySelector('#user-password-register')
-//     .value;
-
-//   await registerUser(email, password, userName)
-//     .then(response => response.json())
-//     .then(data => {
-//       if (data.error) {
-//         alert(data.error.message);
-//       } else {
-//         console.log('It*s ok!');
-//         // FireBaseApi.authSuccess(userName);
-//         FireBaseApi.authSuccess(data);
-//         openGreetingsModal();
-//         openSignUpModal();
-//       }
-//     });
-// }
+//return modals
+[refs.backdropPrivacy, refs.signIn, refs.signUp].forEach(el =>
+  el.removeAttribute('style')
+);
