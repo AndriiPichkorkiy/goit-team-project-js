@@ -27,6 +27,9 @@ html {
         z-index: 0;
         width: 65px;
         height: 65px;
+        &:hover {
+            opacity: 1;
+        }
     }
     @media screen and (min-width: 880px) {
         right: 5%;
