@@ -19,7 +19,6 @@ function onScroll() {
 }
 
 export function toTop(e) {
-  e.preventDefault();
   window.scrollTo(0, 0);
 }
 
