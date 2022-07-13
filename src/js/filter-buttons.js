@@ -21,7 +21,6 @@ async function onFilterButtonClick(event) {
     event.target.nodeName === 'BUTTON'
   ) {
     data = await movieService.getPopularMovies(movieService.page);
-    movieService.totalPage = data.total_pages;
 
     mostPopularBtnEl.classList.add('movies-filter__button--current');
     comingSoonBtnEl.classList.remove('movies-filter__button--current');
@@ -30,6 +29,9 @@ async function onFilterButtonClick(event) {
       pagination.innerHTML = '';
       return;
     }
+    if (movieService.isnotification) {
+    alert (`Знайдено ${movieService.totalResults} фільмів`)
+  }
     renderCollection(data.results);
   }
 
@@ -38,7 +40,6 @@ async function onFilterButtonClick(event) {
     event.target.nodeName === 'BUTTON'
   ) {
     data = await movieService.getUpcoming(movieService.page);
-    movieService.totalPage = data.total_pages;
 
     comingSoonBtnEl.classList.add('movies-filter__button--current');
     mostPopularBtnEl.classList.remove('movies-filter__button--current');
@@ -47,6 +48,9 @@ async function onFilterButtonClick(event) {
       pagination.innerHTML = '';
       return;
     }
+    if (movieService.isnotification) {
+    alert (`Знайдено ${movieService.totalResults} фільмів`)
+  }
     renderCollection(data.results);
   }
 
@@ -55,7 +59,6 @@ async function onFilterButtonClick(event) {
     event.target.nodeName === 'BUTTON'
   ) {
     data = await movieService.getTopRated(movieService.page);
-    movieService.totalPage = data.total_pages;
 
     byRatingBtnEL.classList.add('movies-filter__button--current');
     mostPopularBtnEl.classList.remove('movies-filter__button--current');
@@ -64,6 +67,9 @@ async function onFilterButtonClick(event) {
       pagination.innerHTML = '';
       return;
     }
+    if (movieService.isnotification) {
+    alert (`Знайдено ${movieService.totalResults} фільмів`)
+  }
     renderCollection(data.results);
   }
   renderPagination(movieService.totalPage, movieService.page);
