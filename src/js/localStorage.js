@@ -43,6 +43,7 @@ function removeFromWatched() {
 function addedToQueue() {
   jsonLocalStorage(localStorageKeys.filmInQueue);
   addedStyleToQueue();
+  removeFromWatched()
 }
 
 function addedStyleToWatched() {
@@ -51,8 +52,8 @@ function addedStyleToWatched() {
   watchedBtn.style.backgroundColor = '#FF6B01';
   watchedBtn.style.border = 'none';
 
-  queueBtn.disabled = true;
-  queueBtn.style.opacity = 0.25;
+  // queueBtn.disabled = true;
+  // queueBtn.style.opacity = 0.25;
   watchedBtn.addEventListener('click', removeFromWatched);
 }
 
