@@ -1,5 +1,15 @@
-import { openSignInModal, logOut } from './register-modal';
+import { openSignInModal } from './register-modal';
 import refs from '/src/js/refs';
+import { showNotificashka } from './firebaseAuth';
+import {
+  initializeApp,
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateCurrentUser,
+} from 'firebase/auth';
+
 export class FireBaseApi {
   button = null;
   menuAuth = null;
@@ -18,14 +28,28 @@ export class FireBaseApi {
     this.menuAuth.innerHTML = `<p>LOG OUT</p>`;
 
     this.button.removeEventListener('click', openSignInModal);
-    this.button.addEventListener('click', logOut);
-    // this.libraryContent.innerHTML = `<div class="content__wrapper">
-    //     <h2 class="content__title">There's nothing here! <br/>
-    //       Please add some movies to
-    //       <span class="content__text">${textContent}</span>!
-    //     </h2>
-    //   </div>`;
+    this.button.addEventListener('click', this.logOut);
+  }
+
+  static logOut() {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        const menuAuth = document.querySelector('.enter-btn');
+        menuAuth.innerHTML = `<p>Check in</p>`;
+        showNotificashka('logOut', refs.placeForName.innerText);
+        refs.placeForName.innerHTML = '';
+
+        FireBaseApi.button.addEventListener('click', openSignInModal);
+        FireBaseApi.button.removeEventListener('click', FireBaseApi.logOut);
+
+        FireBaseApi.currentUser = null;
+      })
+      .catch(error => {
+        // An error happened.
+        console.log(error);
+      });
   }
 }
-
 FireBaseApi.init();

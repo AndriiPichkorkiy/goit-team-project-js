@@ -166,35 +166,39 @@ import {
 const auth = getAuth();
 
 export function showNotificashka(code, data) {
-
   if (data === 'Error (auth/user-not-found).') {
-    data = 'Enter the correct login'
+    data = 'Enter the correct login';
   } else if (data === 'Error (auth/wrong-password).') {
-    data = 'Enter the correct password'
-  } else if (data === 'Password should be at least 6 characters (auth/weak-password).') {
-    data = 'Password should be at least 6 characters'
+    data = 'Enter the correct password';
+  } else if (
+    data === 'Password should be at least 6 characters (auth/weak-password).'
+  ) {
+    data = 'Password should be at least 6 characters';
   } else if (data === 'Error (auth/email-already-in-use).') {
-    data = 'User already registered'
-  } 
+    data = 'User already registered';
+  }
 
   switch (code) {
     case 'registerSuccess':
-      renderNotifix(`${data.email} register was success and you have been sign in`, "info");
+      renderNotifix(
+        `${data.email} register was success and you have been sign in`,
+        'info'
+      );
       break;
     case 'registerFaild':
-      renderNotifix(`${data}`, "rupor");
+      renderNotifix(`${data}`, 'rupor');
       break;
     case 'signInSuccess':
-      renderNotifix(`${data.email} you have been sign in`, "info");
+      renderNotifix(`${data.email} you have been sign in`, 'info');
       break;
     case 'signInFaild':
-      renderNotifix(`${data}`, "rupor");
+      renderNotifix(`${data}`, 'rupor');
       break;
     case 'noValidForm':
-      renderNotifix('Please, fill all form fields', "info");
+      renderNotifix('Please, fill all form fields', 'info');
       break;
     case 'logOut':
-      renderNotifix(`${data} was loged out`, "rupor");
+      renderNotifix(`${data} was loged out`, 'rupor');
       break;
     default:
       break;
