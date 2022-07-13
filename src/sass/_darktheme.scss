@@ -1,36 +1,35 @@
-body {
-    transition: 500ms;
-}
+// body {
+//     transition: 500ms;
+// }
 
 .darktheme-btn {
-    padding: 0;
-    background-color: transparent;
-    color: white;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    position: relative;
-    transition: transform;
-    transition-duration: 500ms;
-    &:hover {   
-            transform: scale(1.2)
-        }
+  padding: 0;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  position: relative;
+  transition: transform;
+  transition-duration: 500ms;
+  &:hover {
+    transform: scale(1.2);
+  }
 }
 
-
 .darktheme-icon {
-    width: 30px;
-    height: 30px;
-    transition: 250ms;
-    position: absolute;
+  width: 30px;
+  height: 30px;
+  transition: 250ms;
+  position: absolute;
 }
 
 .darktheme-icon__moon {
-    fill: white;
-    opacity: 0;
+  fill: white;
+  opacity: 0;
 }
 
 .darktheme-icon__sun {
-    fill: $accentColor;
+  fill: $accentColor;
 }

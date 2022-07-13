@@ -6,8 +6,8 @@ import { activateHeadersBtn, checkQuantityStorage } from './myLibraryBtns';
 
 import { renderCollection } from './render-movies';
 
-const pagination = refs.paginationList;
-const root = refs.paginationWrapper;
+export const pagination = refs.paginationList;
+export const root = refs.paginationWrapper;
 
 export function renderPagination(totalPages, currentPage) {
   let liItem = '';
@@ -19,9 +19,7 @@ export function renderPagination(totalPages, currentPage) {
 
   if (currentPage > 1) {
     liItem += `<li>
-    <button class="pagination__button pagination__button--prev" data-page="${
-      currentPage - 1
-    }">Prev</button>
+    <button class="pagination__button" data-page="${currentPage - 1}"><</button>
   </li>`;
   }
 
@@ -70,25 +68,39 @@ export function renderPagination(totalPages, currentPage) {
 
   if (currentPage < totalPages) {
     liItem += `<li>
-    <button class="pagination__button pagination__button--next" data-page="${
+    <button class="pagination__button" data-page="${
       currentPage + 1
-    }">Next</button>
+    }">></i></button>
   </li>`;
   }
-
   pagination.innerHTML = liItem;
 
   pagination.addEventListener('click', onPaginationBtnClick);
 }
+
 export async function onPaginationBtnClick(event) {
   const pageInUse = document.querySelector('.side-nav__link--current').dataset
     .id;
+  const filterPageinUse =
+    document.querySelector('.movies-filter__button--current') ?? 'default';
   if (!event.target.dataset.page) return;
   const page = +event.target.dataset.page;
   refs.moviesCard.innerHTML = '';
 
-  if (pageInUse === 'home') {
+  if (pageInUse === 'home' && filterPageinUse === 'default') {
     const data = await movieService.getSearchQuery(movieService.query, page);
+    renderPagination(movieService.totalPage, page);
+    renderCollection(data.results);
+  } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'popular') {
+    const data = await movieService.getSearchQuery(movieService.query, page);
+    renderPagination(movieService.totalPage, page);
+    renderCollection(data.results);
+  } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'rating') {
+    const data = await movieService.getTopRated(page);
+    renderPagination(movieService.totalPage, page);
+    renderCollection(data.results);
+  } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'future') {
+    const data = await movieService.getUpcoming(page);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
   } else if (pageInUse === 'library') {
@@ -115,9 +127,6 @@ export async function onPaginationBtnClick(event) {
     }
 
     renderCollection(arrToRender);
-    // refs.moviesCard.innerHTML = arrToRender
-    //   .map(data => templeteCard(data))
-    //   .join('');
   }
 }
 
@@ -136,7 +145,7 @@ export function showPagination() {
 
 export async function fetchPopularMovies() {
   refs.moviesCard.innerHTML = '';
-  const data = await movieService.getSearchQuery(
+  let data = await movieService.getSearchQuery(
     movieService.query,
     movieService.page
   );
