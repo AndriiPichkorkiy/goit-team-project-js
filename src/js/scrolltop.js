@@ -18,8 +18,7 @@ function onScroll() {
   }
 }
 
-export function toTop(e) {
-  e.preventDefault();
+export function toTop() {
   window.scrollTo(0, 0);
 }
 
