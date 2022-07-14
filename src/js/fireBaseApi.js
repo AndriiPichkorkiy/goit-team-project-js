@@ -20,10 +20,7 @@ export class FireBaseApi {
   refsLibrarysElements = {};
 
   static changeCurrentUser(user) {
-    console.log(user);
     this.currentUser = user;
-    console.log(true);
-
     if (user) this.unlockLibrary();
     else this.unlockLibrary();
   }

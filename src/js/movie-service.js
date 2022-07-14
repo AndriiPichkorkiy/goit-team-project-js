@@ -3,7 +3,7 @@ class MovieService {
     //Це для пошуку за ключовими словами
     this.page = 1;
     this.totalPage = 1;
-    
+
     this.data = {};
     //Зберігає останній позитивний пошуковий запит (для внутрішньої логіки)
     this.query = '';
@@ -17,25 +17,44 @@ class MovieService {
     this.totalResults = 1;
   }
 
-
   // -----Методи для використання-------
   // Пошук 1 фільма за айдішніком;
   async getOneMovie(id) {
     this.message = 'OK!';
-    if (!id){this.message = 'There is no search query'; return;}
+    if (!id) {
+      this.message = 'There is no search query';
+      return;
+    }
     const action = `movie/${+id}`;
     const parameters = new URLSearchParams({
-      'append_to_response': 'videos',
+      append_to_response: 'videos',
     });
     return this.getMovies(action, parameters);
   }
   //Пошук фільмів за популярністю АБО ключовим словом
-  async getSearchQuery(searchQuery, page){
-    if(!searchQuery){return await this.getPopularMovies(page)}
+  async getSearchQuery(searchQuery, page) {
+    if (!searchQuery) {
+      return await this.getPopularMovies(page);
+    }
+
+    switch (searchQuery) {
+      case 'popular':
+        return await this.getPopularMovies(page);
+        return;
+      case 'rating':
+        return await this.getTopRated(page);
+        return;
+      case 'future':
+        return await this.getUpcoming(page);
+        return;
+
+      default:
+        break;
+    }
     return await this.getMoviesByTitle(searchQuery, page);
-  };
-   // Пошук фільмів за ключовим словом
-   async getMoviesByTitle(searchQuery, page) {
+  }
+  // Пошук фільмів за ключовим словом
+  async getMoviesByTitle(searchQuery, page) {
     this.message = 'OK!';
     if (!searchQuery) {
       this.message = 'Empty request';
@@ -59,10 +78,10 @@ class MovieService {
     const answer = await this.getMovies(action, parameters);
     if (!answer) {
       return;
-    };
-    this.isnotification =  (this.query !== searchQuery) ? true : false
+    }
+    this.isnotification = this.query !== searchQuery ? true : false;
     this.query = searchQuery;
-    
+
     return answer;
   }
   // пошук фільмів за популярністю
@@ -78,10 +97,9 @@ class MovieService {
     return await this.SearchMoviesByCategory('movie/upcoming', page);
   }
 
-
   //-----Системні методи-------
-   //Спільний метод для знаходження фільмів за популярністю, з найбільшим рейтингом, майбутніх фільмів
-   async SearchMoviesByCategory(action, page){
+  //Спільний метод для знаходження фільмів за популярністю, з найбільшим рейтингом, майбутніх фільмів
+  async SearchMoviesByCategory(action, page) {
     this.message = 'OK!';
     if (page < 1) {
       this.message = 'Small value page';
@@ -95,9 +113,9 @@ class MovieService {
       page: page || 1,
     });
     const movies = await this.getMovies(action, parameters);
-    this.isnotification =  (this.page === 1) ? true : false;
-        
-    return movies
+    this.isnotification = this.page === 1 ? true : false;
+
+    return movies;
   }
   //Формування URL для подальшого запиту на сервер. Допоміжний метод
   createUrl(action, param) {
@@ -133,15 +151,23 @@ class MovieService {
     const movies = await this.fetchMovies(url);
 
     //Якщо запрос карточки по Id
-    if(action.slice(0, 6) === "movie/" && action.slice(0, 9) !== "movie/top" && action.slice(0, 8) !== "movie/up"){
-      if(!movies ){this.message = 'No information found'; return;}
-      else {return movies;}
-    };
+    if (
+      action.slice(0, 6) === 'movie/' &&
+      action.slice(0, 9) !== 'movie/top' &&
+      action.slice(0, 8) !== 'movie/up'
+    ) {
+      if (!movies) {
+        this.message = 'No information found';
+        return;
+      } else {
+        return movies;
+      }
+    }
 
     if (!movies || movies.results.length === 0) {
       this.message = 'No information found';
       return;
-    };
+    }
 
     this.data = movies;
     this.page = movies.page;
@@ -149,7 +175,6 @@ class MovieService {
     this.totalResults = movies.total_results;
     return movies;
   }
-
 
   //-----Додаткові методи-------
   //Запит для отримання масива з жанрами фільмів
@@ -162,7 +187,7 @@ class MovieService {
   async galleryData() {
     this.genres = await this.getGenres();
   }
-};
+}
 
 // Створює екземпляр класу і робить іменований експорт
 export const movieService = new MovieService();

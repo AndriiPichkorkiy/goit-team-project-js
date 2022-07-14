@@ -49,7 +49,6 @@ async function authSignUpUser(event) {
 
       showNotificashka('registerSuccess', user);
       // console.log('user', user);
-      debugger;
 
       clearFormData(formData);
 
@@ -72,7 +71,7 @@ async function authSignUpUser(event) {
       loading.off();
     });
 
-  event.currentTarget.reset();
+  refs.formSignUp.reset();
 }
 
 //Зайти в кабінет
@@ -119,6 +118,7 @@ function clearFormData(obj) {
 }
 
 function addFormFields(event) {
+  if (event.target.name !== 'email') return;
   formData[event.target.name] = event.target.value;
   localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(formData));
 }

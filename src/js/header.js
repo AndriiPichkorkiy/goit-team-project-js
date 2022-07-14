@@ -9,6 +9,8 @@ import {
   showPagination,
   removePagination,
 } from './pagination';
+
+import { init } from './history';
 import { hideFilters, showFilters } from './filter-buttons';
 
 const activeHeader = document.querySelector('.js-active-header');
@@ -30,7 +32,8 @@ refs.searchForm = document.querySelector('.search-form');
 refs.searchForm.addEventListener('submit', searchMovies);
 
 function fetchMoviesPagination() {
-  fetchPopularMovies();
+  init();
+  // fetchPopularMovies();
   //   showPagination();
 }
 
