@@ -16,7 +16,7 @@ async function onFilterButtonClick(event) {
   movieService.page = resetedPage;
   let data;
 
-  link = `?query=${event.target.dataset?.id || 'popular'}&` + 'page=1';
+  const link = `?query=${event.target.dataset?.id || 'popular'}&` + 'page=1';
   history.pushState({ page: 1 }, 'title 1', link);
 
   if (
