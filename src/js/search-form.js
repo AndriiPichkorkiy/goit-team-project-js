@@ -1,16 +1,14 @@
 import refs from './refs';
 import { movieService } from './movie-service';
-import renderCardTemplate from './card-templete';
 import './header';
 import { loading, blockSreen } from './loading';
 import {
   renderPagination,
   removePagination,
-  showPagination,
 } from './pagination';
 import { notifix } from './notifix';
 import { deactivateButtons } from './filter-buttons';
-
+import { renderCollection } from './render-movies';
 refs.searchForm = document.querySelector('.search-form');
 
 export default function searchMovies(event) {
@@ -20,7 +18,6 @@ export default function searchMovies(event) {
 
   if (value.length <= 2 || value.length === 0) {
     showNotificashka('moreTwoCharacters');
-    // moreTwoCharacters();
     return;
   }
 
@@ -48,7 +45,6 @@ async function fetchData(value) {
     refs.searchForm.reset();
 
     showNotificashka('correctionRequest');
-    // correctionRequest();
 
     return;
   }
@@ -59,14 +55,11 @@ async function fetchData(value) {
   if (movieService.isnotification) {
     showNotificashka('totalResults', movieService.totalResults);
   }
-  const card = data.results.map(result => renderCardTemplate(result)).join('');
-
-  refs.moviesCard.innerHTML = card;
+  renderCollection(data.results);
 
   loading.off();
 
   if (total_pages >= 2) {
-    // call pagination
     renderPagination(movieService.totalPage, movieService.page);
   }
 }
