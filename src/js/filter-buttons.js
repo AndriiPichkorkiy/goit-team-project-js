@@ -75,6 +75,9 @@ async function onFilterButtonClick(event) {
     }
     renderCollection(data.results);
   }
+  //clear search input
+  refs.searchForm.reset();
+
   renderPagination(movieService.totalPage, movieService.page);
 }
 

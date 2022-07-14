@@ -104,6 +104,8 @@ export async function onPaginationBtnClick(event) {
   } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'popular') {
     link = '?query=popular&' + link;
     const data = await movieService.getSearchQuery(movieService.query, page);
+    console.log(movieService.query, page);
+    console.log('data', data);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
     toTop(0, 0);
