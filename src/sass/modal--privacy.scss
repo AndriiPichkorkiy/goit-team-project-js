@@ -1,0 +1,91 @@
+.modal--privacy {
+  background-color: aliceblue;
+  padding: 1rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  line-height: 1.4rem;
+
+  & > p {
+    margin: 1rem;
+    text-indent: 1rem;
+    @include min768 {
+      margin: 2rem;
+      text-indent: 3rem;
+    }
+  }
+
+  & > h1 {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+    @include min768 {
+      font-size: 2.8rem;
+    }
+  }
+
+  & > h2 {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    @include min768 {
+      font-size: 2rem;
+    }
+  }
+
+  & > ul {
+    margin-left: 2rem;
+    list-style: circle;
+    @include min768 {
+      margin-left: 3rem;
+    }
+  }
+
+  & > h1,
+  h2 {
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+  }
+
+  @include min768 {
+    border-radius: 4rem;
+    font-size: 2.4rem;
+    line-height: 3rem;
+    width: 512px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  @include min1280 {
+    font-size: 2.4rem;
+    line-height: 3rem;
+    width: 800px;
+  }
+
+  & > .close {
+    background-color: white;
+    @include min768 {
+      width: 4rem;
+      height: 4rem;
+      right: 2rem;
+      top: 2rem;
+    }
+  }
+
+  & > .btn-wrapper {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+
+    & > .btn-close-bottom {
+      width: 50%;
+      font-size: 2rem;
+    }
+  }
+}

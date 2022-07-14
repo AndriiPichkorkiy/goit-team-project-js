@@ -6,6 +6,9 @@ import {
   openSignInModal,
 } from './register-modal';
 import { FireBaseApi } from './fireBaseApi';
+import renderNotifix from './notifix';
+
+import { loading, blockSreen } from './loading';
 
 const refs = {
   formSignIn: document.querySelector('#form-sign-in'),
@@ -34,29 +37,41 @@ async function authSignUpUser(event) {
   } = event.target;
 
   if (!email || !password || !checked) return showNotificashka('noValidForm');
-
-  createUserWithEmailAndPassword(auth, email, password)
+  blockSreen();
+  loading.on();
+  await createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       // Signed in
+      loading.off();
       const user = userCredential.user;
+
+      FireBaseApi.changeCurrentUser(user);
+
       showNotificashka('registerSuccess', user);
-      console.log('user', user);
+      // console.log('user', user);
 
       clearFormData(formData);
 
       FireBaseApi.authSuccess(user);
+
       openGreetingsModal();
+
       openSignUpModal();
     })
     .catch(error => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error(errorMessage);
-      showNotificashka('registerFaild', error);
+      blockSreen();
+      loading.off();
+      // const errorCode = error.code;
+      const errorMessage = error.message.split(': ')[1];
+      // console.error(errorMessage);
+      showNotificashka('registerFaild', errorMessage);
       // ..
+    })
+    .finally(() => {
+      loading.off();
     });
 
-  event.currentTarget.reset();
+  refs.formSignUp.reset();
 }
 
 //Зайти в кабінет
@@ -69,21 +84,26 @@ export async function authSignInUser(event) {
   } = event.target;
 
   if (!email || !password) return showNotificashka('noValidForm');
-
-  signInWithEmailAndPassword(auth, email, password)
+  blockSreen();
+  loading.on();
+  await signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
-      console.log(userCredential.user);
+      FireBaseApi.changeCurrentUser(user);
+      // console.log(userCredential.user);
       FireBaseApi.authSuccess(user);
       openSignInModal();
 
       showNotificashka('signInSuccess', user);
     })
     .catch(error => {
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      showNotificashka('signInFaild', error);
+      const errorMessage = error.message.split(': ')[1];
+      showNotificashka('signInFaild', errorMessage);
+    })
+    .finally(() => {
+      blockSreen();
+      loading.off();
     });
 
   // event.currentTarget.reset();
@@ -98,6 +118,7 @@ function clearFormData(obj) {
 }
 
 function addFormFields(event) {
+  if (event.target.name !== 'email') return;
   formData[event.target.name] = event.target.value;
   localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(formData));
 }
@@ -122,12 +143,14 @@ function getStorageDataSignUp() {
 
 function setFormFieldsSignIn(obj) {
   for (const key in obj) {
+    if (key === 'agreement') continue;
     refs.formSignIn[key].value = obj[key];
   }
 }
 
 function setFormFieldsSignUp(obj) {
   for (const key in obj) {
+    if (key === 'agreement') continue;
     refs.formSignUp[key].value = obj[key];
   }
 }
@@ -158,30 +181,46 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  updateCurrentUser,
 } from 'firebase/auth';
 
 const auth = getAuth();
 
 export function showNotificashka(code, data) {
-  console.log('show!');
+  // console.error(code, data);
+  if (data === 'Error (auth/user-not-found).') {
+    data = 'Enter the correct login';
+  } else if (data === 'Error (auth/wrong-password).') {
+    data = 'Enter the correct password';
+  } else if (
+    data === 'Password should be at least 6 characters (auth/weak-password).'
+  ) {
+    data = 'Password should be at least 6 characters';
+  } else if (data === 'Error (auth/email-already-in-use).') {
+    data = 'User already registered';
+  }
+
   switch (code) {
     case 'registerSuccess':
-      alert(`${data.email} register was success and you have been sign in`);
+      renderNotifix(
+        `${data.email} register was success and you have been sign in`,
+        'info'
+      );
       break;
     case 'registerFaild':
-      alert(`${data.message}`);
+      renderNotifix(`${data}`, 'rupor');
       break;
     case 'signInSuccess':
-      alert(`${data.email} you have been sign in`);
+      renderNotifix(`${data.email} you have been sign in`, 'info');
       break;
     case 'signInFaild':
-      alert(`${data.message}`);
+      renderNotifix(`${data}`, 'rupor');
       break;
     case 'noValidForm':
-      alert(`Please, fill all form fields`);
+      renderNotifix('Please, fill all form fields', 'info');
       break;
     case 'logOut':
-      alert(`${data} was loged out`);
+      renderNotifix(`${data} was loged out`, 'rupor');
       break;
     default:
       break;

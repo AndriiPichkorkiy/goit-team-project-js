@@ -22,8 +22,10 @@ function toggleModal() {
 }
 
 function onModalClose() {
+  document.body.removeAttribute('style');
   window.removeEventListener('keydown', onEscKeyPress);
   refs.closeModalBtn.setAttribute('disabled', 'disabled');
+  document.body.classList.remove('show-modal');
   refs.modalContent.style.opacity = 1;
   let delay = 150;
 
@@ -41,8 +43,10 @@ function onModalClose() {
 }
 
 function onModalOpen() {
+  document.body.style.overflow = 'hidden';
   window.addEventListener('keydown', onEscKeyPress);
   refs.closeModalBtn.removeAttribute('disabled');
+  document.body.classList.add('show-modal');
   refs.modalContent.style.opacity = 1;
   let delay = 250;
   toggleModal();

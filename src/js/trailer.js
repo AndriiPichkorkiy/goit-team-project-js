@@ -1,5 +1,6 @@
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/dist/basicLightbox.min.css';
+import * as iconClose from '../images/icons.svg';
 
 let buttonTrailer;
 let getOpanModal;
@@ -28,12 +29,20 @@ function watchToTrailer(videos) {
 
   const key = video.key;
   const instance = basicLightbox.create(`
-    <iframe src="https://www.youtube.com/embed/${key}" width="" height="" frameborder="0" class = "trailer-size"></iframe>
+    <iframe src="https://www.youtube.com/embed/${key}" width="" height="" frameborder="0" class = "trailer-size">
+	 </iframe><button type = "button" class="modal__close-trailer">
+	 <svg class="modal__close-icon" width="14" height="14">
+        <use href="${iconClose}#icon-close"></use>
+      </svg></button>
 `);
 
   getOpanModal = instance.show;
   getCloseModal = instance.close;
   openModalTailer();
+
+  const closeModalTrailer = document.querySelector('.modal__close-trailer');
+  console.log(closeModalTrailer);
+  closeModalTrailer.addEventListener('click', () => instance.close());
 }
 
 function onCloseModalForEsc(e) {
@@ -51,3 +60,17 @@ function openModalTailer() {
   window.addEventListener('keydown', onCloseModalForEsc);
   getOpanModal();
 }
+
+// function modalClBtTrailer(instance) {
+//   const modalBox = document.querySelector('.basicLightbox--iframe');
+//   console.log(modalBox);
+//   modalBox.innerHTML(
+//     `<button class="modal__btn-close-trailer">
+// 	 <svg class="modal__close-icon" width="14" height="14">
+//         <use href="${iconClose}#icon-close"></use>
+//       </svg></button>`
+//   );
+//   const modalCloseBtn = document.querySelector('.modal__close-icon');
+//   console.log(modalCloseBtn);
+//   modalCloseBtn.addEventListener('click', () => instance.close());
+// }

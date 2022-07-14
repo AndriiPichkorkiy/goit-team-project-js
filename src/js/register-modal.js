@@ -5,6 +5,7 @@ import {
 } from './firebaseAuth';
 import refs from '/src/js/refs';
 import { signOut, getAuth } from 'firebase/auth';
+import { FireBaseApi } from './fireBaseApi';
 
 const refs1 = {
   formSignIn: document.querySelector('#form-sign-in'),
@@ -19,11 +20,11 @@ const refs1 = {
   buttonCloseGreetings: null,
 };
 
-refs1.buttonClose = document.querySelector('[data-modal-close-sign-in]');
-refs1.buttonClose.addEventListener('click', openSignInModal);
+refs1.buttonCloseSignIn = document.querySelector('[data-modal-close-sign-in]');
+refs1.buttonCloseSignIn.addEventListener('click', openSignInModal);
 
-refs1.buttonClose = document.querySelector('[data-modal-close-sign-up]');
-refs1.buttonClose.addEventListener('click', openSignUpModal);
+refs1.buttonCloseSignUp = document.querySelector('[data-modal-close-sign-up]');
+refs1.buttonCloseSignUp.addEventListener('click', openSignUpModal);
 
 //buttons for change between modals
 refs1.buttonChangeToSignIn = document.getElementById('btn-open-sign-in');
@@ -31,107 +32,107 @@ refs1.buttonChangeToSignIn.addEventListener('click', changeModal);
 
 refs1.buttonChangeToSignUp = document.getElementById('btn-open-register');
 refs1.buttonChangeToSignUp.addEventListener('click', changeModal);
-//end of buttons
+//====================================
+
+//add close for modal by click on wrapper
+refs1.modalWrapperSignIn.addEventListener('click', onBackDropClick);
+refs1.modalWrapperSignUp.addEventListener('click', onBackDropClick);
+//====================================
+
+//add close for privacy modal
+refs.closePrivacyBottom.addEventListener('click', closeModalPrivacy);
+refs.closePrivacy.addEventListener('click', closeModalPrivacy);
+refs.backdropPrivacy.addEventListener('click', closeModalPrivacy);
+
+//add open for privacy modal
+refs.polycy.addEventListener('click', openModalPrivacy);
+//====================================
 
 refs1.buttonCloseGreetings = document.querySelector(
   '[data-modal-close-greetings]'
 );
 refs1.buttonCloseGreetings.addEventListener('click', openGreetingsModal);
 
-export function openSignInModal() {
-  const button = document.querySelector('[data-id = "auth"]');
-  if (button.dataset.status === 'logOut') {
-    //log out
-    const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        const menuAuth = document.querySelector('.enter-btn');
-        menuAuth.innerHTML = `<p>Check in</p>`;
-        button.dataset.status = 'none';
-        showNotificashka('logOut', refs.placeForName.innerText);
-        refs.placeForName.innerHTML = '';
-      })
-      .catch(error => {
-        // An error happened.
-        console.log(error);
-      });
-  } else {
-    //open modal window
-    refs1.modalWrapperSignIn.classList.toggle('is-hidden');
-  }
+export function openSignInModal(undefined, isChange) {
+  event.preventDefault();
+  const modal = refs1.modalWrapperSignIn;
+  openOrCloseFireBaseModals(modal, isChange);
 }
 
-export function openSignUpModal() {
-  refs1.modalWrapperSignUp.classList.toggle('is-hidden');
+export function openSignUpModal(event, isChange) {
+  const modal = refs1.modalWrapperSignUp;
+  openOrCloseFireBaseModals(modal, isChange);
+}
+
+function openOrCloseFireBaseModals(modal, isChange) {
+  if (modal.classList.contains('is-hidden')) {
+    modal.classList.remove('is-hidden');
+    if (!isChange) window.addEventListener('keydown', onEscKeyPress);
+  } else {
+    modal.classList.add('is-hidden');
+    if (!isChange) window.removeEventListener('keydown', onEscKeyPress);
+  }
 }
 
 export function openGreetingsModal() {
   refs1.modalGreetings.classList.toggle('is-hidden');
+  const cake = document.querySelector('[data-modal-icon-cake]');
+  cake.classList.add('modal__title__icon');
 }
 
 function changeModal() {
-  openSignUpModal();
-  openSignInModal();
+  openSignUpModal(undefined, 'change');
+  openSignInModal(undefined, 'change');
 }
 
-// function onFormSignInSubmit(event) {
-//   event.preventDefault();
+function onEscKeyPress(event) {
+  const ESC_KEY_CODE = 'Escape';
+  if (
+    event.code !== ESC_KEY_CODE ||
+    !refs.backdropPrivacy.classList.contains('is-hidden')
+  ) {
+    return;
+  }
+  closeOpenedModal();
+}
 
-//   if (!formData['user-mail'] || !formData['user-password']) {
-//     return alert('Please, fill all form fields');
-//   }
+function onBackDropClick(event) {
+  if (event.currentTarget === event.target) {
+    closeOpenedModal();
+  }
+}
 
-//   localStorage.removeItem(FORM_STORAGE_KEY);
-//   console.log(formData);
-//   event.currentTarget.reset();
-//   clearFormData(formData);
+function closeOpenedModal() {
+  let modal = refs1.modalWrapperSignUp;
+  if (!modal.classList.contains('is-hidden')) {
+    openSignUpModal();
+  }
+  modal = refs1.modalWrapperSignIn;
+  if (!modal.classList.contains('is-hidden')) {
+    openSignInModal();
+  }
+}
 
-//   const email = event.target.querySelector('#user-email').value;
-//   const password = event.target.querySelector('#user-password').value;
+function openModalPrivacy() {
+  refs.backdropPrivacy.classList.remove('is-hidden');
+  window.removeEventListener('keydown', onEscKeyPressPrivacy);
+  // document.body.classList.add('show-film-modal');
+  document.body.style.overflow = 'hidden';
+}
 
-//   authWithEmailAndPassword(email, password)
-//     .then(response => response.json())
-//     .then(data => {
-//       if (data.error) {
-//         alert(data.error.message);
-//       } else {
-//         console.log('It*s ok!');
-//         FireBaseApi.authSuccess(data);
-//         console.log(data);
-//         openSignInModal();
-//       }
-//     });
-// }
+function closeModalPrivacy() {
+  refs.backdropPrivacy.classList.add('is-hidden');
+  window.addEventListener('keydown', onEscKeyPressPrivacy);
+  // document.body.classList.remove('show-film-modal');
+  document.body.removeAttribute('style');
+}
 
-// async function onFormSignUpSubmit(event) {
-//   event.preventDefault();
+function onEscKeyPressPrivacy(event) {
+  const ESC_KEY_CODE = 'Escape';
+  if (event.code === ESC_KEY_CODE) closeModalPrivacy();
+}
 
-//   if (!formData['user-mail'] || !formData['user-password']) {
-//     return alert('Please, fill all form fields');
-//   }
-
-//   localStorage.removeItem(FORM_STORAGE_KEY);
-//   console.log(formData);
-//   event.currentTarget.reset();
-//   clearFormData(formData);
-
-//   userName = await event.target.querySelector('#user-name').value;
-//   const email = await event.target.querySelector('#user-email-register').value;
-//   const password = await event.target.querySelector('#user-password-register')
-//     .value;
-
-//   await registerUser(email, password, userName)
-//     .then(response => response.json())
-//     .then(data => {
-//       if (data.error) {
-//         alert(data.error.message);
-//       } else {
-//         console.log('It*s ok!');
-//         // FireBaseApi.authSuccess(userName);
-//         FireBaseApi.authSuccess(data);
-//         openGreetingsModal();
-//         openSignUpModal();
-//       }
-//     });
-// }
+//return modals
+[refs.backdropPrivacy, refs.signIn, refs.signUp, refs.modalGR].forEach(el =>
+  el.removeAttribute('style')
+);

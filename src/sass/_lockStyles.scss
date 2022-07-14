@@ -1,0 +1,32 @@
+.btn-lock {
+  border: 1px solid #ff6b015a;
+  color: #0000005a;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.btn-lock::before {
+  content: '';
+  height: 100%;
+  width: 100%;
+}
+
+.btn-lock:hover::before {
+  font-weight: 700;
+  content: 'only for registered users';
+  z-index: 5;
+  color: #fff;
+  background: radial-gradient(circle, #ff6d0b 0%, #ff5a08b3 100%);
+  font-size: 12px;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 20px 20px -15px #fffafacc;
+  align-items: center;
+
+  box-shadow: 0 0 10px #ff6b01, 0 0 20px #ff6b01, 0 0 40px #ff6b01;
+}

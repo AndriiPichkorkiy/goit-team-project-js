@@ -12,6 +12,8 @@ import {
   removePagination,
   onPaginationBtnClick,
 } from './pagination';
+import { FireBaseApi } from './fireBaseApi';
+import vectorSvg from '../images/icons.svg';
 
 import { renderCollection } from './render-movies';
 
@@ -23,6 +25,24 @@ export function activateHeadersBtn() {
   //   const activeHeader = document.querySelector('.js-active-header');
   watchedBtn = document.querySelector('[data-id="watchedBtn"]');
   queueBtn = document.querySelector('[data-id="queueBtn"]');
+
+  if (!FireBaseApi.currentUser) {
+    refs.moviesCard.innerHTML = '';
+    [watchedBtn, queueBtn].forEach(el => {
+      el.disabled = true;
+
+      el.classList.add('library__button--active');
+      el.classList.add('btn-lock');
+
+      el.insertAdjacentHTML(
+        'beforeend',
+        `<svg class="disabled-icon" width="40" height="40">
+           <use href="${vectorSvg}#icon-lock">
+         </svg>`
+      );
+    });
+    return;
+  }
 
   watchedBtn.addEventListener('click', pressWatchedBtn);
   queueBtn.addEventListener('click', pressQueuedBtn);
@@ -66,12 +86,11 @@ export function renderAfterAddAndRemoveFilm() {
     const el = refs.paginationList.querySelector(
       '.pagination__button--current'
     );
-    // if (!el) console.log('!EL');
-    // if (!el) return activeLastBtn();
+
+    if (!el) return activeLastBtn();
 
     const objEvent = { target: el };
-    // console.log('renderAfterAddAndRemoveFilm');
-    // console.log(objEvent);
+
     onPaginationBtnClick(objEvent);
   }
 }

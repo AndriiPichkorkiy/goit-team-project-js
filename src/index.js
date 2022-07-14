@@ -29,6 +29,7 @@ import './js/firebaseAuth';
 //=== === === === === === === ===
 //=== === = MAIN'S PART = === ===
 //=== === === === === === === ===
+import './js/filter-buttons';
 import './js/card-templete';
 // import './js/render-movies';
 //
@@ -88,3 +89,4 @@ import './js/localStorage';
 import './js/loading.js';
 import './js/myLibraryBtns';
 import './js/notifix';
+import './js/history';

@@ -21,7 +21,6 @@
     text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
       0px 18px 23px rgba(0, 0, 0, 0.1);
   }
-
   &:hover img,
   &:focus img {
     transform: scale(1.02);
@@ -37,82 +36,9 @@
   margin-bottom: 8px;
   min-height: 398px;
   object-fit: cover;
+  background: url('/src/images/loading.gif') center / 50px no-repeat;
   @include min768 {
-    height: 455px;
-  }
-  @include min1280 {
-    margin-bottom: 12px;
-    height: 574px;
-  }
-}
-
-.movies-card__heading,
-.movies-card__text {
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.33;
-
-  @include min1280 {
-    font-size: 20px;
-    line-height: 1.2;
-  }
-}
-
-.movies-card__heading {
-  text-transform: uppercase;
-  color: $primaryTextColor;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.movies-card__text {
-  color: $accentColor;
-  margin-top: 1px;
-}
-
-.movies-card__rating {
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.33;
-  padding: 1px 10px;
-
-  color: $textColorOnDark;
-  background-color: $btnHoverColor;
-  text-transform: uppercase;
-  border-radius: 5px;
-  margin-left: 8px;
-
-  @include min1280 {
-    font-size: 14px;
-    padding: 3px 12px;
-    vertical-align: middle;
-  }
-}
-.movies {
-  margin-bottom: 40px;
-  @include min768 {
-    margin-bottom: 60px;
-  }
-}
-
-.movies-card__item {
-  cursor: pointer;
-  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover,
-  &:focus {
-    transform: scale(1.02);
-  }
-}
-
-.movies-card__thumb > img {
-  border-radius: 5px;
-  overflow: hidden;
-  margin-bottom: 8px;
-  min-height: 398px;
-  object-fit: cover;
-  @include min768 {
-    height: 455px;
+    height: 510px;
   }
   @include min1280 {
     margin-bottom: 12px;
