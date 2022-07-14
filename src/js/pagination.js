@@ -147,7 +147,7 @@ export async function onPaginationBtnClick(event) {
     renderCollection(arrToRender);
     toTop(0, 0);
   }
-
+  
   history.pushState({ page: 1 }, 'title 1', link);
 }
 

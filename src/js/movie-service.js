@@ -40,13 +40,13 @@ class MovieService {
     switch (searchQuery) {
       case 'popular':
         return await this.getPopularMovies(page);
-        return;
+
       case 'rating':
         return await this.getTopRated(page);
-        return;
+
       case 'future':
         return await this.getUpcoming(page);
-        return;
+
 
       default:
         break;
