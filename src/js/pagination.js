@@ -3,7 +3,7 @@ import { movieService } from './movie-service';
 import templeteCard from './card-templete';
 import { localStorageKeys } from './localStorage';
 import { activateHeadersBtn, checkQuantityStorage } from './myLibraryBtns';
-import {changeNavigation,currentHistoryPage} from './history'
+import { changeNavigation, currentHistoryPage } from './history';
 
 import { renderCollection } from './render-movies';
 import { toTop } from './scrolltop';
@@ -90,32 +90,38 @@ export async function onPaginationBtnClick(event) {
 
   //refs.moviesCard.innerHTML = ''; // <<<<<<< FT-15.0-fix
   // history.pushState({page: 1}, "title 1", `?page=${page}`);
-  
-  history.pushState({page: 1}, "title 1", `?page=${page}`);
 
-  changeNavigation(page)
+  let link = `page=${page}`;
 
-  if (pageInUse === 'home' && filterPageinUse === 'default') {
+  changeNavigation(page);
+
+  // if (pageInUse === 'home' && filterPageinUse === 'default') {
+  //   link = `?query=${movieService.query}&` + link;
+  //   const data = await movieService.getSearchQuery(movieService.query, page);
+  //   renderCollection(data.results);
+  //   renderPagination(movieService.totalPage, page);
+  //   toTop(0, 0);} else 
+  if (pageInUse === 'home' && filterPageinUse.dataset.id === 'popular') {
+    link = '?query=popular&' + link;
     const data = await movieService.getSearchQuery(movieService.query, page);
-    renderCollection(data.results);
-    renderPagination(movieService.totalPage, page);
-    toTop(0, 0);
-  } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'popular') {
-    const data = await movieService.getSearchQuery(movieService.query, page);
+    console.log(movieService.query, page);
+    console.log('data', data);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
     toTop(0, 0);
   } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'rating') {
+    link = '?query=rating&' + link;
     const data = await movieService.getTopRated(page);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
     toTop(0, 0);
   } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'future') {
+    link = '?query=future&' + link;
     const data = await movieService.getUpcoming(page);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
     toTop(0, 0);
-  } else if (pageInUse === 'library') {
+  }else if (pageInUse === 'library') {
     const activeBtn = document.querySelector('.library__button--active');
     const value =
       activeBtn.dataset.id === 'watchedBtn'
@@ -141,6 +147,8 @@ export async function onPaginationBtnClick(event) {
     renderCollection(arrToRender);
     toTop(0, 0);
   }
+
+  history.pushState({ page: 1 }, 'title 1', link);
 }
 
 export function removePagination() {

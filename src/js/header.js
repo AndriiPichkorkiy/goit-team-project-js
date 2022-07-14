@@ -9,6 +9,8 @@ import {
   showPagination,
   removePagination,
 } from './pagination';
+
+import { init } from './history';
 import { hideFilters, showFilters } from './filter-buttons';
 
 const activeHeader = document.querySelector('.js-active-header');
@@ -21,7 +23,7 @@ let mainPage = 'homePage';
 markupForm();
 
 refs.home.classList.add('side-nav__link--current');
-refs.logoLink.setAttribute('style', 'cursor:default');
+refs.logoLink.setAttribute('style', 'cursor:default; pointer-events: none;');
 logoPageHome.classList.add('reveal-text');
 logoIcon.setAttribute('style', 'stroke: #ffffff');
 backgroundMain.classList.remove('background__main--lib');
@@ -30,7 +32,8 @@ refs.searchForm = document.querySelector('.search-form');
 refs.searchForm.addEventListener('submit', searchMovies);
 
 function fetchMoviesPagination() {
-  fetchPopularMovies();
+  init();
+  // fetchPopularMovies();
   //   showPagination();
 }
 
@@ -76,8 +79,8 @@ function markupPageHome() {
   refs.home.classList.add('side-nav__link--current');
   refs.library.classList.remove('side-nav__link--current');
   refs.header.classList.remove('header-bg-lib');
-  refs.logoLink.setAttribute('style', 'cursor:default');
-  logoIcon.setAttribute('style', 'stroke: #ffffff');
+  refs.logoLink.setAttribute('style', 'cursor:default; pointer-events: none;');
+  logoIcon.setAttribute('style', 'stroke: #ffffff;');
   logoPageHome.classList.add('reveal-text');
   logoPageHome.classList.remove('rise-text');
   backgroundMain.classList.remove('background__main--lib');
@@ -88,7 +91,7 @@ function markupPageLibrary() {
   refs.library.classList.add('side-nav__link--current');
   refs.home.classList.remove('side-nav__link--current');
   refs.header.classList.add('header-bg-lib');
-  refs.logoLink.setAttribute('style', 'cursor:pointer;');
+  refs.logoLink.setAttribute('style', 'cursor:pointer; color: #ffffff');
   logoIcon.setAttribute('style', 'stroke: currentColor');
   logoPageHome.classList.remove('reveal-text');
   logoPageHome.classList.add('rise-text');

@@ -76,6 +76,8 @@ function openOrCloseFireBaseModals(modal, isChange) {
 
 export function openGreetingsModal() {
   refs1.modalGreetings.classList.toggle('is-hidden');
+  const cake = document.querySelector('[data-modal-icon-cake]')
+  cake.classList.add('modal__title__icon')
 }
 
 function changeModal() {
@@ -85,7 +87,10 @@ function changeModal() {
 
 function onEscKeyPress(event) {
   const ESC_KEY_CODE = 'Escape';
-  if (event.code !== ESC_KEY_CODE) {
+  if (
+    event.code !== ESC_KEY_CODE ||
+    !refs.backdropPrivacy.classList.contains('is-hidden')
+  ) {
     return;
   }
   closeOpenedModal();
@@ -116,7 +121,6 @@ function openModalPrivacy() {
 }
 
 function closeModalPrivacy() {
-  console.log('');
   refs.backdropPrivacy.classList.add('is-hidden');
   window.addEventListener('keydown', onEscKeyPressPrivacy);
   // document.body.classList.remove('show-film-modal');
@@ -129,6 +133,6 @@ function onEscKeyPressPrivacy(event) {
 }
 
 //return modals
-[refs.backdropPrivacy, refs.signIn, refs.signUp].forEach(el =>
-  el.removeAttribute('style')
+[refs.backdropPrivacy, refs.signIn, refs.signUp, refs1.modalGreetings].forEach(
+  el => el.removeAttribute('style')
 );
