@@ -54,6 +54,7 @@ refs1.buttonCloseGreetings = document.querySelector(
 refs1.buttonCloseGreetings.addEventListener('click', openGreetingsModal);
 
 export function openSignInModal(undefined, isChange) {
+  event.preventDefault();
   const modal = refs1.modalWrapperSignIn;
   openOrCloseFireBaseModals(modal, isChange);
 }
@@ -84,7 +85,10 @@ function changeModal() {
 
 function onEscKeyPress(event) {
   const ESC_KEY_CODE = 'Escape';
-  if (event.code !== ESC_KEY_CODE) {
+  if (
+    event.code !== ESC_KEY_CODE ||
+    !refs.backdropPrivacy.classList.contains('is-hidden')
+  ) {
     return;
   }
   closeOpenedModal();
@@ -115,7 +119,6 @@ function openModalPrivacy() {
 }
 
 function closeModalPrivacy() {
-  console.log('');
   refs.backdropPrivacy.classList.add('is-hidden');
   window.addEventListener('keydown', onEscKeyPressPrivacy);
   // document.body.classList.remove('show-film-modal');
@@ -128,6 +131,6 @@ function onEscKeyPressPrivacy(event) {
 }
 
 //return modals
-[refs.backdropPrivacy, refs.signIn, refs.signUp].forEach(el =>
-  el.removeAttribute('style')
+[refs.backdropPrivacy, refs.signIn, refs.signUp, refs1.modalGreetings].forEach(
+  el => el.removeAttribute('style')
 );

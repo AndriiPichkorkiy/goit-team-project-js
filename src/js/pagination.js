@@ -3,7 +3,7 @@ import { movieService } from './movie-service';
 import templeteCard from './card-templete';
 import { localStorageKeys } from './localStorage';
 import { activateHeadersBtn, checkQuantityStorage } from './myLibraryBtns';
-import {changeNavigation,currentHistoryPage} from './history'
+import { changeNavigation, currentHistoryPage } from './history';
 
 import { renderCollection } from './render-movies';
 import { toTop } from './scrolltop';
@@ -87,26 +87,34 @@ export async function onPaginationBtnClick(event) {
     document.querySelector('.movies-filter__button--current') ?? 'default';
   if (!event.target.dataset.page) return;
   const page = +event.target.dataset.page;
-  
-  history.pushState({page: 1}, "title 1", `?page=${page}`);
-  changeNavigation(page)
+
+  //refs.moviesCard.innerHTML = ''; // <<<<<<< FT-15.0-fix
+  // history.pushState({page: 1}, "title 1", `?page=${page}`);
+
+  let link = `page=${page}`;
+
+  changeNavigation(page);
 
   if (pageInUse === 'home' && filterPageinUse === 'default') {
+    link = `?query=${movieService.query}&` + link;
     const data = await movieService.getSearchQuery(movieService.query, page);
     renderCollection(data.results);
     renderPagination(movieService.totalPage, page);
     toTop(0, 0);
   } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'popular') {
+    link = '?query=popular&' + link;
     const data = await movieService.getSearchQuery(movieService.query, page);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
     toTop(0, 0);
   } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'rating') {
+    link = '?query=rating&' + link;
     const data = await movieService.getTopRated(page);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
     toTop(0, 0);
   } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'future') {
+    link = '?query=future&' + link;
     const data = await movieService.getUpcoming(page);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
@@ -137,6 +145,8 @@ export async function onPaginationBtnClick(event) {
     renderCollection(arrToRender);
     toTop(0, 0);
   }
+
+  history.pushState({ page: 1 }, 'title 1', link);
 }
 
 export function removePagination() {

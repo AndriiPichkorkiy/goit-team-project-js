@@ -8,6 +8,8 @@ import {
 import { FireBaseApi } from './fireBaseApi';
 import renderNotifix from './notifix';
 
+import { loading, blockSreen } from './loading';
+
 const refs = {
   formSignIn: document.querySelector('#form-sign-in'),
   formSignUp: document.querySelector('#form-sign-up'),
@@ -35,36 +37,41 @@ async function authSignUpUser(event) {
   } = event.target;
 
   if (!email || !password || !checked) return showNotificashka('noValidForm');
-
-  createUserWithEmailAndPassword(auth, email, password)
+  blockSreen();
+  loading.on();
+  await createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       // Signed in
-      console.log(0);
+      loading.off();
       const user = userCredential.user;
-      console.log('abc');
+
       FireBaseApi.changeCurrentUser(user);
-      console.log('qweqweqwe');
+
       showNotificashka('registerSuccess', user);
       // console.log('user', user);
-      debugger;
-      console.log(1);
+
       clearFormData(formData);
-      console.log(2);
+
       FireBaseApi.authSuccess(user);
-      console.log(3);
+
       openGreetingsModal();
-      console.log(4);
+
       openSignUpModal();
     })
     .catch(error => {
+      blockSreen();
+      loading.off();
       // const errorCode = error.code;
       const errorMessage = error.message.split(': ')[1];
       // console.error(errorMessage);
       showNotificashka('registerFaild', errorMessage);
       // ..
+    })
+    .finally(() => {
+      loading.off();
     });
 
-  event.currentTarget.reset();
+  refs.formSignUp.reset();
 }
 
 //Зайти в кабінет
@@ -77,8 +84,9 @@ export async function authSignInUser(event) {
   } = event.target;
 
   if (!email || !password) return showNotificashka('noValidForm');
-
-  signInWithEmailAndPassword(auth, email, password)
+  blockSreen();
+  loading.on();
+  await signInWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
@@ -92,6 +100,10 @@ export async function authSignInUser(event) {
     .catch(error => {
       const errorMessage = error.message.split(': ')[1];
       showNotificashka('signInFaild', errorMessage);
+    })
+    .finally(() => {
+      blockSreen();
+      loading.off();
     });
 
   // event.currentTarget.reset();
@@ -106,6 +118,7 @@ function clearFormData(obj) {
 }
 
 function addFormFields(event) {
+  if (event.target.name !== 'email') return;
   formData[event.target.name] = event.target.value;
   localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(formData));
 }
@@ -174,7 +187,7 @@ import {
 const auth = getAuth();
 
 export function showNotificashka(code, data) {
-  console.error(code, data);
+  // console.error(code, data);
   if (data === 'Error (auth/user-not-found).') {
     data = 'Enter the correct login';
   } else if (data === 'Error (auth/wrong-password).') {

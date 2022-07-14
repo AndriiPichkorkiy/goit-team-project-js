@@ -26,23 +26,23 @@ export function activateHeadersBtn() {
   watchedBtn = document.querySelector('[data-id="watchedBtn"]');
   queueBtn = document.querySelector('[data-id="queueBtn"]');
 
-  // if (!FireBaseApi.currentUser) {
-  //   [watchedBtn, queueBtn].forEach(el => {
-  //     el.disabled = true;
-  //     console.log(el);
+  if (!FireBaseApi.currentUser) {
+    refs.moviesCard.innerHTML = '';
+    [watchedBtn, queueBtn].forEach(el => {
+      el.disabled = true;
 
-  //     el.classList.add('library__button--active');
-  //     el.classList.add('btn-lock');
+      el.classList.add('library__button--active');
+      el.classList.add('btn-lock');
 
-  //     el.insertAdjacentHTML(
-  //       'beforeend',
-  //       `<svg class="disabled-icon" width="40" height="40">
-  //          <use href="${vectorSvg}#icon-lock">
-  //        </svg>`
-  //     );
-  //   });
-  //   return;
-  // }
+      el.insertAdjacentHTML(
+        'beforeend',
+        `<svg class="disabled-icon" width="40" height="40">
+           <use href="${vectorSvg}#icon-lock">
+         </svg>`
+      );
+    });
+    return;
+  }
 
   watchedBtn.addEventListener('click', pressWatchedBtn);
   queueBtn.addEventListener('click', pressQueuedBtn);

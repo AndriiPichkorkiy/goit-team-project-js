@@ -9,6 +9,8 @@ import {
   showPagination,
   removePagination,
 } from './pagination';
+
+import { init } from './history';
 import { hideFilters, showFilters } from './filter-buttons';
 
 const activeHeader = document.querySelector('.js-active-header');
@@ -30,7 +32,8 @@ refs.searchForm = document.querySelector('.search-form');
 refs.searchForm.addEventListener('submit', searchMovies);
 
 function fetchMoviesPagination() {
-  fetchPopularMovies();
+  init();
+  // fetchPopularMovies();
   //   showPagination();
 }
 
@@ -49,15 +52,7 @@ refs.home.addEventListener('click', e => {
   fetchMoviesPagination();
 });
 
-refs.library.addEventListener('click', e => {
-  e.preventDefault();
-  removePagination();
-  hideFilters();
-  if (mainPage === 'libraryPage') return;
-
-  markupPageLibrary();
-  markupButtons();
-});
+refs.library.addEventListener('click', openLibrary);
 
 refs.logoLink.addEventListener('click', e => {
   e.preventDefault();
@@ -68,6 +63,16 @@ refs.logoLink.addEventListener('click', e => {
   markupForm();
   fetchMoviesPagination();
 });
+
+export function openLibrary(e, isForesed) {
+  e?.preventDefault();
+  removePagination();
+  hideFilters();
+  if (!isForesed && mainPage === 'libraryPage') return;
+
+  markupPageLibrary();
+  markupButtons();
+}
 
 function markupPageHome() {
   mainPage = 'homePage';
