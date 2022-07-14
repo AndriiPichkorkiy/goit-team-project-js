@@ -54,6 +54,7 @@ refs1.buttonCloseGreetings = document.querySelector(
 refs1.buttonCloseGreetings.addEventListener('click', openGreetingsModal);
 
 export function openSignInModal(undefined, isChange) {
+  event.preventDefault();
   const modal = refs1.modalWrapperSignIn;
   openOrCloseFireBaseModals(modal, isChange);
 }

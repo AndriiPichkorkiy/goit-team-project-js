@@ -49,15 +49,7 @@ refs.home.addEventListener('click', e => {
   fetchMoviesPagination();
 });
 
-refs.library.addEventListener('click', e => {
-  e.preventDefault();
-  removePagination();
-  hideFilters();
-  if (mainPage === 'libraryPage') return;
-
-  markupPageLibrary();
-  markupButtons();
-});
+refs.library.addEventListener('click', openLibrary);
 
 refs.logoLink.addEventListener('click', e => {
   e.preventDefault();
@@ -68,6 +60,16 @@ refs.logoLink.addEventListener('click', e => {
   markupForm();
   fetchMoviesPagination();
 });
+
+export function openLibrary(e, isForesed) {
+  e?.preventDefault();
+  removePagination();
+  hideFilters();
+  if (!isForesed && mainPage === 'libraryPage') return;
+
+  markupPageLibrary();
+  markupButtons();
+}
 
 function markupPageHome() {
   mainPage = 'homePage';
