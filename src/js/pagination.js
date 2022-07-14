@@ -87,8 +87,12 @@ export async function onPaginationBtnClick(event) {
     document.querySelector('.movies-filter__button--current') ?? 'default';
   if (!event.target.dataset.page) return;
   const page = +event.target.dataset.page;
+
+  //refs.moviesCard.innerHTML = ''; // <<<<<<< FT-15.0-fix
+  // history.pushState({page: 1}, "title 1", `?page=${page}`);
   
   history.pushState({page: 1}, "title 1", `?page=${page}`);
+
   changeNavigation(page)
 
   if (pageInUse === 'home' && filterPageinUse === 'default') {

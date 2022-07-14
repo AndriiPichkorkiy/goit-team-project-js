@@ -12,19 +12,19 @@ function addEventsOnModalBtn() {
   filmCard = document.querySelector('.film-card');
 
   //lock buttons if there is not user
-  // if (!FireBaseApi.currentUser) {
-  //   [watchedBtn, queueBtn].forEach(el => {
-  //     el.disabled = true;
-  //     el.classList.add('btn-lock');
-  //     el.insertAdjacentHTML(
-  //       'beforeend',
-  //       `<svg class="disabled-icon" width="40" height="40">
-  //          <use href="${vectorSvg}#icon-lock">
-  //        </svg>`
-  //     );
-  //   });
-  //   return;
-  // }
+  if (!FireBaseApi.currentUser) {
+    [watchedBtn, queueBtn].forEach(el => {
+      el.disabled = true;
+      el.classList.add('btn-lock');
+      el.insertAdjacentHTML(
+        'beforeend',
+        `<svg class="disabled-icon" width="40" height="40">
+           <use href="${vectorSvg}#icon-lock">
+         </svg>`
+      );
+    });
+    return;
+  }
 
   watchedBtn.addEventListener('click', addToWatched, { once: true });
   queueBtn.addEventListener('click', addedToQueue);
@@ -60,6 +60,7 @@ function removeFromWatched() {
 function addedToQueue() {
   jsonLocalStorage(localStorageKeys.filmInQueue);
   addedStyleToQueue();
+  removeFromWatched()
 }
 
 function addedStyleToWatched() {
@@ -67,8 +68,8 @@ function addedStyleToWatched() {
   watchedBtn.style.backgroundColor = '#FF6B01';
   watchedBtn.style.border = 'none';
 
-  queueBtn.disabled = true;
-  queueBtn.style.opacity = 0.25;
+  // queueBtn.disabled = true;
+  // queueBtn.style.opacity = 0.25;
   watchedBtn.addEventListener('click', removeFromWatched);
 }
 

@@ -9,7 +9,8 @@ import {
   signOut,
   updateCurrentUser,
 } from 'firebase/auth';
-import { addEventsOnModalBtn } from './localStorage';
+
+import { openLibrary } from './header';
 
 export class FireBaseApi {
   button = null;
@@ -23,8 +24,8 @@ export class FireBaseApi {
     this.currentUser = user;
     console.log(true);
 
-    // if (!user) this.unlockLibrary();
-    // else this.blockLibrary();
+    if (user) this.unlockLibrary();
+    else this.unlockLibrary();
   }
 
   static init() {
@@ -43,6 +44,7 @@ export class FireBaseApi {
   }
 
   static logOut() {
+    event?.preventDefault();
     const auth = getAuth();
     signOut(auth)
       .then(() => {
@@ -63,6 +65,16 @@ export class FireBaseApi {
       });
   }
 
-  static unlockLibrary() {}
+  static unlockLibrary() {
+    const pageInUse = document.querySelector('.side-nav__link--current').dataset
+      .id;
+
+    if (pageInUse !== 'home') {
+      openLibrary(undefined, true);
+      refs.ma;
+    }
+
+    // refs.home.dispatchEvent(new Event('click'));
+  }
 }
 FireBaseApi.init();

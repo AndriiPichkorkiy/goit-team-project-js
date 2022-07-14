@@ -2,8 +2,7 @@ import refs from './refs';
 import { movieService } from './movie-service';
 import renderCardTemplate from './card-templete';
 import './header';
-import { loading } from './loading';
-import { blockSreen } from './loading';
+import { loading, blockSreen } from './loading';
 import {
   renderPagination,
   removePagination,
