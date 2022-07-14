@@ -170,12 +170,21 @@ $iterations: 1;
   animation-timing-function: cubic-bezier(0, 0.1, 1, 0);
 }
 
+.navigation__logo:hover > svg,
+.navigation__logo:hover > span {
+  color: $accentColor;
+}
+
 .rise-text {
   position: relative;
   user-select: none;
   animation-name: rise-text;
   color: $textColorOnDark;
   text-shadow: 3px 3px 5px $textColorOnDark;
+
+  &:hover {
+    color: $accentColor;
+  }
   &:after {
     content: '';
     position: absolute;
@@ -222,10 +231,6 @@ $iterations: 1;
   100% {
     transform: scaleX(0);
   }
-}
-
-.rise-text:hover {
-  color: $accentColor;
 }
 
 // *navigation
