@@ -90,12 +90,12 @@ export default async function onClickFilm(id) {
       <h3 class="btn-trailer-text">Watch Trailer</h3>
     </div>
   </button>
-  <img loading="lazy"
+  <img
     class="film-poster-img"
     src="https://image.tmdb.org/t/p/w500/${poster_path}"
     onError="this.onerror=null;this.src='https://subscribenow.com.au/time/asia/Solo/Content/Images/noCover.gif';"
     alt="${tags}"
-    loading="lazy"/>
+    />
     </div>
             <div class="value-films">
             <h2 class="name-film">${original_title}</h2>
