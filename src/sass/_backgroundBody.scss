@@ -2,13 +2,14 @@ body {
   transition-duration: 0s;
 }
 
-.background__main {
-  background: url(/src/images/bg-main/backggroundOpacity.png) repeat,
-    url(/src/images/bg-main/kinolenta.png) center repeat-y;
-  background-size: contain;
-}
+// .background__main {
+//   background: url(/src/images/bg-main/backggroundOpacity.png) repeat,
+//     url(/src/images/bg-main/kinolenta.png) center repeat-y;
+//   background-size: contain;
+// }
 
 .background__main--lib {
   background: url(/src/images/bg-main/backggroundOpacity.png) repeat,
     url(/src/images/bg-main/pngegg.png) center no-repeat;
+  background-size: contain;
 }

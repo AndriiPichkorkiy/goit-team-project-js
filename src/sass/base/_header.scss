@@ -7,7 +7,7 @@
 
   background-color: $textColorDark;
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-    url(/src/images/header/bg-home-320-1x-min.jpg);
+    url(/src/images/header/1test.jpg);
 
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
@@ -38,7 +38,7 @@
 
   @include min1280 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/header/bg-home-1280-1x-min.jpg);
+      url(/src/images/header/kinobabina1.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
@@ -47,7 +47,7 @@
           rgba(0, 0, 0, 0.56),
           rgba(0, 0, 0, 0.56)
         ),
-        url(/src/images/header/bg-home-1280-2x-min.jpg);
+        url(/src/images/header/test3.jpg);
     }
   }
 }
