@@ -27,6 +27,7 @@ body {
 }
 
 .darktheme-icon__moon {
+<<<<<<< Updated upstream
     fill: white;
     opacity: 0;
 }
@@ -34,3 +35,12 @@ body {
 .darktheme-icon__sun {
     fill: $accentColor;
 }
+=======
+  fill: white;
+}
+
+.darktheme-icon__sun {
+  fill: $accentColor;
+    opacity: 0;
+}
+>>>>>>> Stashed changes
