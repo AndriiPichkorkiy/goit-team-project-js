@@ -190,6 +190,11 @@
 }
 .form-box__link {
   color: $accentColor;
+  display: inline;
+  cursor: pointer;
+  // &:hover {
+  //   transform: scale(105%);
+  // }
   // white-space: nowrap;
 }
 
@@ -305,16 +310,16 @@
   flex-wrap: wrap;
 }
 
-.modal__title__icon{
+.modal__title__icon {
   width: 105px;
     height: 105px;
     margin: 5px;
     animation: zoom-in-down 2s 0.3s cubic-bezier(0, 0.3, 0.85, 1),
-    tada 2s 0.3s cubic-bezier(0, 0.3, 0.8, 1);
+        tada 2s 0.3s cubic-bezier(0, 0.3, 0.8, 1);
 }
 
 @keyframes zoom-in-down {
-  from {
+  0% {
     opacity: 0;
     transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
     animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);

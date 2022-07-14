@@ -65,7 +65,7 @@
 }
 
 .logo__name {
-  display: block;
+  //   display: block;
   font-weight: 500;
   font-size: 30px;
   //   line-height: 2;
@@ -77,19 +77,19 @@
 
 .logo__icon {
   stroke: currentColor;
-  fill: $textColorDark;
+  fill: transparent;
   @include min768 {
     margin-right: 10px;
   }
 }
 
-.navigation__logo {
+.wrapper-logo {
   display: flex;
   align-items: center;
   color: white;
 }
 
-.navigation__logo:hover {
+.wrapper-logo:hover {
   color: $accentColor;
 }
 
@@ -431,4 +431,12 @@ $iterations: 1;
   color: white;
 
   font-size: 15px;
+}
+
+.disabled-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
 }

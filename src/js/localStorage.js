@@ -1,4 +1,6 @@
 import { renderAfterAddAndRemoveFilm } from './myLibraryBtns';
+import { FireBaseApi } from './fireBaseApi';
+import vectorSvg from '../images/icons.svg';
 
 let watchedBtn;
 let queueBtn;
@@ -8,6 +10,21 @@ function addEventsOnModalBtn() {
   watchedBtn = document.querySelector('.add-to-watched');
   queueBtn = document.querySelector('.add-to-queue');
   filmCard = document.querySelector('.film-card');
+
+  //lock buttons if there is not user
+  // if (!FireBaseApi.currentUser) {
+  //   [watchedBtn, queueBtn].forEach(el => {
+  //     el.disabled = true;
+  //     el.classList.add('btn-lock');
+  //     el.insertAdjacentHTML(
+  //       'beforeend',
+  //       `<svg class="disabled-icon" width="40" height="40">
+  //          <use href="${vectorSvg}#icon-lock">
+  //        </svg>`
+  //     );
+  //   });
+  //   return;
+  // }
 
   watchedBtn.addEventListener('click', addToWatched, { once: true });
   queueBtn.addEventListener('click', addedToQueue);
@@ -24,7 +41,7 @@ export const localStorageKeys = {
 function addToWatched() {
   jsonLocalStorage(localStorageKeys.watchedFilm);
   addedStyleToWatched();
-  removeFromQueue()
+  removeFromQueue();
   // watchedBtn.removeEventListener('click', addToWatched)
 }
 function removeFromWatched() {
@@ -47,7 +64,6 @@ function addedToQueue() {
 }
 
 function addedStyleToWatched() {
-
   watchedBtn.textContent = 'remove from watched';
   watchedBtn.style.backgroundColor = '#FF6B01';
   watchedBtn.style.border = 'none';
@@ -86,11 +102,10 @@ function jsonLocalStorage(value) {
 
   const card = { ...filmCard.dataset };
 
-  card.genre_ids = filmCard.dataset.genre.split(','); 
+  card.genre_ids = filmCard.dataset.genre.split(',');
   oldItems.push(card);
 
   localStorage.setItem(value, JSON.stringify(oldItems));
-  
 
   renderAfterAddAndRemoveFilm();
 }

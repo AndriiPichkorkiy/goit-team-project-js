@@ -4,7 +4,9 @@ import templeteCard from './card-templete';
 import { localStorageKeys } from './localStorage';
 import { activateHeadersBtn, checkQuantityStorage } from './myLibraryBtns';
 import {changeNavigation,currentHistoryPage} from './history'
+
 import { renderCollection } from './render-movies';
+import { toTop } from './scrolltop';
 
 export const pagination = refs.paginationList;
 export const root = refs.paginationWrapper;
@@ -85,25 +87,34 @@ export async function onPaginationBtnClick(event) {
     document.querySelector('.movies-filter__button--current') ?? 'default';
   if (!event.target.dataset.page) return;
   const page = +event.target.dataset.page;
-  refs.moviesCard.innerHTML = '';
+
+  //refs.moviesCard.innerHTML = ''; // <<<<<<< FT-15.0-fix
   // history.pushState({page: 1}, "title 1", `?page=${page}`);
+  
+  history.pushState({page: 1}, "title 1", `?page=${page}`);
+
   changeNavigation(page)
+
   if (pageInUse === 'home' && filterPageinUse === 'default') {
     const data = await movieService.getSearchQuery(movieService.query, page);
-    renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
+    renderPagination(movieService.totalPage, page);
+    toTop(0, 0);
   } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'popular') {
     const data = await movieService.getSearchQuery(movieService.query, page);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
+    toTop(0, 0);
   } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'rating') {
     const data = await movieService.getTopRated(page);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
+    toTop(0, 0);
   } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'future') {
     const data = await movieService.getUpcoming(page);
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
+    toTop(0, 0);
   } else if (pageInUse === 'library') {
     const activeBtn = document.querySelector('.library__button--active');
     const value =
@@ -128,6 +139,7 @@ export async function onPaginationBtnClick(event) {
     }
 
     renderCollection(arrToRender);
+    toTop(0, 0);
   }
 }
 
@@ -145,7 +157,6 @@ export function showPagination() {
 //                                Show home page
 
 export async function fetchPopularMovies() {
-  refs.moviesCard.innerHTML = '';
   let data = await movieService.getSearchQuery(
     movieService.query,
     movieService.page

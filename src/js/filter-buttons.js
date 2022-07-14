@@ -3,7 +3,7 @@ import refs from './refs';
 import { movieService } from './movie-service';
 import { renderCollection } from './render-movies';
 import { renderPagination, pagination, root } from './pagination';
-
+import { showNotificashka } from './search-form';
 const resetedPage = 1;
 const filterButtonsEl = document.querySelector('.movies-filter__list');
 filterButtonsEl.addEventListener('click', onFilterButtonClick);
@@ -21,7 +21,6 @@ async function onFilterButtonClick(event) {
     event.target.nodeName === 'BUTTON'
   ) {
     data = await movieService.getPopularMovies(movieService.page);
-    movieService.totalPage = data.total_pages;
 
     mostPopularBtnEl.classList.add('movies-filter__button--current');
     comingSoonBtnEl.classList.remove('movies-filter__button--current');
@@ -30,9 +29,9 @@ async function onFilterButtonClick(event) {
       pagination.innerHTML = '';
       return;
     }
-    if (movieService.isnotification) {
-    alert (`Знайдено ${movieService.totalResults} фільмів`)
-  }
+      if (movieService.isnotification) {
+    showNotificashka('totalResults', movieService.totalResults);
+    }
     renderCollection(data.results);
   }
 
@@ -41,7 +40,6 @@ async function onFilterButtonClick(event) {
     event.target.nodeName === 'BUTTON'
   ) {
     data = await movieService.getUpcoming(movieService.page);
-    movieService.totalPage = data.total_pages;
 
     comingSoonBtnEl.classList.add('movies-filter__button--current');
     mostPopularBtnEl.classList.remove('movies-filter__button--current');
@@ -50,8 +48,8 @@ async function onFilterButtonClick(event) {
       pagination.innerHTML = '';
       return;
     }
-    if (movieService.isnotification) {
-    alert (`Знайдено ${movieService.totalResults} фільмів`)
+      if (movieService.isnotification) {
+    showNotificashka('totalResults', movieService.totalResults);
   }
     renderCollection(data.results);
   }
@@ -61,7 +59,6 @@ async function onFilterButtonClick(event) {
     event.target.nodeName === 'BUTTON'
   ) {
     data = await movieService.getTopRated(movieService.page);
-    movieService.totalPage = data.total_pages;
 
     byRatingBtnEL.classList.add('movies-filter__button--current');
     mostPopularBtnEl.classList.remove('movies-filter__button--current');
@@ -70,8 +67,8 @@ async function onFilterButtonClick(event) {
       pagination.innerHTML = '';
       return;
     }
-    if (movieService.isnotification) {
-    alert (`Знайдено ${movieService.totalResults} фільмів`)
+      if (movieService.isnotification) {
+    showNotificashka('totalResults', movieService.totalResults);
   }
     renderCollection(data.results);
   }

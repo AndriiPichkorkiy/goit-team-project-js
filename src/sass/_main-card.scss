@@ -36,8 +36,9 @@
   margin-bottom: 8px;
   min-height: 398px;
   object-fit: cover;
+  background: url('/src/images/loading.gif') center / 50px no-repeat;
   @include min768 {
-    height: 455px;
+    height: 510px;
   }
   @include min1280 {
     margin-bottom: 12px;

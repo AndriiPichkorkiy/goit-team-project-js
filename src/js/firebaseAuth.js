@@ -39,21 +39,27 @@ async function authSignUpUser(event) {
   createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       // Signed in
+      console.log(0);
       const user = userCredential.user;
-      FireBaseApi.currentUser = user;
+      console.log('abc');
+      FireBaseApi.changeCurrentUser(user);
+      console.log('qweqweqwe');
       showNotificashka('registerSuccess', user);
       // console.log('user', user);
-
+      debugger;
+      console.log(1);
       clearFormData(formData);
-
+      console.log(2);
       FireBaseApi.authSuccess(user);
+      console.log(3);
       openGreetingsModal();
+      console.log(4);
       openSignUpModal();
     })
     .catch(error => {
-      const errorCode = error.code;
+      // const errorCode = error.code;
       const errorMessage = error.message.split(': ')[1];
-      console.error(errorMessage);
+      // console.error(errorMessage);
       showNotificashka('registerFaild', errorMessage);
       // ..
     });
@@ -76,7 +82,7 @@ export async function authSignInUser(event) {
     .then(userCredential => {
       // Signed in
       const user = userCredential.user;
-      FireBaseApi.currentUser = user;
+      FireBaseApi.changeCurrentUser(user);
       // console.log(userCredential.user);
       FireBaseApi.authSuccess(user);
       openSignInModal();
@@ -124,12 +130,14 @@ function getStorageDataSignUp() {
 
 function setFormFieldsSignIn(obj) {
   for (const key in obj) {
+    if (key === 'agreement') continue;
     refs.formSignIn[key].value = obj[key];
   }
 }
 
 function setFormFieldsSignUp(obj) {
   for (const key in obj) {
+    if (key === 'agreement') continue;
     refs.formSignUp[key].value = obj[key];
   }
 }
@@ -166,35 +174,40 @@ import {
 const auth = getAuth();
 
 export function showNotificashka(code, data) {
-
+  console.error(code, data);
   if (data === 'Error (auth/user-not-found).') {
-    data = 'Enter the correct login'
+    data = 'Enter the correct login';
   } else if (data === 'Error (auth/wrong-password).') {
-    data = 'Enter the correct password'
-  } else if (data === 'Password should be at least 6 characters (auth/weak-password).') {
-    data = 'Password should be at least 6 characters'
+    data = 'Enter the correct password';
+  } else if (
+    data === 'Password should be at least 6 characters (auth/weak-password).'
+  ) {
+    data = 'Password should be at least 6 characters';
   } else if (data === 'Error (auth/email-already-in-use).') {
-    data = 'User already registered'
-  } 
+    data = 'User already registered';
+  }
 
   switch (code) {
     case 'registerSuccess':
-      renderNotifix(`${data.email} register was success and you have been sign in`, "info");
+      renderNotifix(
+        `${data.email} register was success and you have been sign in`,
+        'info'
+      );
       break;
     case 'registerFaild':
-      renderNotifix(`${data}`, "rupor");
+      renderNotifix(`${data}`, 'rupor');
       break;
     case 'signInSuccess':
-      renderNotifix(`${data.email} you have been sign in`, "info");
+      renderNotifix(`${data.email} you have been sign in`, 'info');
       break;
     case 'signInFaild':
-      renderNotifix(`${data}`, "rupor");
+      renderNotifix(`${data}`, 'rupor');
       break;
     case 'noValidForm':
-      renderNotifix('Please, fill all form fields', "info");
+      renderNotifix('Please, fill all form fields', 'info');
       break;
     case 'logOut':
-      renderNotifix(`${data} was loged out`, "rupor");
+      renderNotifix(`${data} was loged out`, 'rupor');
       break;
     default:
       break;
