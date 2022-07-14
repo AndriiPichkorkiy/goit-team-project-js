@@ -169,6 +169,10 @@ class MovieService {
       return;
     }
 
+    if (action.slice(0, 9) === 'movie/top'){
+        if (movies.total_pages > 500){movies.total_pages = 500; movies.total_results =  10000};
+    };
+
     this.data = movies;
     this.page = movies.page;
     this.totalPage = movies.total_pages;
