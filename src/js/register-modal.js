@@ -76,6 +76,8 @@ function openOrCloseFireBaseModals(modal, isChange) {
 
 export function openGreetingsModal() {
   refs1.modalGreetings.classList.toggle('is-hidden');
+  const cake = document.querySelector('[data-modal-icon-cake]')
+  cake.classList.add('modal__title__icon')
 }
 
 function changeModal() {
