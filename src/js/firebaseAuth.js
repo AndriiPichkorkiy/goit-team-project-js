@@ -48,7 +48,7 @@ async function authSignUpUser(event) {
       FireBaseApi.changeCurrentUser(user);
 
       showNotificashka('registerSuccess', user);
-      // console.log('user', user);
+
 
       clearFormData(formData);
 
@@ -63,7 +63,7 @@ async function authSignUpUser(event) {
       loading.off();
       // const errorCode = error.code;
       const errorMessage = error.message.split(': ')[1];
-      // console.error(errorMessage);
+
       showNotificashka('registerFaild', errorMessage);
       // ..
     })
@@ -91,7 +91,7 @@ export async function authSignInUser(event) {
       // Signed in
       const user = userCredential.user;
       FireBaseApi.changeCurrentUser(user);
-      // console.log(userCredential.user);
+
       FireBaseApi.authSuccess(user);
       openSignInModal();
 
@@ -187,7 +187,7 @@ import {
 const auth = getAuth();
 
 export function showNotificashka(code, data) {
-  // console.error(code, data);
+
   if (data === 'Error (auth/user-not-found).') {
     data = 'Enter the correct login';
   } else if (data === 'Error (auth/wrong-password).') {

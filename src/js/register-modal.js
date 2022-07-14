@@ -124,7 +124,7 @@ function closeModalPrivacy() {
   refs.backdropPrivacy.classList.add('is-hidden');
   window.addEventListener('keydown', onEscKeyPressPrivacy);
   // document.body.classList.remove('show-film-modal');
-  document.body.removeAttribute('style');
+  document.body.style.overflow = 'auto';
 }
 
 function onEscKeyPressPrivacy(event) {

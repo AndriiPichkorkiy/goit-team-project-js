@@ -58,7 +58,7 @@ export class FireBaseApi {
       })
       .catch(error => {
         // An error happened.
-        console.log(error);
+
       });
   }
 
