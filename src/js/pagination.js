@@ -95,13 +95,13 @@ export async function onPaginationBtnClick(event) {
 
   changeNavigation(page);
 
-  if (pageInUse === 'home' && filterPageinUse === 'default') {
-    link = `?query=${movieService.query}&` + link;
-    const data = await movieService.getSearchQuery(movieService.query, page);
-    renderCollection(data.results);
-    renderPagination(movieService.totalPage, page);
-    toTop(0, 0);
-  } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'popular') {
+  // if (pageInUse === 'home' && filterPageinUse === 'default') {
+  //   link = `?query=${movieService.query}&` + link;
+  //   const data = await movieService.getSearchQuery(movieService.query, page);
+  //   renderCollection(data.results);
+  //   renderPagination(movieService.totalPage, page);
+  //   toTop(0, 0);} else 
+  if (pageInUse === 'home' && filterPageinUse.dataset.id === 'popular') {
     link = '?query=popular&' + link;
     const data = await movieService.getSearchQuery(movieService.query, page);
     console.log(movieService.query, page);
@@ -121,7 +121,7 @@ export async function onPaginationBtnClick(event) {
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
     toTop(0, 0);
-  } else if (pageInUse === 'library') {
+  }else if (pageInUse === 'library') {
     const activeBtn = document.querySelector('.library__button--active');
     const value =
       activeBtn.dataset.id === 'watchedBtn'

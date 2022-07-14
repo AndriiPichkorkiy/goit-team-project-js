@@ -7,10 +7,29 @@ import refs from './refs';
 window.addEventListener('DOMContentLoaded', init);
 window.onpopstate = init;
 
+const mostPopularBtnEl = document.querySelector('[data-id="popular"]');
+const byRatingBtnEL = document.querySelector('[data-id="rating"]');
+const comingSoonBtnEl = document.querySelector('[data-id="future"]');
+
 export async function init() {
   const currentPage = getCurrentPage();
   const currentQuery = getCurrentQuery();
+  if (currentQuery === 'popular') {
+   mostPopularBtnEl.classList.add('movies-filter__button--current');
+    comingSoonBtnEl.classList.remove('movies-filter__button--current');
+    byRatingBtnEL.classList.remove('movies-filter__button--current');
+  } 
+  if (currentQuery === 'rating') {
+  byRatingBtnEL.classList.add('movies-filter__button--current');
+    mostPopularBtnEl.classList.remove('movies-filter__button--current');
+    comingSoonBtnEl.classList.remove('movies-filter__button--current');
+  };
+  if (currentQuery === 'future') {
+   comingSoonBtnEl.classList.add('movies-filter__button--current');
+    mostPopularBtnEl.classList.remove('movies-filter__button--current');
+    byRatingBtnEL.classList.remove('movies-filter__button--current');
 
+  } 
   await movieService.galleryData();
   refs.moviesCard.innerHTML = '';
   let data = await movieService.getSearchQuery(currentQuery, currentPage);
