@@ -7,13 +7,13 @@
 
   background-color: $textColorDark;
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-    url(/src/images/header/4007516-660x440.jpeg);
+    url(/src/images/header/bg-libra-320-1x-new.jpg);
 
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/header/bg-libra-320-2x-min.jpg);
+      url(/src/images/header/bg-libra-768-2x-min.jpg);
   }
 
   background-position: center;
@@ -23,7 +23,7 @@
   @include min768 {
     min-height: 216px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/header/kinobabina1.jpg);
+      url(/src/images/header/bg-libra-320-1x-new.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
@@ -38,7 +38,7 @@
 
   @include min1280 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/header/bg-libra-1280-1x-min.jpg);
+      url(/src/images/header/bg-libra-1280-1x-new.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),

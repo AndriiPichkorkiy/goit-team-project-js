@@ -7,14 +7,14 @@
 
   background-color: $textColorDark;
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-    url(/src/images/header/1test.jpg);
+    url(/src/images/header/bg-home-320-1x-new.jpg);
 
-  @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/header/bg-home-320-2x-min.jpg);
-  }
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+        url(/src/images/header/bg-home-320-2x-min.jpg);
+    }
 
   background-position: center;
   background-repeat: no-repeat;
@@ -23,32 +23,32 @@
   @include min768 {
     min-height: 216px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/header/bg-home-768-1x-min.jpg);
+      url(/src/images/header/bg-home-768-1x-new.jpg);
 
-    @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-      background-image: linear-gradient(
-          rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)
-        ),
-        url(/src/images/header/bg-home-768-2x-min.jpg);
-    }
+     @media (min-device-pixel-ratio: 2),
+       (min-resolution: 192dpi),
+       (min-resolution: 2dppx) {
+       background-image: linear-gradient(
+           rgba(0, 0, 0, 0.56),
+           rgba(0, 0, 0, 0.56)
+         ),
+         url(/src/images/header/bg-home-768-2x-min.jpg);
+     }
   }
 
   @include min1280 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
-      url(/src/images/header/kinobabina1.jpg);
+      url(/src/images/header/bg-home-768-1x-new.jpg);
 
-    @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-      background-image: linear-gradient(
-          rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)
-        ),
-        url(/src/images/header/test3.jpg);
-    }
+     @media (min-device-pixel-ratio: 2),
+       (min-resolution: 192dpi),
+       (min-resolution: 2dppx) {
+       background-image: linear-gradient(
+           rgba(0, 0, 0, 0.56),
+           rgba(0, 0, 0, 0.56)
+         ),
+         url(/src/images/header/bg-home-1280-2x-min.jpg);
+     }
   }
 }
 // *logo
