@@ -8,7 +8,7 @@ import {
   removePagination,
   showPagination,
 } from './pagination';
-import {notifix} from './notifix';
+import { notifix } from './notifix';
 import { deactivateButtons } from './filter-buttons';
 
 refs.searchForm = document.querySelector('.search-form');
@@ -19,7 +19,7 @@ export default function searchMovies(event) {
   const value = event.currentTarget.elements.query.value.trim();
 
   if (value.length <= 2 || value.length === 0) {
-    showNotificashka('moreTwoCharacters')
+    showNotificashka('moreTwoCharacters');
     // moreTwoCharacters();
     return;
   }
@@ -52,7 +52,10 @@ async function fetchData(value) {
 
     return;
   }
-  
+
+  const link = `?query=${value}&` + 'page=1';
+  history.pushState({ page: 1 }, 'title 1', link);
+
   if (movieService.isnotification) {
     showNotificashka('totalResults', movieService.totalResults);
   }
@@ -73,16 +76,15 @@ function clearMarkup() {
 }
 
 export function showNotificashka(code, data) {
-
   switch (code) {
     case 'moreTwoCharacters':
-      notifix(`Please enter more than 2 characters`, "info");
+      notifix(`Please enter more than 2 characters`, 'info');
       break;
     case 'correctionRequest':
-      notifix(`Please enter a correction request`, "rupor");
+      notifix(`Please enter a correction request`, 'rupor');
       break;
     case 'totalResults':
-      notifix(`We found ${data} movies for you`, "info");
+      notifix(`We found ${data} movies for you`, 'info');
       break;
     default:
       break;

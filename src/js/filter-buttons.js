@@ -16,6 +16,9 @@ async function onFilterButtonClick(event) {
   movieService.page = resetedPage;
   let data;
 
+  const link = `?query=${event.target.dataset?.id || 'popular'}&` + 'page=1';
+  history.pushState({ page: 1 }, 'title 1', link);
+
   if (
     event.target.dataset.id === 'popular' &&
     event.target.nodeName === 'BUTTON'
@@ -29,8 +32,8 @@ async function onFilterButtonClick(event) {
       pagination.innerHTML = '';
       return;
     }
-      if (movieService.isnotification) {
-    showNotificashka('totalResults', movieService.totalResults);
+    if (movieService.isnotification) {
+      showNotificashka('totalResults', movieService.totalResults);
     }
     renderCollection(data.results);
   }
@@ -48,9 +51,9 @@ async function onFilterButtonClick(event) {
       pagination.innerHTML = '';
       return;
     }
-      if (movieService.isnotification) {
-    showNotificashka('totalResults', movieService.totalResults);
-  }
+    if (movieService.isnotification) {
+      showNotificashka('totalResults', movieService.totalResults);
+    }
     renderCollection(data.results);
   }
 
@@ -67,9 +70,9 @@ async function onFilterButtonClick(event) {
       pagination.innerHTML = '';
       return;
     }
-      if (movieService.isnotification) {
-    showNotificashka('totalResults', movieService.totalResults);
-  }
+    if (movieService.isnotification) {
+      showNotificashka('totalResults', movieService.totalResults);
+    }
     renderCollection(data.results);
   }
   renderPagination(movieService.totalPage, movieService.page);

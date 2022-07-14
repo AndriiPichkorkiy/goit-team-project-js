@@ -89,4 +89,4 @@ import './js/localStorage';
 import './js/loading.js';
 import './js/myLibraryBtns';
 import './js/notifix';
-import './js/history'
+import './js/history';
