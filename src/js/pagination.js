@@ -93,15 +93,15 @@ export async function onPaginationBtnClick(event) {
 
   let link = `page=${page}`;
 
-  changeNavigation(page);
+  // changeNavigation(page);
 
-  // if (pageInUse === 'home' && filterPageinUse === 'default') {
-  //   link = `?query=${movieService.query}&` + link;
-  //   const data = await movieService.getSearchQuery(movieService.query, page);
-  //   renderCollection(data.results);
-  //   renderPagination(movieService.totalPage, page);
-  //   toTop(0, 0);} else 
-  if (pageInUse === 'home' && filterPageinUse.dataset.id === 'popular') {
+  if (pageInUse === 'home' && filterPageinUse === 'default') {
+    link = `?query=${movieService.query}&` + link;
+    const data = await movieService.getSearchQuery(movieService.query, page);
+    renderCollection(data.results);
+    renderPagination(movieService.totalPage, page);
+    toTop(0, 0);
+  } else if (pageInUse === 'home' && filterPageinUse.dataset.id === 'popular') {
     link = '?query=popular&' + link;
     const data = await movieService.getSearchQuery(movieService.query, page);
     console.log(movieService.query, page);
@@ -121,7 +121,7 @@ export async function onPaginationBtnClick(event) {
     renderPagination(movieService.totalPage, page);
     renderCollection(data.results);
     toTop(0, 0);
-  }else if (pageInUse === 'library') {
+  } else if (pageInUse === 'library') {
     const activeBtn = document.querySelector('.library__button--active');
     const value =
       activeBtn.dataset.id === 'watchedBtn'
@@ -147,8 +147,10 @@ export async function onPaginationBtnClick(event) {
     renderCollection(arrToRender);
     toTop(0, 0);
   }
-  
-  history.pushState({ page: 1 }, 'title 1', link);
+  if (pageInUse === 'home') {
+    changeNavigation(page);
+    history.pushState({ page: 1 }, 'title 1', link);
+  }
 }
 
 export function removePagination() {

@@ -76,8 +76,8 @@ function openOrCloseFireBaseModals(modal, isChange) {
 
 export function openGreetingsModal() {
   refs1.modalGreetings.classList.toggle('is-hidden');
-  const cake = document.querySelector('[data-modal-icon-cake]')
-  cake.classList.add('modal__title__icon')
+  const cake = document.querySelector('[data-modal-icon-cake]');
+  cake.classList.add('modal__title__icon');
 }
 
 function changeModal() {
@@ -133,6 +133,6 @@ function onEscKeyPressPrivacy(event) {
 }
 
 //return modals
-[refs.backdropPrivacy, refs.signIn, refs.signUp, refs1.modalGreetings].forEach(
-  el => el.removeAttribute('style')
+[refs.backdropPrivacy, refs.signIn, refs.signUp, refs.modalGR].forEach(el =>
+  el.removeAttribute('style')
 );
