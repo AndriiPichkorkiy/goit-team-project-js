@@ -1,5 +1,6 @@
 import refs from '/src/js/refs';
-import * as iconSearch from '/src/images/icons.svg';
+import * as iconSearch from '../images/icons.svg';
+
 import { activateHeadersBtn } from './myLibraryBtns';
 import searchMovies from './search-form';
 import { FireBaseApi } from './fireBaseApi';
@@ -9,6 +10,7 @@ import {
   removePagination,
 } from './pagination';
 import { hideFilters, showFilters } from './filter-buttons';
+
 const activeHeader = document.querySelector('.js-active-header');
 const logoPageHome = document.querySelector('.logo__name');
 const backgroundMain = document.querySelector('.background__main');
